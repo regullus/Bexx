@@ -1,0 +1,515 @@
+﻿@model WebApp.Model.DadosPessoais
+@{
+    ViewData["Title"] = "Dados pessoais";
+    ViewData["SubTitle"] = "atualização de cadastro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Header{}
+@section Scripts{
+
+    <script>
+        "use strict";
+        var KTform1 = function () {
+            var _handleIdForm = function (e) {
+                var validation;
+                var form = KTUtil.getById('idForm');
+
+                validation = FormValidation.formValidation(
+                    form,
+                    {
+                        fields: {
+                            nome: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Nome é necessário'
+                                    }
+                                }
+                            },
+                            cpf: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'CPF é necessário'
+                                    },
+                                    digits: {
+                                        message: 'O valor deve ser númerico'
+                                    }
+                                }
+                            },
+                            celular: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Celular é necessário'
+                                    },
+                                    digits: {
+                                        message: 'O valor deve ser númerico'
+                                    }
+                                }
+                            },
+                            email: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'email é necessário'
+                                    },
+                                    regexp: {
+                                        regexp: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+\@@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/,
+                                        message: 'O email não é valido',
+                                    }
+                                }
+                            },
+                            agencia: {
+                                validators: {
+                                    digits: {
+                                        message: 'O valor deve ser númerico'
+                                    }
+                                }
+                            },
+                            agenciaDigito: {
+                                validators: {
+                                    digits: {
+                                        message: 'O valor deve ser númerico'
+                                    }
+                                }
+                            },
+                            conta: {
+                                validators: {
+                                    digits: {
+                                        message: 'O valor deve ser númerico'
+                                    }
+                                }
+                            },
+                            contaDigito: {
+                                validators: {
+                                    digits: {
+                                        message: 'O valor deve ser númerico'
+                                    }
+                                }
+                            }
+
+                        },
+                        plugins: {
+                            trigger: new FormValidation.plugins.Trigger(),
+                            bootstrap: new FormValidation.plugins.Bootstrap(),
+                            submitButton: new FormValidation.plugins.SubmitButton(),
+                            defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                        }
+                    }
+                );
+
+                $('.salvar').on('click', function (e) {
+                    e.preventDefault();
+                    validation.validate().then(function (status) {
+                        if (status == 'Valid') {
+                            KTApp.blockPage({
+                                overlayColor: 'blue',
+                                opacity: 0.1,
+                                state: 'primary',
+                                message: 'Aguarde...'
+                            });
+                            form.submit();
+                        } else {
+                            swal.fire({
+                                text: "Desculpe, parece que foram detectados alguns erros, tente novamente...",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "OK",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            });
+                            KTApp.unblockPage();
+                        }
+                    });
+                });
+
+                $(".cancelar").on('click', function (e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: "Tem certeza?",
+                        text: "Todos os dados digitados serâo perdidos!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        cancelButtonText: "Não",
+                        confirmButtonText: "Sim"
+                    }).then(function (result) {
+                        if (result.value) {
+                            $(window.location).attr('href', '@Url.Action("Index","DadosPessoais", new {id = Model.id })');
+                        }
+                    });
+                });
+
+                var avatar5 = new KTImageInput('imagem');
+
+                avatar5.on('cancel', function (imageInput) {
+                    swal.fire({
+                        title: 'Image cancelada!',
+                        icon: "warning",
+                        type: 'success',
+                        buttonsStyling: false,
+                        confirmButtonText: 'ok',
+                        confirmButtonClass: 'btn btn-primary font-weight-bold'
+                    });
+                });
+
+                avatar5.on('remove', function (imageInput) {
+                    swal.fire({
+                        title: 'Imagem removida!',
+                        icon: "warning",
+                        type: 'error',
+                        buttonsStyling: false,
+                        confirmButtonText: 'ok',
+                        confirmButtonClass: 'btn btn-primary font-weight-bold'
+                    });
+                });
+            }
+            return {
+                // public functions
+                init: function () {
+                    _handleIdForm();
+                }
+            };
+        }();
+
+        jQuery(document).ready(function () {
+            KTform1.init();
+        });
+
+    </script>
+
+}
+
+<div class="d-flex flex-row">
+    <div class="flex-row-fluid">
+        <div class="card card-custom card-stretch gutter-b">
+
+            <!--begin::Card header-->
+            <div class="card-header py-3">
+                <div class="card-title align-items-start flex-column">
+                    <h3 class="card-label font-weight-bolder text-dark">@ViewData["Title"]</h3>
+                    <span class="text-muted font-weight-bold font-size-sm mt-1">@ViewData["SubTitle"]</span>
+                </div>
+                <div class="card-toolbar">
+                    <!--begin::Button-->
+                    <button type="submit" class="btn btn-light-success mr-2  mt-2 text-right salvar">
+                        <i class="flaticon-edit-1"></i> Salvar
+                    </button>
+                    <button type="reset" class="btn btn-light-dark mr-2 mt-2 cancelar">
+                        <i class="flaticon-cancel"></i> Cancelar
+                    </button>
+                    <a href='@Url.Action("Index", "Home")' class="btn btn-light-primary font-weight-bolder mr-2 mt-2">
+                        <span class="svg-icon svg-icon-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24" />
+                                    <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                    <path d="M6.96323356,15.1775211 C6.62849853,15.5122561 6.08578582,15.5122561 5.75105079,15.1775211 C5.41631576,14.842786 5.41631576,14.3000733 5.75105079,13.9653383 L10.8939067,8.82248234 C11.2184029,8.49798619 11.7409054,8.4866328 12.0791905,8.79672747 L17.2220465,13.5110121 C17.5710056,13.8308912 17.5945795,14.3730917 17.2747004,14.7220508 C16.9548212,15.0710098 16.4126207,15.0945838 16.0636617,14.7747046 L11.5257773,10.6149773 L6.96323356,15.1775211 Z" fill="#000000" fill-rule="nonzero" transform="translate(11.500001, 12.000001) scale(-1, 1) rotate(-270.000000) translate(-11.500001, -12.000001) " />
+                                </g>
+                            </svg>
+                        </span>Voltar
+                    </a>
+                    <!--end::Button-->
+                </div>
+            </div>
+            <!--end::Card header-->
+            <form class="form" id="idForm" asp-action="Index" enctype="multipart/form-data">
+
+                <input hidden type="text" name="id" value="@(Model != null ? Model.id : "0")" />
+                <input hidden type="text" name="idUsuarioDados" value="@(Model != null ? Model.idUsuarioDados : "0")" />
+
+                <!--begin::Card body-->
+                <div class="card-body">
+                    <!--begin::Row-->
+                    <div class="row">
+                        <div class="col-xl-2"></div>
+                        <div class="col-xl-7 my-2">
+                            <div class="row">
+                                <label class="col-form-label col-3 text-lg-right text-left"></label>
+                                <div class="col-9">
+                                    <h6 class="text-dark font-weight-bold mb-7">Informações básicas:</h6>
+                                </div>
+                            </div>
+                            <!--begin::Group Avatar-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Avatar</label>
+                                <div class="col-9">
+                                    <div class="image-input image-input-empty image-input-outline" id="imagem">
+                                        <div class="image-input-wrapper" style="background-image: @( "url('" + ViewBag.UrlImage + "?id=" + Utils.Helpers.Chave() + "')" ) "></div>
+                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                            <i class="fa fa-pen icon-sm text-muted"></i>
+                                            <input name="imagem" type="file" accept=".png, .jpg, .jpeg" />
+                                            <input type="hidden" name="image_remove" />
+                                        </label>
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                        </span>
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Group Avatar-->
+                            <!--begin::Group Nome-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Nome</label>
+                                <div class="col-9">
+                                    <input class="form-control" type="text" name="nome" value="@(Model != null ? Model.nome : "")" />
+                                </div>
+                            </div>
+                            <!--end::Group Nome-->
+                            <!--begin::Group Pais-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Pais</label>
+                                <div class="col-9">
+                                    @Html.DropDownList("idPais", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <!--end::Group Pais-->
+                            <!--begin::Group Idioma-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Idioma</label>
+                                <div class="col-9">
+                                    @Html.DropDownList("idIdioma", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <!--end::Group Idioma-->
+                            <!--begin::Group CPF-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">CPF</label>
+                                <div class="col-9">
+                                    <input class="form-control" type="text" name="cpf" value="@(Model != null ? Model.cpf : "")" placeholder="27419477843" maxlength="11" />
+                                    <span class="form-text text-muted">Informe somente os numeros.</span>
+                                </div>
+                            </div>
+                            <!--begin::Group Sexo-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Sexo</label>
+                                <div class="col-9">
+                                    @Html.DropDownList("idSexo", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <!--end::Group Sexo-->
+                            <!--end::Group CPF-->
+
+                            <div class="separator separator-dashed mb-10"></div>
+                            <div class="row">
+                                <label class="col-form-label col-3 text-lg-right text-left"></label>
+                                <div class="col-9">
+                                    <h6 class="text-dark font-weight-bold mb-7">Endereços de contato:</h6>
+                                </div>
+                            </div>
+                            <!--end::Group CPF-->
+                            <!--begin::Group Celular-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Celular</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-phone"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="celular" value="@(Model != null ? Model.celular : "")" placeholder="5511977772222" max="13" />
+                                    </div>
+                                    <span class="form-text text-muted">Informe somente os numeros.</span>
+                                </div>
+                            </div>
+                            <!--end::Group Celular-->
+                            <!--begin::Group Email-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Email</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-at"></i>
+                                            </span>
+                                        </div>
+                                        <input type="email" class="form-control" name="email" value="@(Model != null ? Model.email : "")" placeholder="Email" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Group Email-->
+                            <!--begin::Group Twitch-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Twitch</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-twitch"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="SocialTwitch" value="@(Model != null ? Model.SocialTwitch : "")" placeholder="" />
+                                    </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group Twitch-->
+                            <!--begin::Group FaceBook-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">FaceBook</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-facebook"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="SocialFacebook" value="@(Model != null ? Model.SocialFacebook : "")" placeholder="" />
+                                    </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group FaceBook-->
+                            <!--begin::Group Twitter-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Twitter</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-twitter"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="SocialTwitter" value="@(Model != null ? Model.SocialTwitter : "")" placeholder="" />
+                                    </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group Twitter-->
+                            <!--begin::Group YouTube-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">YouTube</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-youtube"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="SocialYouTube" value="@(Model != null ? Model.SocialYouTube : "")" placeholder="" />
+                                    </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group YouTube-->
+                            <!--begin::Group Instagram-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Instagram</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-instagram"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="SocialInstagram" value="@(Model != null ? Model.SocialInstagram : "")" placeholder="" />
+                                    </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group Instagram-->
+                            <div @(User.IsInRole("Streamer") ? "" : "hidden" )>
+                                <div class="separator separator-dashed mb-10"></div>
+                                <div class="row">
+                                    <label class="col-form-label col-3 text-lg-right text-left"></label>
+                                    <div class="col-9">
+                                        <h6 class="text-dark font-weight-bold mb-7">Dados bancários:</h6>
+                                    </div>
+                                </div>
+                                <!--begin::Group Instituição Finnanceira-->
+                                <div class="form-group row">
+                                    <label class="col-form-label col-3 text-lg-right text-left">Instituição financeira</label>
+                                    <div class="col-9">
+                                        @Html.DropDownList("idInstituicaoFinanceira", null, htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <!--end::Group Instituição Finnanceira-->
+                                <!--begin::Group Agencia-->
+                                <div class="form-group row">
+                                    <label class="col-form-label col-3 text-lg-right text-left">Agencia</label>
+                                    <div class="col-3">
+                                        <div class="input-group input-group-lg">
+                                            <input type="text" class="form-control" placeholder="" name="agencia" value="@(Model != null ? Model.agencia : "")" maxlength="5" />
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group input-group-lg">
+                                            <input type="text" class="form-control" placeholder="" name="agenciaDigito" value="@(Model != null ? Model.agenciaDigito : "")" maxlength="1" />
+                                        </div>
+                                    </div>
+                                    @*<span class="form-text text-muted">Informe somente os numeros.</span>*@
+                                </div>
+                                <!--end::Group Agencia-->
+                                <!--begin::Group Conta-->
+                                <div class="form-group row">
+                                    <label class="col-form-label col-3 text-lg-right text-left">Conta</label>
+
+                                    <div class="col-3">
+                                        <div class="input-group input-group-lg">
+                                            <input type="text" class="form-control" placeholder="" name="conta" value="@(Model != null ? Model.conta : "")" maxlength="8" />
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group input-group-lg">
+                                            <input type="text" class="form-control" placeholder="" name="contaDigito" value="@(Model != null ? Model.contaDigito : "")" maxlength="1" />
+                                        </div>
+                                    </div>
+                                    @*<span class="form-text text-muted">Informe somente os numeros.</span>*@
+                                </div>
+                                <!--end::Group Conta-->
+                                <!--begin::Group Chave Pix-->
+                                <div class="form-group row">
+                                    <label class="col-form-label col-3 text-lg-right text-left">Chave Pix</label>
+                                    <div class="col-9">
+                                        <div class="input-group input-group-lg">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="la la-key"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" name="chavePix" value="@(Model != null ? Model.chavePix : "")" placeholder="" />
+                                        </div>
+                                        <span class="form-text text-muted"></span>
+                                    </div>
+                                </div>
+                                <!--end::Group Chave Pix-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Card body-->
+                <!--begin::Card footer-->
+                <div class="card-footer d-flex justify-content-end">
+                    <!--begin::Button-->
+                    <button type="submit" class="btn btn-light-success mr-2  mt-2 text-right salvar">
+                        <i class="flaticon-edit-1"></i> Salvar
+                    </button>
+                    <button type="reset" class="btn btn-light-dark mr-2 mt-2 cancelar">
+                        <i class="flaticon-cancel"></i> Cancelar
+                    </button>
+                    <a href='@Url.Action("Index", "Home")' class="btn btn-light-primary font-weight-bolder mr-2 mt-2">
+                        <span class="svg-icon svg-icon-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24" />
+                                    <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                    <path d="M6.96323356,15.1775211 C6.62849853,15.5122561 6.08578582,15.5122561 5.75105079,15.1775211 C5.41631576,14.842786 5.41631576,14.3000733 5.75105079,13.9653383 L10.8939067,8.82248234 C11.2184029,8.49798619 11.7409054,8.4866328 12.0791905,8.79672747 L17.2220465,13.5110121 C17.5710056,13.8308912 17.5945795,14.3730917 17.2747004,14.7220508 C16.9548212,15.0710098 16.4126207,15.0945838 16.0636617,14.7747046 L11.5257773,10.6149773 L6.96323356,15.1775211 Z" fill="#000000" fill-rule="nonzero" transform="translate(11.500001, 12.000001) scale(-1, 1) rotate(-270.000000) translate(-11.500001, -12.000001) " />
+                                </g>
+                            </svg>
+                        </span>Voltar
+                    </a>
+                    <!--end::Button-->
+                </div>
+                <!--end::Card footer-->
+            </form>
+        </div>
+        <!--end::Card-->
+        @*</div>*@
+        <!--end::Container-->
+        @*</div>*@
+        <!--end::Entry-->
+        @*</div>*@
+    </div>
+</div>

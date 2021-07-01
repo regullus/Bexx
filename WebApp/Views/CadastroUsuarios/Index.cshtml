@@ -1,0 +1,906 @@
+﻿@model WebApp.Model.CadastroUsuario
+@{
+    ViewData["Title"] = "Cadastros de usuários";
+    ViewData["SubTitle"] = "pessoas que terão acesso ao sistema";
+    ViewData["SubMenu"] = "true";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Header{
+    <link href="@Url.Content("~/assets/plugins/custom/datatables/datatables.bundle.css")" rel="stylesheet" type="text/css" />
+}
+@section Scripts{
+
+    <script src="@Url.Content("~/assets/plugins/custom/datatables/datatables.bundle.js")"></script>
+    <script src="@Url.Content("~/assets/js/pages/crud/forms/widgets/bootstrap-datepicker.js")"></script>
+
+    <script>
+      
+        var KTform1 = function () {
+            var validation;
+            var form = KTUtil.getById('idForm');
+
+            validation = FormValidation.formValidation(
+                form,
+                {
+                    fields: {
+                        nome: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'O nome é necessário.'
+                                }
+                            }
+                        },
+                        cpf: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'O CPF é necessário.'
+                                },
+                                digits: {
+                                    message: 'O valor deve ser númerico.'
+                                }
+                            }
+                        },
+                        login: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'O login é necessário.'
+                                },                               
+                            }
+                        },
+                        senha: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'A senha é necessária.'
+                                },                            
+                            }
+                        },
+                        dataExpiracaoSenha: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'A data de expiração da senha é necessária.'
+                                },                            
+                            }
+                        },
+                        celular: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'O celular é necessário.'
+                                },
+                                digits: {
+                                    message: 'O valor deve ser númerico.'
+                                }
+                            }
+                        },
+                        email: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'O email é necessário.'
+                                },
+                                regexp: {
+                                    regexp: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+\@@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/,
+                                    message: 'O email não é valido',
+                                }
+                            }
+                        },
+                        agencia: {
+                            validators: {
+                                digits: {
+                                    message: 'O valor deve ser númerico.'
+                                }
+                            }
+                        },
+                        agenciaDigito: {
+                            validators: {
+                                digits: {
+                                    message: 'O valor deve ser númerico.'
+                                }
+                            }
+                        },
+                        conta: {
+                            validators: {
+                                digits: {
+                                    message: 'O valor deve ser númerico.'
+                                }
+                            }
+                        },
+                        contaDigito: {
+                            validators: {
+                                digits: {
+                                    message: 'O valor deve ser númerico.'
+                                }
+                            }
+                        }
+
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        bootstrap: new FormValidation.plugins.Bootstrap(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                    }
+                }
+            );
+
+            $('.salvar').on('click', function (e) {
+                e.preventDefault();
+                validation.validate().then(function (status) {
+                    if (status == 'Valid') {
+                        KTApp.blockPage({
+                            overlayColor: 'blue',
+                            opacity: 0.1,
+                            state: 'primary',
+                            message: 'Aguarde...'
+                        });
+
+                        $('#perfil').prop("disabled", "");
+                        $('#login').prop("disabled", "");
+                        $('#doisFatoresHabilitados').prop("disabled", "");
+
+                        form.submit();
+
+                        $('#perfil').prop("disabled", "disabled");
+                        $('#login').prop("disabled", "disabled");
+                        $('#doisFatoresHabilitados').prop("disabled", "disabled");
+                    } else {
+                        swal.fire({
+                            text: "Desculpe, parece que foram detectados alguns erros, tente novamente...",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "OK",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        });
+                        KTApp.unblockPage();
+                    }
+                });
+            });
+
+            $(".cancelar").on('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: "Tem certeza?",
+                    text: "Todos os dados digitados serâo perdidos!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    cancelButtonText: "Não",
+                    confirmButtonText: "Sim"
+                }).then(function (result) {
+                    if (result.value) {
+                        $(window.location).attr('href', '@Url.Action("Index", "CadastroUsuarios")');
+                    }
+                });
+            });
+
+            $('.novo').on('click', function (e) {
+                $('#lblStatus').text("Novo");
+
+                limpar();
+            });
+
+            var avatar5 = new KTImageInput('imagem');
+
+            avatar5.on('cancel', function (imageInput) {
+                swal.fire({
+                    title: 'Image cancelada!',
+                    icon: "warning",
+                    type: 'success',
+                    buttonsStyling: false,
+                    confirmButtonText: 'ok',
+                    confirmButtonClass: 'btn btn-primary font-weight-bold'
+                });
+            });
+
+            avatar5.on('remove', function (imageInput) {
+                swal.fire({
+                    title: 'Imagem removida!',
+                    icon: "warning",
+                    type: 'error',
+                    buttonsStyling: false,
+                    confirmButtonText: 'ok',
+                    confirmButtonClass: 'btn btn-primary font-weight-bold'
+                });
+            });
+
+            // menu lateral dos tipos
+            var _initAside = function () {
+                offcanvas = new KTOffcanvas('kt_profile_aside', {
+                    overlay: true,
+                    baseClass: 'offcanvas-mobile',
+                    toggleBy: 'kt_subheader_mobile_toggle'
+                });
+            }
+
+            return {
+                // public functions
+                init: function () {
+                    _initAside();
+                }
+            };
+        }();
+
+        var KTBootstrapDatepicker = function () {
+
+            var bootstrapDatepicker = function () {
+                const hoje = new Date();
+                hoje.setDate(hoje.getDate() - 1);
+                var dataLim = (`00${hoje.getDate()}`).slice(-2) + '/' + (`00${hoje.getMonth() + 1}`).slice(-2) + '/' + hoje.getFullYear();
+
+                $('#dataExpiracaoSenha').datepicker({
+                  /*  rtl: KTUtil.isRTL(),*/
+                    format: "dd/mm/yyyy",
+          /*          language: "pt-BR",*/
+                    startDate: dataLim,
+                    todayHighlight: true,
+                    clearBtn: true,
+                    autoclose: true,
+                    //changeMonth: true,
+                    //changeYear: true,
+                    //dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+                    dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                    //monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    //monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+                /*    todayBtn: true,*/
+               /*     orientation: "bottom left",*/
+             /*       templates: arrows*/
+                });
+
+            }
+
+            return {
+                // public functions
+                init: function () {
+                    bootstrapDatepicker();
+                }
+            };
+        }();
+
+        function limpar() {
+            $('#id').val(0);
+            $('#idPais').val(31);
+            $('#idSexo').val(3);
+            $('#nome').val("");
+            $('#senha').val("");
+            $('#login').val("");
+            $('#login').prop("disabled", "");
+            $('#email').val("");
+            $('#idIdioma').val(1);
+            $('#avatar').val("");
+            $('#avatarUrl').css('background-image', 'url("' + '@ViewBag.UrlImageDefault' + '")');
+            $('#celular').val("");
+
+            let dt = new Date('@ViewBag.dataExpiracaoSenha');
+            let dtFormatada = (`00${dt.getDate()}`).slice(-2) + '/' + (`00${dt.getMonth() + 1}`).slice(-2) + '/' + dt.getFullYear();
+            $('#dataExpiracaoSenha').datepicker().datepicker('setDate', dtFormatada);
+
+            $('#doisFatoresHabilitados').val('false');
+            $('#doisFatoresHabilitados').prop("disabled", "disabled");
+            $('#perfil').val("Streamer");
+            $('#perfil').prop("disabled", "");
+            $('#idUsuarioDados').val(0);
+            $('#SocialTwitch').val("");
+            $('#SocialFacebook').val("");
+            $('#SocialTwitter').val("");
+            $('#SocialYouTube').val("");
+            $('#SocialInstagram').val("");
+            $('#cpf').val("");
+            $('#idInstituicaoFinanceira').val(1);
+            $('#agencia').val("");
+            $('#agenciaDigito').val("");
+            $('#conta').val("");
+            $('#contaDigito').val("");
+            $('#chavePix').val("");
+        }
+
+        $('#kt_datatable').DataTable({
+            "ordering": true,
+            "info": false,
+            "scrollY": "400px",
+            "scrollCollapse": true,
+            "paging": false,
+            "searching": true,
+        });
+
+
+        var table = $('#kt_datatable').DataTable();
+
+        $('#kt_datatable_filter1').on('keyup', function () {
+            table.search(this.value).draw();
+        });
+
+
+        jQuery(document).ready(function () {
+            KTBootstrapDatepicker.init();
+            KTform1.init();
+
+            if (@Model.id == 0) {
+                $('#perfil').prop("disabled", "");
+                $('#login').prop("disabled", "");
+                $('#doisFatoresHabilitados').val("false");
+                $('#doisFatoresHabilitados').prop("disabled", "disabled");
+            }
+            else {
+                $('#perfil').prop("disabled", "disabled");
+                $('#login').prop("disabled", "disabled");
+                $('#doisFatoresHabilitados').prop("disabled", "disabled");
+            }
+
+            let dt = new Date('@Model.dataExpiracaoSenha');
+            if (@Model.id == 0)
+                dt = new Date('@ViewBag.dataExpiracaoSenha');
+            let dtFormatada = (`00${dt.getDate()}`).slice(-2) + '/' + (`00${dt.getMonth() + 1}`).slice(-2) + '/' + dt.getFullYear();
+            $('#dataExpiracaoSenha').datepicker().datepicker('setDate', dtFormatada);
+
+            var table = $('#kt_datatable').DataTable();
+            $('#kt_datatable tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+
+                    KTApp.blockPage({
+                        overlayColor: 'blue',
+                        opacity: 0.1,
+                        state: 'primary',
+                        message: 'Aguarde...'
+                    });
+
+                    $.post('@Url.Action("GetUsuario", "cadastroUsuarios")', { id: this.id }, function (data) {
+                        KTApp.unblockPage();
+
+                    /*  $("#idForm").validate().resetForm(); */
+                    /*  $("#idForm").data("validator").resetForm(); */
+                        //var validator = $("#idForm").validate();
+                        //validator.resetForm();
+                        //console.log("--->" );                  
+                        //console.log("--->", $("#idForm"));
+
+                        if (data.id > 0) {
+                            $('#lblStatus').text("Alteração");
+
+                            $('#id').val(data.id);
+                            $('#idPais').val(data.idPais);
+                            $('#idSexo').val(data.idSexo);
+                          //$('#dataVencimentoPlano').val(data.dataVencimentoPlano);
+
+                            let dt = new Date(data.dataExpiracaoSenha);
+                            let dtFormatada = (`00${dt.getDate()}`).slice(-2) + '/' + (`00${dt.getMonth() + 1}`).slice(-2) + '/' + dt.getFullYear();
+                            $('#dataExpiracaoSenha').datepicker().datepicker('setDate', dtFormatada);
+
+                            $('#idIdioma').val(data.idIdioma);
+                            $('#avatar').val(data.avatar);
+                            $('#avatarUrl').css('background-image', 'url("' + data.avatarUrl + '")');
+                            $('#nome').val(data.nome);
+                            $('#senha').val(data.senha);
+
+                            $('#login').val(data.login);
+                            if (data.id == 0) {
+                                $('#login').prop("disabled", "");
+                            }
+                            else {
+                                $('#login').prop("disabled", "disabled");
+                            }
+
+                            $('#email').val(data.email);
+                            $('#celular').val(data.celular);
+                            if (data.doisFatoresHabilitados) {
+                                $('#doisFatoresHabilitados').val('true');
+                                $('#doisFatoresHabilitados').prop("disabled", "");
+                            }
+                            else {
+                                $('#doisFatoresHabilitados').val('false');
+                                $('#doisFatoresHabilitados').prop("disabled", "disabled");
+                            }
+                            $('#perfil').val(data.perfil);
+                            $('#perfil').prop("disabled", "disabled");
+                            $('#idUsuarioDados').val(data.idUsuarioDados);
+                            $('#SocialTwitch').val(data.socialTwitch);
+                            $('#SocialFacebook').val(data.socialFacebook);
+                            $('#SocialTwitter').val(data.socialTwitter);
+                            $('#SocialYouTube').val(data.socialYouTube);
+                            $('#SocialInstagram').val(data.socialInstagram);
+                            $('#cpf').val(data.cpf);
+                            $('#idInstituicaoFinanceira').val(data.idInstituicaoFinanceira);
+                            $('#agencia').val(data.agencia);
+                            $('#agenciaDigito').val(data.agenciaDigito);
+                            $('#conta').val(data.conta);
+                            $('#contaDigito').val(data.contaDigito);
+                            $('#chavePix').val(data.chavePix);
+                        }
+                        else {
+                            limpar();
+
+                            swal.fire({
+                                html: "Desculpe, n\u00e3o foi poss\u00edvel obter as informações do usuario.",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#kt_datatable_filter').hide();
+
+        });
+
+    </script>
+}
+
+<!--begin::Profile Overview-->
+<div class="d-flex flex-row gutter-b">
+    <!--begin::Aside-->
+    @*<div class="flex-row-auto offcanvas-mobile h-750px h-xl-750px w-400px w-xl-450px" id="kt_profile_aside">*@
+    <div class="flex-row-auto offcanvas-mobile " style="height:100%" id="kt_profile_aside">
+        <!--begin::Profile Card-->
+        <div class="card card-custom card-stretch">
+            <!--begin::Header-->
+            <div class="card-header py-3">
+                <div class="card-title align-items-start flex-column">
+                    <h3 class="card-label font-weight-bolder text-dark">Lista de usuários</h3>
+                    <span class="text-muted font-weight-bold font-size-sm mt-1">selecione para alterar</span>
+                </div>
+                <div class="card-toolbar">
+                    <button type="submit" class="btn btn-light-success mr-2 mt-2 text-right novo">
+                        <i class="flaticon-edit-1"></i> Novo
+                    </button>
+                </div>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body" style="padding: 0px 0px 0px 0px !important;">
+                <!--begin::Card-->
+                <div class="card card-custom">
+                    <div class="card-body ">
+
+                        <div class="row align-items-center">
+                            <div class="col-md-12 my-4 my-md-0">
+                                <div class="input-icon">
+                                    <input type="search" class="form-control " placeholder="Procurar..." aria-controls="kt_datatable" id="kt_datatable_filter1" />
+                                    <span>
+                                        <i class="flaticon2-search-1 text-muted"></i>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <table class="table table-checkable" id="kt_datatable" width="100px">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Login</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (UsuarioListaCrudModel item in ViewBag.Usuarios)
+                                {
+                                    <tr id="@item.id">
+                                        <td>@item.nome</td>
+                                        <td>@item.login</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Body-->
+
+            <div class="card-footer d-flex justify-content-end">
+                <button type="submit" class="btn btn-light-success mr-2 mt-2 text-right novo">
+                    <i class="flaticon-edit-1"></i> Novo
+                </button>
+            </div>
+
+        </div>
+        <!--end::Profile Card-->
+    </div>
+    <!--end::Aside-->
+    <!--begin::Content-->
+    <div class="flex-row-fluid ml-lg-8">
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <!--begin::Header-->
+            <div class="card-header py-3">
+                <div class="card-title align-items-start flex-column">
+                    <h3 class="card-label font-weight-bolder text-dark">Usuário</h3>
+                    <span class="text-muted font-weight-bold font-size-sm mt-1" id="lblStatus">Novo</span>
+                </div>
+                <div class="card-toolbar">
+                    <button type="submit" class="btn  btn-light-success mr-2 mt-2 text-right salvar">
+                        <i class="flaticon-edit-1"></i> Salvar
+                    </button>
+                    <button type="reset" class="btn btn-light-dark mr-2 mt-2 cancelar">
+                        <i class="flaticon-cancel"></i> Cancelar
+                    </button>
+                    <a href='@Url.Action("Index", "Home")' class="btn btn-light-primary font-weight-bolder mr-2 mt-2">
+                        <span class="svg-icon svg-icon-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24" />
+                                    <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                    <path d="M6.96323356,15.1775211 C6.62849853,15.5122561 6.08578582,15.5122561 5.75105079,15.1775211 C5.41631576,14.842786 5.41631576,14.3000733 5.75105079,13.9653383 L10.8939067,8.82248234 C11.2184029,8.49798619 11.7409054,8.4866328 12.0791905,8.79672747 L17.2220465,13.5110121 C17.5710056,13.8308912 17.5945795,14.3730917 17.2747004,14.7220508 C16.9548212,15.0710098 16.4126207,15.0945838 16.0636617,14.7747046 L11.5257773,10.6149773 L6.96323356,15.1775211 Z" fill="#000000" fill-rule="nonzero" transform="translate(11.500001, 12.000001) scale(-1, 1) rotate(-270.000000) translate(-11.500001, -12.000001) " />
+                                </g>
+                            </svg>
+                        </span>Voltar
+                    </a>
+                </div>
+            </div>
+            <!--end::Header-->
+            <form class="form" id="idForm" asp-action="Index" enctype="multipart/form-data">
+
+                <input hidden type="text" id="id" name="id" value="@(Model != null ? Model.id : "0")" />
+                <input hidden type="text" id="idUsuarioDados" name="idUsuarioDados" value="@(Model != null ? Model.idUsuarioDados : "0")" />
+                <input hidden type="text" id="avatar" name="avatar" value="@(Model != null ? Model.avatar : "000000_avatar.png")" />
+
+                <div class="card-body">
+                    <!--begin::Row-->
+                    <div class="row">
+                        <div class="col-xl-1"></div>
+                        <div class="col-xl-10 my-2">
+                            <div class="row">
+                                <label class="col-form-label col-3 text-lg-right text-left"></label>
+                                <div class="col-9">
+                                    <h6 class="text-dark font-weight-bold mb-7">Informações básicas:</h6>
+                                </div>
+                            </div>
+                            <!--begin::Group Avatar-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Avatar</label>
+                                <div class="col-9">
+
+                                    <div class="image-input image-input-empty image-input-outline" id="imagem">
+                                        <div class="image-input-wrapper" id="avatarUrl" name="avatarUrl" style="background-image: @( "url('" + Model.avatarUrl + "')" ) "></div>
+                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                            <i class="fa fa-pen icon-sm text-muted"></i>
+                                            <input name="imagem" type="file" accept=".png, .jpg, .jpeg" />
+                                            <input type="hidden" name="image_remove" />
+                                        </label>
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                        </span>
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Group Avatar-->
+                            <!--begin::Group Nome-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Nome</label>
+                                <div class="col-9">
+                                    <input class="form-control" type="text" id="nome" name="nome" value="@(Model != null ? Model.nome : "")" />
+                                </div>
+                            </div>
+                            <!--end::Group Nome-->
+                            <!--begin::Group duas perfil-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Perfil</label>
+                                <div class="col-9">
+                                    <select class="form-control" id="perfil" name="perfil" disabled="">
+                                        <option selected="@(Model.perfil == "Administrador" ? "selected" : " " )" value="Administrador">Administrador</option>
+                                        @*<option selected="@(Model.perfil == "Master"        ? "selected" : " " )" value="Master">Master</option>*@
+                                        <option selected="@(Model.perfil == "Publicitario"  ? "selected" : " " )" value="Publicitario">Publicitario</option>
+                                        <option selected="@(Model.perfil == "Streamer"      ? "selected" : " " )" value="Streamer">Streamer</option>
+                                        <option selected="@(Model.perfil == "Usuario"       ? "selected" : " " )" value="Usuario">Usuário</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--end::Group duas perfil-->
+                            <!--begin::Group Pais-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Pais</label>
+                                <div class="col-9">
+                                    @Html.DropDownList("idPais", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <!--end::Group Pais-->
+                            <!--begin::Group Pais-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Idioma</label>
+                                <div class="col-9">
+                                    @Html.DropDownList("idIdioma", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <!--end::Group Pais-->
+                            <!--begin::Group CPF-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">CPF</label>
+                                <div class="col-9">
+                                    <input class="form-control" type="text" id="cpf" name="cpf" value="@(Model != null ? Model.cpf : "")" placeholder="27419477843" maxlength="11" />
+                                    <span class="form-text text-muted">Informe somente os numeros.</span>
+                                </div>
+                            </div>
+                            <!--end::Group CPF-->
+                            <!--begin::Group Sexo-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Sexo</label>
+                                <div class="col-9">
+                                    @Html.DropDownList("idSexo", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <!--end::Group Sexo-->
+                            <!--begin::Group Situação-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Situação</label>
+                                <div class="col-9">
+                                    @Html.DropDownList("idUserSituacao", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <!--end::Group Situação-->
+
+                            <div class="separator separator-dashed mb-10"></div>
+                            <div class="row">
+                                <label class="col-form-label col-3 text-lg-right text-left"></label>
+                                <div class="col-9">
+                                    <h6 class="text-dark font-weight-bold mb-7">Autenticação:</h6>
+                                </div>
+                            </div>
+                            <!--begin::Group login-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Login</label>
+                                <div class="col-9">
+                                    <input class="form-control" type="text" id="login" name="login" value="@(Model != null ? Model.login : "")" placeholder="" disabled="" />
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group login-->
+                            <!--begin::Group senha-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Senha</label>
+                                <div class="col-9">
+                                    <input class="form-control" type="text" id="senha" name="senha" value="@(Model != null ? Model.senha : "")" placeholder="" />
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group senha-->
+                            <!--begin::Group Expiração-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Expiração</label>
+                                <div class="col-9">
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control" id="dataExpiracaoSenha" name="dataExpiracaoSenha" readonly="readonly" placeholder="Selecione uma data" value="" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="la la-calendar-check-o"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Group Expiração-->
+                            <!--begin::Group duas etapas-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Verificação em duas etapas</label>
+                                <div class="col-9">
+                                    <select class="form-control" id="doisFatoresHabilitados" name="doisFatoresHabilitados" disabled="">
+                                        <option selected="@(Model.doisFatoresHabilitados ? "selected" : "")" value="true">Habilitado</option>
+                                        <option selected="@(Model.doisFatoresHabilitados ? "" : "selected")" value="false">Desabilitado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--end::Group duas etapas-->
+
+                            <div class="separator separator-dashed mb-10"></div>
+                            <div class="row">
+                                <label class="col-form-label col-3 text-lg-right text-left"></label>
+                                <div class="col-9">
+                                    <h6 class="text-dark font-weight-bold mb-7">Endereços de contato:</h6>
+                                </div>
+                            </div>
+                            <!--end::Group CPF-->
+                            <!--begin::Group Celular-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Celular</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-phone"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="celular" name="celular" value="@(Model != null ? Model.celular : "")" placeholder="5511977772222" max="13" />
+                                    </div>
+                                    <span class="form-text text-muted">Informe somente os numeros.</span>
+                                </div>
+                            </div>
+                            <!--end::Group Celular-->
+                            <!--begin::Group Email-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Email</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-at"></i>
+                                            </span>
+                                        </div>
+                                        <input type="email" class="form-control" id="email" name="email" value="@(Model != null ? Model.email : "")" placeholder="Email" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Group Email-->
+                            <!--begin::Group Twitch-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Twitch</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-twitch"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="SocialTwitch" name="SocialTwitch" value="@(Model != null ? Model.SocialTwitch : "")" placeholder="" />
+                                    </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group Twitch-->
+                            <!--begin::Group FaceBook-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">FaceBook</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-facebook"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="SocialFacebook" name="SocialFacebook" value="@(Model != null ? Model.SocialFacebook : "")" placeholder="" />
+                                    </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group FaceBook-->
+                            <!--begin::Group Twitter-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Twitter</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-twitter"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="SocialTwitter" name="SocialTwitter" value="@(Model != null ? Model.SocialTwitter : "")" placeholder="" />
+                                    </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group Twitter-->
+                            <!--begin::Group YouTube-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">YouTube</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-youtube"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="SocialYouTube" name="SocialYouTube" value="@(Model != null ? Model.SocialYouTube : "")" placeholder="" />
+                                    </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group YouTube-->
+                            <!--begin::Group Instagram-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Instagram</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-instagram"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="SocialInstagram" name="SocialInstagram" value="@(Model != null ? Model.SocialInstagram : "")" placeholder="" />
+                                    </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group Instagram-->
+                            <div class="separator separator-dashed mb-10"></div>
+                            <div class="row">
+                                <label class="col-form-label col-3 text-lg-right text-left"></label>
+                                <div class="col-9">
+                                    <h6 class="text-dark font-weight-bold mb-7">Dados bancários:</h6>
+                                </div>
+                            </div>
+                            <!--begin::Group Instituição Finnanceira-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Instituição financeira</label>
+                                <div class="col-9">
+                                    @Html.DropDownList("idInstituicaoFinanceira", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <!--end::Group Instituição Finnanceira-->
+                            <!--begin::Group Agencia-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Agencia</label>
+                                <div class="col-5">
+                                    <div class="input-group input-group-lg">
+                                        <input type="text" class="form-control" placeholder="" id="agencia" name="agencia" value="@(Model != null ? Model.agencia : "")" maxlength="5" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group input-group-lg">
+                                        <input type="text" class="form-control" placeholder="" id="agenciaDigito" name="agenciaDigito" value="@(Model != null ? Model.agenciaDigito : "")" maxlength="1" />
+                                    </div>
+                                </div>
+                                @*<span class="form-text text-muted">Informe somente os numeros.</span>*@
+                            </div>
+                            <!--end::Group Agencia-->
+                            <!--begin::Group Conta-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Conta</label>
+                                <div class="col-5">
+                                    <div class="input-group input-group-lg">
+                                        <input type="text" class="form-control" placeholder="" id="conta" name="conta" value="@(Model != null ? Model.conta : "")" maxlength="8" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group input-group-lg">
+                                        <input type="text" class="form-control" placeholder="" id="contaDigito" name="contaDigito" value="@(Model != null ? Model.contaDigito : "")" maxlength="1" />
+                                    </div>
+                                </div>
+                                @*<span class="form-text text-muted">Informe somente os numeros.</span>*@
+                            </div>
+                            <!--end::Group Conta-->
+                            <!--begin::Group Chave Pix-->
+                            <div class="form-group row">
+                                <label class="col-form-label col-3 text-lg-right text-left">Chave Pix</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="la la-key"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="chavePix" name="chavePix" value="@(Model != null ? Model.chavePix : "")" placeholder="" />
+                                    </div>
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <!--end::Group Chave Pix-->
+
+                        </div>
+                    </div>
+                    <!--end::Row-->
+                </div>
+
+                <div class="card-footer d-flex justify-content-end">
+                    <button type="submit" class="btn btn-light-success mr-2 mt-2 text-right salvar">
+                        <i class="flaticon-edit-1"></i> Salvar
+                    </button>
+                    <button type="reset" class="btn btn-light-dark mr-2 mt-2 cancelar">
+                        <i class="flaticon-cancel"></i> Cancelar
+                    </button>
+                    <a href='@Url.Action("Index", "Home")' class="btn btn-light-primary font-weight-bolder mr-2 mt-2">
+                        <span class="svg-icon svg-icon-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24" />
+                                    <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                    <path d="M6.96323356,15.1775211 C6.62849853,15.5122561 6.08578582,15.5122561 5.75105079,15.1775211 C5.41631576,14.842786 5.41631576,14.3000733 5.75105079,13.9653383 L10.8939067,8.82248234 C11.2184029,8.49798619 11.7409054,8.4866328 12.0791905,8.79672747 L17.2220465,13.5110121 C17.5710056,13.8308912 17.5945795,14.3730917 17.2747004,14.7220508 C16.9548212,15.0710098 16.4126207,15.0945838 16.0636617,14.7747046 L11.5257773,10.6149773 L6.96323356,15.1775211 Z" fill="#000000" fill-rule="nonzero" transform="translate(11.500001, 12.000001) scale(-1, 1) rotate(-270.000000) translate(-11.500001, -12.000001) " />
+                                </g>
+                            </svg>
+                        </span>Voltar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--end::Content-->
+</div>
+<!--end::Profile Overview-->

@@ -1,0 +1,1193 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="Marketing Social Midia" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Layout Page-->
+    @RenderSection("Header", required: false)
+    <!--end::Layout Page-->
+    <!--begin::Global Theme Styles(used by all pages)-->
+    <link href="@Url.Content("~/assets/plugins/global/plugins.bundle.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/plugins/custom/prismjs/prismjs.bundle.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/css/style.bundle.css")" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles-->
+    <!--begin::Custon style-->
+    <link rel="stylesheet" href="@Url.Content("~/css/style.css")" />
+    <!--end::Custon style-->
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+</head>
+<!--begin::Body-->
+<body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-static page-loading">
+    <!--begin::Main-->
+    <!--begin::Header Mobile-->
+    <div id="kt_header_mobile" class="header-mobile header-mobile-fixed">
+        <!--begin::Logo-->
+        <a href="@Url.Action("Index", "Home")">
+            <img alt="Logo" src="@Url.Content("~/img/logo/logo.png")" class="logo-default max-h-30px" />
+        </a>
+        <!--end::Logo-->
+        <!--begin::Toolbar-->
+        <div class="d-flex align-items-center">
+            <button class="btn btn-hover-text-primary p-0 ml-3" id="kt_header_mobile_topbar_toggle">
+                <span class="svg-icon svg-icon-xl">
+                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo5\dist/../src/media/svg/icons\Text\Menu.svg-->
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24" />
+                            <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5" />
+                            <path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L18.5,10 C19.3284271,10 20,10.6715729 20,11.5 C20,12.3284271 19.3284271,13 18.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3" />
+                        </g>
+                    </svg><!--end::Svg Icon-->
+                </span>
+            </button>
+        </div>
+        <!--end::Toolbar-->
+    </div>
+    <!--end::Header Mobile-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Page-->
+        <div class="d-flex flex-row flex-column-fluid page">
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+                <!--begin::Header-->
+                <div id="kt_header" class="header header-fixed">
+                    <!--begin::Container-->
+                    <div class="container d-flex align-items-stretch justify-content-between">
+                        <!--begin::Left-->
+                        <div class="d-none d-lg-flex align-items-center mr-3">
+                            <!--begin::Logo-->
+                            <a href="@Url.Action("Index", "Home")">
+                                <img alt="Logo" src="@Url.Content("~/img/logo/logo.png")" class="logo-sticky max-h-35px" />
+                            </a>
+                            <!--end::Logo-->
+                        </div>
+                        <!--end::Left-->
+                        <!--begin::Topbar-->
+                        <div class="topbar">
+                            <!--begin::Quick Actions-->
+                            <div class="topbar-item mr-4">
+                                <div class="btn btn-icon btn-sm btn-clean btn-text-dark-75" id="kt_quick_actions_toggle">
+                                    <span class="svg-icon svg-icon-lg">
+                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
+                                                <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3" />
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                                </div>
+                            </div>
+                            <!--end::Quick panel-->
+                            <!--begin::User-->
+                            <div class="topbar-item mr-4">
+                                <div class="btn btn-icon btn-sm btn-clean btn-text-dark-75" id="kt_quick_user_toggle">
+                                    <span class="svg-icon svg-icon-lg">
+                                        <!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <polygon points="0 0 24 0 24 24 0 24" />
+                                                <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                                </div>
+                            </div>
+                            <!--end::User-->
+                            <!--begin::Notifications-->
+                            <div class="topbar-item">
+                                <div class="btn btn-icon btn-sm btn-primary font-weight-bolder p-0" id="kt_quick_notifications_toggle">3</div>
+                            </div>
+                            <!--end::Notifications-->
+                        </div>
+                        <!--end::Topbar-->
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Header-->
+                <!--begin::Content-->
+                <div class="content d-flex flex-column flex-column-fluid p-0" id="kt_content">
+                    <!--begin::Subheader-->
+                    <div class="subheader py-3 py-lg-8 subheader-transparent" id="kt_subheader">
+                        <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                            <!--begin::Info-->
+                            <div class="d-flex align-items-center mr-1">
+                                <!--begin::Mobile Toggle-->
+                                @if (ViewData["SubMenu"] != null)
+                                {
+                                    <button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none" id="kt_subheader_mobile_toggle">
+                                        <span></span>
+                                    </button>
+                                }
+                                <!--end::Mobile Toggle-->
+                                <!--begin::Page Heading-->
+                                <div class="d-flex align-items-baseline flex-wrap mr-5">
+                                    <!--begin::Page Title-->
+                                    <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">@ViewData["Title"]</h2>
+                                    <!--end::Page Title-->
+                                    <!--begin::Breadcrumb-->
+                                    <p class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
+                                        @(ViewData["SubTitle"] == null ? "" : ViewData["SubTitle"].ToString().ToLower())
+                                    </p>
+                                    <!--end::Breadcrumb-->
+                                </div>
+                                <!--end::Page Heading-->
+                            </div>
+                            <!--end::Info-->
+                            <!--begin::Toolbar-->
+                            <div class="d-flex align-items-center flex-wrap">
+                                @if (false) //ToDo Quick Action para uma dada pagina
+                                {
+                                    <!--begin::Dropdown-->
+                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                        <a href="#" class="btn btn-primary btn-fixed-height font-weight-bold px-2 px-lg-5 mr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="svg-icon svg-icon-lg">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Files/File.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                        <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                        <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+                                                        <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                            <span class="d-none d-md-inline">Acesso Rápido</span>
+                                        </a>
+                                        <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
+                                            <!--begin::Navigation-->
+                                            <ul class="navi navi-hover">
+                                                <li class="navi-header font-weight-bold py-4">
+                                                    <span class="font-size-lg">Choose Label:</span>
+                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                </li>
+                                                <li class="navi-separator mb-3 opacity-70"></li>
+                                                <li class="navi-item">
+                                                    <a href="#" class="navi-link">
+                                                        <span class="navi-text">
+                                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="navi-item">
+                                                    <a href="#" class="navi-link">
+                                                        <span class="navi-text">
+                                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="navi-item">
+                                                    <a href="#" class="navi-link">
+                                                        <span class="navi-text">
+                                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="navi-item">
+                                                    <a href="#" class="navi-link">
+                                                        <span class="navi-text">
+                                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="navi-item">
+                                                    <a href="#" class="navi-link">
+                                                        <span class="navi-text">
+                                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="navi-separator mt-3 opacity-70"></li>
+                                                <li class="navi-footer py-4">
+                                                    <a class="btn btn-clean font-weight-bold btn-sm" href="#">
+                                                        <i class="ki ki-plus icon-sm"></i>Add new
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <!--end::Navigation-->
+                                        </div>
+                                    </div>
+                                    <!--end::Dropdown-->
+                                }
+                                <!--begin::Button-->
+                                <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-icon font-weight-bold">
+                                    <span class="svg-icon svg-icon-lg">
+                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group-chat.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z" fill="#000000" />
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                                </a>
+                                <!--end::Button-->
+                            </div>
+                            <!--end::Toolbar-->
+                        </div>
+                    </div>
+                    <!--end::Subheader-->
+                    <!--begin::Entry-->
+                    <div class="d-flex flex-column-fluid">
+                        <!--begin::Container-->
+                        <div class="container">
+                            @RenderBody()
+                        </div>
+                        <!--end::Container-->
+                    </div>
+                    <!--end::Entry-->
+                </div>
+                <!--end::Content-->
+                <!--begin::Footer-->
+                <div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
+                    <!--begin::Container-->
+                    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+                        <!--begin::Copyright-->
+                        <div class="text-dark order-2 order-md-1">
+                            <span class="text-muted font-weight-bold mr-2">@DateTime.Now.ToString("yyyy")©</span>
+                            <a href="@Url.Action("Index", "Home")" target="_blank" class="text-dark-75 stext-hover-primary">Multiplix</a>
+                        </div>
+                        <!--end::Copyright-->
+                        <!--begin::Nav-->
+                        <div class="nav nav-dark order-1 order-md-2">
+                            <a href="@Url.Action("Index", "Sobre")" class="nav-link pr-3 pl-0">Sobre</a>
+                            <a href="@Url.Action("Index", "Contato")" class="nav-link pl-3 pr-0">Contato</a>
+                        </div>
+                        <!--end::Nav-->
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Footer-->
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Page-->
+    </div>
+    <!--end::Main-->
+    <!-- begin::Notifications Panel-->
+    <div id="kt_quick_notifications" class="offcanvas offcanvas-right p-10">
+        <!--begin::Header-->
+        <div class="offcanvas-header d-flex align-items-center justify-content-between mb-10">
+            <h3 class="font-weight-bold m-0">
+                Notifications
+                <small class="text-muted font-size-sm ml-2">3 Novas</small>
+            </h3>
+            <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_notifications_close">
+                <i class="ki ki-close icon-xs text-muted"></i>
+            </a>
+        </div>
+        <!--end::Header-->
+        <!--begin::Content-->
+        <div class="offcanvas-content pr-5 mr-n5">
+            <!--begin::Nav-->
+            <div class="navi navi-icon-circle navi-spacer-x-0">
+                <!--begin::Item-->
+                <a href="#" class="navi-item">
+                    <div class="navi-link rounded">
+                        <div class="symbol symbol-50 symbol-circle mr-3">
+                            <div class="symbol-label">
+                                <i class="flaticon-bell text-success icon-lg"></i>
+                            </div>
+                        </div>
+                        <div class="navi-text">
+                            <div class="font-weight-bold font-size-lg">Não se esqueça de atualizar seus dados cadastrais</div>
+                            <div class="text-muted"></div>
+                        </div>
+                    </div>
+                </a>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <a href="#" class="navi-item">
+                    <div class="navi-link rounded">
+                        <div class="symbol symbol-50 symbol-circle mr-3">
+                            <div class="symbol-label">
+                                <i class="flaticon-bell text-danger icon-lg"></i>
+                            </div>
+                        </div>
+                        <div class="navi-text">
+                            <div class="font-weight-bold font-size-lg">Veja os novos anúncios!</div>
+                            <div class="text-muted">de MotoSpped Brasil</div>
+                        </div>
+                    </div>
+                </a>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <a href="#" class="navi-item">
+                    <div class="navi-link rounded">
+                        <div class="symbol symbol-50 symbol-circle mr-3">
+                            <div class="symbol-label">
+                                <i class="flaticon-list text-primary icon-lg"></i>
+                            </div>
+                        </div>
+                        <div class="navi-text">
+                            <div class="font-weight-bold font-size-lg">Relatórios já disponível</div>
+                            <div class="text-muted">@(DateTime.Now.ToString("dd/MM/yyyy"))</div>
+                        </div>
+                    </div>
+                </a>
+                <!--end::Item-->
+            </div>
+            <!--end::Nav-->
+        </div>
+        <!--end::Content-->
+    </div>
+    <!-- end::Notifications Panel-->
+    <!--begin::Quick Actions Panel-->
+    <div id="kt_quick_actions" class="offcanvas offcanvas-right p-10">
+        <!--begin::Header-->
+        <div class="offcanvas-header d-flex align-items-center justify-content-between pb-10">
+            <h3 class="font-weight-bold m-0">
+                Acesso rápido
+                <small class="text-muted font-size-sm ml-2">&nbsp;</small>
+            </h3>
+            <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_actions_close">
+                <i class="ki ki-close icon-xs text-muted"></i>
+            </a>
+        </div>
+        <!--end::Header-->
+        <!--begin::Content-->
+        <div class="offcanvas-content pr-5 mr-n5">
+            @if (User.IsInRole("Administrador"))
+            {
+                <div class="row gutter-b">
+                    <!--begin::Item CadastroUsuarios-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/CadastroUsuarios")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                        <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                        <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Cadastro de usuários</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item Mensagens-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Mensagens")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M14.8571499,13 C14.9499122,12.7223297 15,12.4263059 15,12.1190476 L15,6.88095238 C15,5.28984632 13.6568542,4 12,4 L11.7272727,4 C10.2210416,4 9,5.17258756 9,6.61904762 L10.0909091,6.61904762 C10.0909091,5.75117158 10.823534,5.04761905 11.7272727,5.04761905 L12,5.04761905 C13.0543618,5.04761905 13.9090909,5.86843034 13.9090909,6.88095238 L13.9090909,12.1190476 C13.9090909,12.4383379 13.8240964,12.7385644 13.6746497,13 L10.3253503,13 C10.1759036,12.7385644 10.0909091,12.4383379 10.0909091,12.1190476 L10.0909091,9.5 C10.0909091,9.06606198 10.4572216,8.71428571 10.9090909,8.71428571 C11.3609602,8.71428571 11.7272727,9.06606198 11.7272727,9.5 L11.7272727,11.3333333 L12.8181818,11.3333333 L12.8181818,9.5 C12.8181818,8.48747796 11.9634527,7.66666667 10.9090909,7.66666667 C9.85472911,7.66666667 9,8.48747796 9,9.5 L9,12.1190476 C9,12.4263059 9.0500878,12.7223297 9.14285008,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L14.8571499,13 Z" fill="#000000" opacity="0.3" />
+                                        <path d="M9,10.3333333 L9,12.1190476 C9,13.7101537 10.3431458,15 12,15 C13.6568542,15 15,13.7101537 15,12.1190476 L15,10.3333333 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 L9,10.3333333 Z M10.0909091,11.1212121 L12,12.5 L13.9090909,11.1212121 L13.9090909,12.1190476 C13.9090909,13.1315697 13.0543618,13.952381 12,13.952381 C10.9456382,13.952381 10.0909091,13.1315697 10.0909091,12.1190476 L10.0909091,11.1212121 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Mensagens<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <div class="row gutter-b">
+                    <!--begin::Item Lancamentos-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Lancamentos")" class="btn btn-block btn-light btn-shadow btn-hover-primary border py-10 d-flex flex-grow-1 rounded flex-column align-items-center">
+                            <span class="nav-icon py-2 w-auto">
+                                <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <rect fill="#000000" opacity="0.3" x="11.5" y="2" width="2" height="4" rx="1" />
+                                            <rect fill="#000000" opacity="0.3" x="11.5" y="16" width="2" height="5" rx="1" />
+                                            <path d="M15.493,8.044 C15.2143319,7.68933156 14.8501689,7.40750104 14.4005,7.1985 C13.9508311,6.98949895 13.5170021,6.885 13.099,6.885 C12.8836656,6.885 12.6651678,6.90399981 12.4435,6.942 C12.2218322,6.98000019 12.0223342,7.05283279 11.845,7.1605 C11.6676658,7.2681672 11.5188339,7.40749914 11.3985,7.5785 C11.2781661,7.74950085 11.218,7.96799867 11.218,8.234 C11.218,8.46200114 11.2654995,8.65199924 11.3605,8.804 C11.4555005,8.95600076 11.5948324,9.08899943 11.7785,9.203 C11.9621676,9.31700057 12.1806654,9.42149952 12.434,9.5165 C12.6873346,9.61150047 12.9723317,9.70966616 13.289,9.811 C13.7450023,9.96300076 14.2199975,10.1308324 14.714,10.3145 C15.2080025,10.4981676 15.6576646,10.7419985 16.063,11.046 C16.4683354,11.3500015 16.8039987,11.7268311 17.07,12.1765 C17.3360013,12.6261689 17.469,13.1866633 17.469,13.858 C17.469,14.6306705 17.3265014,15.2988305 17.0415,15.8625 C16.7564986,16.4261695 16.3733357,16.8916648 15.892,17.259 C15.4106643,17.6263352 14.8596698,17.8986658 14.239,18.076 C13.6183302,18.2533342 12.97867,18.342 12.32,18.342 C11.3573285,18.342 10.4263378,18.1741683 9.527,17.8385 C8.62766217,17.5028317 7.88033631,17.0246698 7.285,16.404 L9.413,14.238 C9.74233498,14.6433354 10.176164,14.9821653 10.7145,15.2545 C11.252836,15.5268347 11.7879973,15.663 12.32,15.663 C12.5606679,15.663 12.7949989,15.6376669 13.023,15.587 C13.2510011,15.5363331 13.4504991,15.4540006 13.6215,15.34 C13.7925009,15.2259994 13.9286662,15.0740009 14.03,14.884 C14.1313338,14.693999 14.182,14.4660013 14.182,14.2 C14.182,13.9466654 14.1186673,13.7313342 13.992,13.554 C13.8653327,13.3766658 13.6848345,13.2151674 13.4505,13.0695 C13.2161655,12.9238326 12.9248351,12.7908339 12.5765,12.6705 C12.2281649,12.5501661 11.8323355,12.420334 11.389,12.281 C10.9583312,12.141666 10.5371687,11.9770009 10.1255,11.787 C9.71383127,11.596999 9.34650161,11.3531682 9.0235,11.0555 C8.70049838,10.7578318 8.44083431,10.3968355 8.2445,9.9725 C8.04816568,9.54816454 7.95,9.03200304 7.95,8.424 C7.95,7.67666293 8.10199848,7.03700266 8.406,6.505 C8.71000152,5.97299734 9.10899753,5.53600171 9.603,5.194 C10.0970025,4.85199829 10.6543302,4.60183412 11.275,4.4435 C11.8956698,4.28516587 12.5226635,4.206 13.156,4.206 C13.9160038,4.206 14.6918294,4.34533194 15.4835,4.624 C16.2751706,4.90266806 16.9686637,5.31433061 17.564,5.859 L15.493,8.044 Z" fill="#000000" />
+                                        </g>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Lancamentos</span>
+                        </a>
+                    </div>
+                    <!--end::Item Lancamentos-->
+                    <!--begin::Item Extrato-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Extratos")" class="btn btn-block btn-light btn-shadow btn-hover-primary border py-10 d-flex flex-grow-1 rounded flex-column align-items-center">
+                            <span class="nav-icon py-2 w-auto">
+                                <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <polygon fill="#000000" opacity="0.3" points="6 3 18 3 20 6.5 4 6.5" />
+                                            <path d="M6,5 L18,5 C19.1045695,5 20,5.8954305 20,7 L20,19 C20,20.1045695 19.1045695,21 18,21 L6,21 C4.8954305,21 4,20.1045695 4,19 L4,7 C4,5.8954305 4.8954305,5 6,5 Z M9,9 C8.44771525,9 8,9.44771525 8,10 C8,10.5522847 8.44771525,11 9,11 L15,11 C15.5522847,11 16,10.5522847 16,10 C16,9.44771525 15.5522847,9 15,9 L9,9 Z" fill="#000000" />
+                                        </g>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Extratos</span>
+                        </a>
+                        <!--end::Item Extrato-->
+                    </div>
+                </div>
+                <div class="row gutter-b">
+                    <!--begin::Item Anuncio Precos-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/AnunciosPrecos")" class="btn btn-block btn-light btn-shadow btn-hover-primary border py-10 d-flex flex-grow-1 rounded flex-column align-items-center">
+                            <span class="nav-icon py-2 w-auto">
+                                <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path d="M2,6 L21,6 C21.5522847,6 22,6.44771525 22,7 L22,17 C22,17.5522847 21.5522847,18 21,18 L2,18 C1.44771525,18 1,17.5522847 1,17 L1,7 C1,6.44771525 1.44771525,6 2,6 Z M11.5,16 C13.709139,16 15.5,14.209139 15.5,12 C15.5,9.790861 13.709139,8 11.5,8 C9.290861,8 7.5,9.790861 7.5,12 C7.5,14.209139 9.290861,16 11.5,16 Z" fill="#000000" opacity="0.3" transform="translate(11.500000, 12.000000) rotate(-345.000000) translate(-11.500000, -12.000000) " />
+                                            <path d="M2,6 L21,6 C21.5522847,6 22,6.44771525 22,7 L22,17 C22,17.5522847 21.5522847,18 21,18 L2,18 C1.44771525,18 1,17.5522847 1,17 L1,7 C1,6.44771525 1.44771525,6 2,6 Z M11.5,16 C13.709139,16 15.5,14.209139 15.5,12 C15.5,9.790861 13.709139,8 11.5,8 C9.290861,8 7.5,9.790861 7.5,12 C7.5,14.209139 9.290861,16 11.5,16 Z M11.5,14 C12.6045695,14 13.5,13.1045695 13.5,12 C13.5,10.8954305 12.6045695,10 11.5,10 C10.3954305,10 9.5,10.8954305 9.5,12 C9.5,13.1045695 10.3954305,14 11.5,14 Z" fill="#000000" />
+                                        </g>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Preços dos Anuncios</span>
+                        </a>
+                    </div>
+                    <!--end::Item Anuncio Precos-->
+                    <!--begin::Item Home-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Home<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+
+
+            }
+            @if (User.IsInRole("Publicitario"))
+            {
+                <div class="row gutter-b">
+                    <!--begin::Item Campanhas-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Campanhas")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M6,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,19 C20,20.1045695 19.1045695,21 18,21 L6,21 C4.8954305,21 4,20.1045695 4,19 L4,5 C4,3.8954305 4.8954305,3 6,3 Z M5.5,5 C5.22385763,5 5,5.22385763 5,5.5 L5,6.5 C5,6.77614237 5.22385763,7 5.5,7 L6.5,7 C6.77614237,7 7,6.77614237 7,6.5 L7,5.5 C7,5.22385763 6.77614237,5 6.5,5 L5.5,5 Z M17.5,5 C17.2238576,5 17,5.22385763 17,5.5 L17,6.5 C17,6.77614237 17.2238576,7 17.5,7 L18.5,7 C18.7761424,7 19,6.77614237 19,6.5 L19,5.5 C19,5.22385763 18.7761424,5 18.5,5 L17.5,5 Z M5.5,9 C5.22385763,9 5,9.22385763 5,9.5 L5,10.5 C5,10.7761424 5.22385763,11 5.5,11 L6.5,11 C6.77614237,11 7,10.7761424 7,10.5 L7,9.5 C7,9.22385763 6.77614237,9 6.5,9 L5.5,9 Z M17.5,9 C17.2238576,9 17,9.22385763 17,9.5 L17,10.5 C17,10.7761424 17.2238576,11 17.5,11 L18.5,11 C18.7761424,11 19,10.7761424 19,10.5 L19,9.5 C19,9.22385763 18.7761424,9 18.5,9 L17.5,9 Z M5.5,13 C5.22385763,13 5,13.2238576 5,13.5 L5,14.5 C5,14.7761424 5.22385763,15 5.5,15 L6.5,15 C6.77614237,15 7,14.7761424 7,14.5 L7,13.5 C7,13.2238576 6.77614237,13 6.5,13 L5.5,13 Z M17.5,13 C17.2238576,13 17,13.2238576 17,13.5 L17,14.5 C17,14.7761424 17.2238576,15 17.5,15 L18.5,15 C18.7761424,15 19,14.7761424 19,14.5 L19,13.5 C19,13.2238576 18.7761424,13 18.5,13 L17.5,13 Z M17.5,17 C17.2238576,17 17,17.2238576 17,17.5 L17,18.5 C17,18.7761424 17.2238576,19 17.5,19 L18.5,19 C18.7761424,19 19,18.7761424 19,18.5 L19,17.5 C19,17.2238576 18.7761424,17 18.5,17 L17.5,17 Z M5.5,17 C5.22385763,17 5,17.2238576 5,17.5 L5,18.5 C5,18.7761424 5.22385763,19 5.5,19 L6.5,19 C6.77614237,19 7,18.7761424 7,18.5 L7,17.5 C7,17.2238576 6.77614237,17 6.5,17 L5.5,17 Z" fill="#000000" opacity="0.3" />
+                                        <path d="M11.3521577,14.5722612 L13.9568442,12.7918113 C14.1848159,12.6359797 14.2432972,12.3248456 14.0874656,12.0968739 C14.0526941,12.0460053 14.0088196,12.002002 13.9580532,11.9670814 L11.3533667,10.1754041 C11.1258528,10.0189048 10.8145486,10.0764735 10.6580493,10.3039875 C10.6007019,10.3873574 10.5699997,10.4861652 10.5699997,10.5873545 L10.5699997,14.1594818 C10.5699997,14.4356241 10.7938573,14.6594818 11.0699997,14.6594818 C11.1706891,14.6594818 11.2690327,14.6290818 11.3521577,14.5722612 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Campanhas<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item Relatórios-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Relatorios")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3" />
+                                        <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000" />
+                                        <rect fill="#000000" opacity="0.3" x="7" y="10" width="5" height="2" rx="1" />
+                                        <rect fill="#000000" opacity="0.3" x="7" y="14" width="9" height="2" rx="1" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Relatórios<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <div class="row gutter-b">
+                    <!--begin::Item ExtratoUsuarios-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/ExtratoUsuarios")" class="btn btn-block btn-light btn-shadow btn-hover-primary border py-10 d-flex flex-grow-1 rounded flex-column align-items-center">
+                            <span class="nav-icon py-2 w-auto">
+                                <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <polygon fill="#000000" opacity="0.3" points="6 3 18 3 20 6.5 4 6.5" />
+                                            <path d="M6,5 L18,5 C19.1045695,5 20,5.8954305 20,7 L20,19 C20,20.1045695 19.1045695,21 18,21 L6,21 C4.8954305,21 4,20.1045695 4,19 L4,7 C4,5.8954305 4.8954305,5 6,5 Z M9,9 C8.44771525,9 8,9.44771525 8,10 C8,10.5522847 8.44771525,11 9,11 L15,11 C15.5522847,11 16,10.5522847 16,10 C16,9.44771525 15.5522847,9 15,9 L9,9 Z" fill="#000000" />
+                                        </g>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Extratos</span>
+                        </a>
+                    </div>
+                    <!--end::Item ExtratoUsuarios-->
+                    <!--begin::Item Painel-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Painel")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="13" rx="1.5" />
+                                        <rect fill="#000000" opacity="0.3" x="7" y="9" width="3" height="8" rx="1.5" />
+                                        <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero" />
+                                        <rect fill="#000000" opacity="0.3" x="17" y="11" width="3" height="6" rx="1.5" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Painel<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <div class="row gutter-b">                   
+                    <!--begin::Item Home-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Home<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+            }
+            @if (User.IsInRole("Streamer"))
+            {
+                <div class="row gutter-b">
+                    <!--begin::Item Trona-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Trona")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <rect fill="#000000" opacity="0.3" x="4" y="4" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="4" y="10" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="10" y="4" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="10" y="10" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="16" y="4" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="16" y="10" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="4" y="16" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="10" y="16" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="16" y="16" width="4" height="4" rx="2" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Tronagem<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item ExtratoUsuarios-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/ExtratoUsuarios")" class="btn btn-block btn-light btn-shadow btn-hover-primary border py-10 d-flex flex-grow-1 rounded flex-column align-items-center">
+                            <span class="nav-icon py-2 w-auto">
+                                <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <polygon fill="#000000" opacity="0.3" points="6 3 18 3 20 6.5 4 6.5" />
+                                            <path d="M6,5 L18,5 C19.1045695,5 20,5.8954305 20,7 L20,19 C20,20.1045695 19.1045695,21 18,21 L6,21 C4.8954305,21 4,20.1045695 4,19 L4,7 C4,5.8954305 4.8954305,5 6,5 Z M9,9 C8.44771525,9 8,9.44771525 8,10 C8,10.5522847 8.44771525,11 9,11 L15,11 C15.5522847,11 16,10.5522847 16,10 C16,9.44771525 15.5522847,9 15,9 L9,9 Z" fill="#000000" />
+                                        </g>
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Extratos</span>
+                        </a>
+                    </div>
+                    <!--end::Item ExtratoUsuarios-->
+                </div>
+                <div class="row gutter-b">
+                    <!--begin::Item Relatórios-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Relatorios")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3" />
+                                        <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000" />
+                                        <rect fill="#000000" opacity="0.3" x="7" y="10" width="5" height="2" rx="1" />
+                                        <rect fill="#000000" opacity="0.3" x="7" y="14" width="9" height="2" rx="1" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Relatórios<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item Home-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Home<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+            }
+            @if (User.IsInRole("Usuario"))
+            {
+                <div class="row gutter-b">
+                    <!--begin::Item Trona-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Trona")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <rect fill="#000000" opacity="0.3" x="4" y="4" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="4" y="10" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="10" y="4" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="10" y="10" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="16" y="4" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="16" y="10" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="4" y="16" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="10" y="16" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="16" y="16" width="4" height="4" rx="2" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Tronagem<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item Leads-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Leads")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M5.5,2 L18.5,2 C19.3284271,2 20,2.67157288 20,3.5 L20,6.5 C20,7.32842712 19.3284271,8 18.5,8 L5.5,8 C4.67157288,8 4,7.32842712 4,6.5 L4,3.5 C4,2.67157288 4.67157288,2 5.5,2 Z M11,4 C10.4477153,4 10,4.44771525 10,5 C10,5.55228475 10.4477153,6 11,6 L13,6 C13.5522847,6 14,5.55228475 14,5 C14,4.44771525 13.5522847,4 13,4 L11,4 Z" fill="#000000" opacity="0.3" />
+                                        <path d="M5.5,9 L18.5,9 C19.3284271,9 20,9.67157288 20,10.5 L20,13.5 C20,14.3284271 19.3284271,15 18.5,15 L5.5,15 C4.67157288,15 4,14.3284271 4,13.5 L4,10.5 C4,9.67157288 4.67157288,9 5.5,9 Z M11,11 C10.4477153,11 10,11.4477153 10,12 C10,12.5522847 10.4477153,13 11,13 L13,13 C13.5522847,13 14,12.5522847 14,12 C14,11.4477153 13.5522847,11 13,11 L11,11 Z M5.5,16 L18.5,16 C19.3284271,16 20,16.6715729 20,17.5 L20,20.5 C20,21.3284271 19.3284271,22 18.5,22 L5.5,22 C4.67157288,22 4,21.3284271 4,20.5 L4,17.5 C4,16.6715729 4.67157288,16 5.5,16 Z M11,18 C10.4477153,18 10,18.4477153 10,19 C10,19.5522847 10.4477153,20 11,20 L13,20 C13.5522847,20 14,19.5522847 14,19 C14,18.4477153 13.5522847,18 13,18 L11,18 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Leads<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <div class="row gutter-b">
+                    <!--begin::Item Relatórios-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Relatorios")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3" />
+                                        <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000" />
+                                        <rect fill="#000000" opacity="0.3" x="7" y="10" width="5" height="2" rx="1" />
+                                        <rect fill="#000000" opacity="0.3" x="7" y="14" width="9" height="2" rx="1" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Relatórios<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item EmailProspecção-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/EmailProspeccao")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Email Prospecção</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <div class="row gutter-b">
+                    <!--begin::Item CartaoVisita-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/CartaoVisita")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <rect fill="#000000" opacity="0.3" x="2" y="5" width="20" height="14" rx="2" />
+                                        <rect fill="#000000" x="2" y="8" width="20" height="3" />
+                                        <rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2" rx="1" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Cartão de Visita</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item MeuSite-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/MeuSite")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M11,20 L11,17 C11,16.4477153 11.4477153,16 12,16 C12.5522847,16 13,16.4477153 13,17 L13,20 L15.5,20 C15.7761424,20 16,20.2238576 16,20.5 C16,20.7761424 15.7761424,21 15.5,21 L8.5,21 C8.22385763,21 8,20.7761424 8,20.5 C8,20.2238576 8.22385763,20 8.5,20 L11,20 Z" fill="#000000" opacity="0.3" />
+                                        <path d="M3,5 L21,5 C21.5522847,5 22,5.44771525 22,6 L22,16 C22,16.5522847 21.5522847,17 21,17 L3,17 C2.44771525,17 2,16.5522847 2,16 L2,6 C2,5.44771525 2.44771525,5 3,5 Z M4.5,8 C4.22385763,8 4,8.22385763 4,8.5 C4,8.77614237 4.22385763,9 4.5,9 L13.5,9 C13.7761424,9 14,8.77614237 14,8.5 C14,8.22385763 13.7761424,8 13.5,8 L4.5,8 Z M4.5,10 C4.22385763,10 4,10.2238576 4,10.5 C4,10.7761424 4.22385763,11 4.5,11 L7.5,11 C7.77614237,11 8,10.7761424 8,10.5 C8,10.2238576 7.77614237,10 7.5,10 L4.5,10 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Meu Site<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <div class="row gutter-b">
+                    <!--begin::Item Home-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Home<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+            }
+            @if (User.IsInRole("Master"))
+            {
+                <div class="row gutter-b">
+                    <!--begin::Item CadastroUsuario-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/CadastroUsuario")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                        <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                        <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Cadastro de usuário</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item Mensagens-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Mensagens")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M14.8571499,13 C14.9499122,12.7223297 15,12.4263059 15,12.1190476 L15,6.88095238 C15,5.28984632 13.6568542,4 12,4 L11.7272727,4 C10.2210416,4 9,5.17258756 9,6.61904762 L10.0909091,6.61904762 C10.0909091,5.75117158 10.823534,5.04761905 11.7272727,5.04761905 L12,5.04761905 C13.0543618,5.04761905 13.9090909,5.86843034 13.9090909,6.88095238 L13.9090909,12.1190476 C13.9090909,12.4383379 13.8240964,12.7385644 13.6746497,13 L10.3253503,13 C10.1759036,12.7385644 10.0909091,12.4383379 10.0909091,12.1190476 L10.0909091,9.5 C10.0909091,9.06606198 10.4572216,8.71428571 10.9090909,8.71428571 C11.3609602,8.71428571 11.7272727,9.06606198 11.7272727,9.5 L11.7272727,11.3333333 L12.8181818,11.3333333 L12.8181818,9.5 C12.8181818,8.48747796 11.9634527,7.66666667 10.9090909,7.66666667 C9.85472911,7.66666667 9,8.48747796 9,9.5 L9,12.1190476 C9,12.4263059 9.0500878,12.7223297 9.14285008,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L14.8571499,13 Z" fill="#000000" opacity="0.3" />
+                                        <path d="M9,10.3333333 L9,12.1190476 C9,13.7101537 10.3431458,15 12,15 C13.6568542,15 15,13.7101537 15,12.1190476 L15,10.3333333 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 L9,10.3333333 Z M10.0909091,11.1212121 L12,12.5 L13.9090909,11.1212121 L13.9090909,12.1190476 C13.9090909,13.1315697 13.0543618,13.952381 12,13.952381 C10.9456382,13.952381 10.0909091,13.1315697 10.0909091,12.1190476 L10.0909091,11.1212121 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Mensagens<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <div class="row gutter-b">
+                    <!--begin::Item Trona-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Trona")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <rect fill="#000000" opacity="0.3" x="4" y="4" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="4" y="10" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="10" y="4" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="10" y="10" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="16" y="4" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="16" y="10" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="4" y="16" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="10" y="16" width="4" height="4" rx="2" />
+                                        <rect fill="#000000" x="16" y="16" width="4" height="4" rx="2" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Tronagem<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item Leads-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Leads")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M5.5,2 L18.5,2 C19.3284271,2 20,2.67157288 20,3.5 L20,6.5 C20,7.32842712 19.3284271,8 18.5,8 L5.5,8 C4.67157288,8 4,7.32842712 4,6.5 L4,3.5 C4,2.67157288 4.67157288,2 5.5,2 Z M11,4 C10.4477153,4 10,4.44771525 10,5 C10,5.55228475 10.4477153,6 11,6 L13,6 C13.5522847,6 14,5.55228475 14,5 C14,4.44771525 13.5522847,4 13,4 L11,4 Z" fill="#000000" opacity="0.3" />
+                                        <path d="M5.5,9 L18.5,9 C19.3284271,9 20,9.67157288 20,10.5 L20,13.5 C20,14.3284271 19.3284271,15 18.5,15 L5.5,15 C4.67157288,15 4,14.3284271 4,13.5 L4,10.5 C4,9.67157288 4.67157288,9 5.5,9 Z M11,11 C10.4477153,11 10,11.4477153 10,12 C10,12.5522847 10.4477153,13 11,13 L13,13 C13.5522847,13 14,12.5522847 14,12 C14,11.4477153 13.5522847,11 13,11 L11,11 Z M5.5,16 L18.5,16 C19.3284271,16 20,16.6715729 20,17.5 L20,20.5 C20,21.3284271 19.3284271,22 18.5,22 L5.5,22 C4.67157288,22 4,21.3284271 4,20.5 L4,17.5 C4,16.6715729 4.67157288,16 5.5,16 Z M11,18 C10.4477153,18 10,18.4477153 10,19 C10,19.5522847 10.4477153,20 11,20 L13,20 C13.5522847,20 14,19.5522847 14,19 C14,18.4477153 13.5522847,18 13,18 L11,18 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Leads<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <div class="row gutter-b">
+                    <!--begin::Item Relatorios-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/Relatorios")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3" />
+                                        <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000" />
+                                        <rect fill="#000000" opacity="0.3" x="7" y="10" width="5" height="2" rx="1" />
+                                        <rect fill="#000000" opacity="0.3" x="7" y="14" width="9" height="2" rx="1" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Relatórios<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item EmailProspeccao-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/EmailProspeccao")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Email prospecção</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <div class="row gutter-b">
+                    <!--begin::Item CartaoVisita-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/CartaoVisita")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <rect fill="#000000" opacity="0.3" x="2" y="5" width="20" height="14" rx="2" />
+                                        <rect fill="#000000" x="2" y="8" width="20" height="3" />
+                                        <rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2" rx="1" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Cartão de visita</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item MeuSite-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~/MeuSite")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M11,20 L11,17 C11,16.4477153 11.4477153,16 12,16 C12.5522847,16 13,16.4477153 13,17 L13,20 L15.5,20 C15.7761424,20 16,20.2238576 16,20.5 C16,20.7761424 15.7761424,21 15.5,21 L8.5,21 C8.22385763,21 8,20.7761424 8,20.5 C8,20.2238576 8.22385763,20 8.5,20 L11,20 Z" fill="#000000" opacity="0.3" />
+                                        <path d="M3,5 L21,5 C21.5522847,5 22,5.44771525 22,6 L22,16 C22,16.5522847 21.5522847,17 21,17 L3,17 C2.44771525,17 2,16.5522847 2,16 L2,6 C2,5.44771525 2.44771525,5 3,5 Z M4.5,8 C4.22385763,8 4,8.22385763 4,8.5 C4,8.77614237 4.22385763,9 4.5,9 L13.5,9 C13.7761424,9 14,8.77614237 14,8.5 C14,8.22385763 13.7761424,8 13.5,8 L4.5,8 Z M4.5,10 C4.22385763,10 4,10.2238576 4,10.5 C4,10.7761424 4.22385763,11 4.5,11 L7.5,11 C7.77614237,11 8,10.7761424 8,10.5 C8,10.2238576 7.77614237,10 7.5,10 L4.5,10 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Meu site<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <div class="row gutter-b">
+                    <!--begin::Item Home-->
+                    <div class="col-6">
+                        <a href="@Url.Content("~")" class="btn btn-block btn-light btn-shadow btn-hover-primary text-dark-50 text-center py-10 px-5">
+                            <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z" fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="d-block font-weight-bold font-size-h6 mt-2">Home<br />&nbsp;</span>
+                        </a>
+                    </div>
+                    <!--end::Item-->
+                </div>
+            }
+        </div>
+        <!--end::Content-->
+    </div>
+    <!--end::Quick Actions Panel-->
+    <!-- begin::User Panel-->
+    <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
+        <!--begin::Header-->
+        <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
+            <h3 class="font-weight-bold m-0">
+                Usuário
+                <small class="text-muted font-size-sm ml-2">&nbsp;</small>
+            </h3>
+            <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
+                <i class="ki ki-close icon-xs text-muted"></i>
+            </a>
+        </div>
+        <!--end::Header-->
+        <!--begin::Content-->
+        <div class="offcanvas-content pr-5 mr-n5">
+            <!--begin::Header-->
+            <div class="d-flex align-items-center mt-5">
+                <div class="symbol symbol-100 mr-5">
+                    <div class="symbol-label" style="background-image:url('@User.Identity.Avatar()')"></div>
+                    <i class="symbol-badge bg-success"></i>
+                </div>
+                <div class="d-flex flex-column">
+                    <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">@User.Identity.Nome()</a>
+                    <div class="text-muted mt-1">@User.Identity.Regra()</div>
+                    <div class="navi mt-2">
+                        <a href="#" class="navi-item">
+                            <span class="navi-link p-0 pb-2">
+                                <span class="navi-icon mr-1">
+                                    <span class="svg-icon svg-icon-lg svg-icon-primary">
+                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Mail-notification.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <path d="M21,12.0829584 C20.6747915,12.0283988 20.3407122,12 20,12 C16.6862915,12 14,14.6862915 14,18 C14,18.3407122 14.0283988,18.6747915 14.0829584,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12.0829584 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000" />
+                                                <circle fill="#000000" opacity="0.3" cx="19.5" cy="17.5" r="2.5" />
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                                </span>
+                                <span class="navi-text text-muted text-hover-primary">@User.Identity.Email()</span>
+                            </span>
+                        </a>
+                        <form method="post" asp-controller="Login" asp-action="Logout">
+                            <input class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5" type="submit" value="Logout" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--end::Header-->
+            <!--begin::Separator-->
+            <div class="separator separator-dashed mt-8 mb-5"></div>
+            <!--end::Separator-->
+            <!--begin::Nav-->
+            <div class="navi navi-spacer-x-0 p-0">
+                <!--begin::Item-->
+                <a href="@Url.Content("~/DadosPessoais")" class="navi-item">
+                    <div class="navi-link">
+                        <div class="symbol symbol-40 bg-light mr-3">
+                            <div class="symbol-label">
+                                <span class="svg-icon svg-icon-md svg-icon-warning">
+                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Chart-bar1.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path d="M8,17 C8.55228475,17 9,17.4477153 9,18 L9,21 C9,21.5522847 8.55228475,22 8,22 L3,22 C2.44771525,22 2,21.5522847 2,21 L2,18 C2,17.4477153 2.44771525,17 3,17 L3,16.5 C3,15.1192881 4.11928813,14 5.5,14 C6.88071187,14 8,15.1192881 8,16.5 L8,17 Z M5.5,15 C4.67157288,15 4,15.6715729 4,16.5 L4,17 L7,17 L7,16.5 C7,15.6715729 6.32842712,15 5.5,15 Z" fill="#000000" opacity="0.3" />
+                                            <path d="M2,11.8650466 L2,6 C2,4.34314575 3.34314575,3 5,3 L19,3 C20.6568542,3 22,4.34314575 22,6 L22,15 C22,15.0032706 21.9999948,15.0065399 21.9999843,15.009808 L22.0249378,15 L22.0249378,19.5857864 C22.0249378,20.1380712 21.5772226,20.5857864 21.0249378,20.5857864 C20.7597213,20.5857864 20.5053674,20.4804296 20.317831,20.2928932 L18.0249378,18 L12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.23590829,11 3.04485894,11.3127315 2,11.8650466 Z M6,7 C5.44771525,7 5,7.44771525 5,8 C5,8.55228475 5.44771525,9 6,9 L15,9 C15.5522847,9 16,8.55228475 16,8 C16,7.44771525 15.5522847,7 15,7 L6,7 Z" fill="#000000" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
+                            </div>
+                        </div>
+                        <div class="navi-text">
+                            <div class="font-weight-bold">Dados pessoais</div>
+                            <div class="text-muted">atualização de cadastro</div>
+                        </div>
+                    </div>
+                </a>
+                <!--end:Item-->
+                <!--begin::Item-->
+                <!--<a href="@Url.Content("~/AlterarSenha")" class="navi-item">
+                    <div class="navi-link">
+                        <div class="symbol symbol-40 bg-light mr-3">
+                            <div class="symbol-label">
+                                <span class="svg-icon svg-icon-md svg-icon-success">-->
+                <!--begin::Svg Icon | path:assets/media/svg/icons/General/Notification2.svg-->
+                <!--<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24" />
+                        <path d="M13.2070325,4 C13.0721672,4.47683179 13,4.97998812 13,5.5 C13,8.53756612 15.4624339,11 18.5,11 C19.0200119,11 19.5231682,10.9278328 20,10.7929675 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L13.2070325,4 Z" fill="#000000" />
+                        <circle fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5" />
+                    </g>
+                </svg>-->
+                <!--end::Svg Icon-->
+                <!--</span>
+                            </div>
+                        </div>
+                        <div class="navi-text">
+                            <div class="font-weight-bold">Alterar Senha</div>
+                            <div class="text-muted">
+                                altere sua senha de tempos em tempos!
+                            </div>
+                        </div>
+                    </div>
+                </a>-->
+                <!--end:Item-->
+                <!--begin::Item-->
+                <a href="@Url.Content("~/Seguranca")" class="navi-item">
+                    <div class="navi-link">
+                        <div class="symbol symbol-40 bg-light mr-3">
+                            <div class="symbol-label">
+                                <span class="svg-icon svg-icon-md svg-icon-success">
+                                    <!--begin::Svg Icon | path:assets/media/svg/icons/General/Notification2.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3" />
+                                            <path d="M14.5,11 C15.0522847,11 15.5,11.4477153 15.5,12 L15.5,15 C15.5,15.5522847 15.0522847,16 14.5,16 L9.5,16 C8.94771525,16 8.5,15.5522847 8.5,15 L8.5,12 C8.5,11.4477153 8.94771525,11 9.5,11 L9.5,10.5 C9.5,9.11928813 10.6192881,8 12,8 C13.3807119,8 14.5,9.11928813 14.5,10.5 L14.5,11 Z M12,9 C11.1715729,9 10.5,9.67157288 10.5,10.5 L10.5,11 L13.5,11 L13.5,10.5 C13.5,9.67157288 12.8284271,9 12,9 Z" fill="#000000" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
+                            </div>
+                        </div>
+                        <div class="navi-text">
+                            <div class="font-weight-bold">Seguranca</div>
+                            <div class="text-muted">
+                                senha e autenticação
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!--end:Item-->
+            </div>
+            <!--end::Nav-->
+            <!--begin::Separator-->
+            <div class="separator separator-dashed my-7"></div>
+            <!--end::Separator-->
+        </div>
+        <!--end::Content-->
+    </div>
+    <!-- end::User Panel-->
+    <!--begin::Scrolltop-->
+    <div id="kt_scrolltop" class="scrolltop">
+        <span class="svg-icon">
+            <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Up-2.svg-->
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <polygon points="0 0 24 0 24 24 0 24" />
+                    <rect fill="#000000" opacity="0.3" x="11" y="10" width="2" height="10" rx="1" />
+                    <path d="M6.70710678,12.7071068 C6.31658249,13.0976311 5.68341751,13.0976311 5.29289322,12.7071068 C4.90236893,12.3165825 4.90236893,11.6834175 5.29289322,11.2928932 L11.2928932,5.29289322 C11.6714722,4.91431428 12.2810586,4.90106866 12.6757246,5.26284586 L18.6757246,10.7628459 C19.0828436,11.1360383 19.1103465,11.7686056 18.7371541,12.1757246 C18.3639617,12.5828436 17.7313944,12.6103465 17.3242754,12.2371541 L12.0300757,7.38413782 L6.70710678,12.7071068 Z" fill="#000000" fill-rule="nonzero" />
+                </g>
+            </svg>
+            <!--end::Svg Icon-->
+        </span>
+    </div>
+    <!--end::Scrolltop-->
+    <script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#6993FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#F3F6F9", "dark": "#212121" }, "light": { "white": "#ffffff", "primary": "#E1E9FF", "secondary": "#ECF0F3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#212121", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#ECF0F3", "gray-300": "#E5EAEE", "gray-400": "#D6D6E0", "gray-500": "#B5B5C3", "gray-600": "#80808F", "gray-700": "#464E5F", "gray-800": "#1B283F", "gray-900": "#212121" } }, "font-family": "Poppins" };</script>
+    <!--begin::Global Theme Bundle(used by all pages)-->
+    <script src="@Url.Content("~/assets/plugins/global/plugins.bundle.js")"></script>
+    <script src="@Url.Content("~/assets/plugins/custom/prismjs/prismjs.bundle.js")"></script>
+    <script src="@Url.Content("~/assets/js/scripts.bundle.js")"></script>
+    <!--end::Global Theme Bundle-->
+    @RenderSection("Scripts", required: false)
+
+    @if (ViewBag.Erro != null)
+    {
+        <script>
+            $(document).ready(function () {
+                swal.fire({
+                    title: "Erro!",
+                    html: "@Html.Raw(ViewBag.Erro)",
+                    icon: "error",
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    },
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                });
+            });
+        </script>
+    }
+    @if (ViewBag.Mensagem != null)
+    {
+        <script>
+            $(document).ready(function () {
+                swal.fire({
+                    title: "Sucesso!",
+                    html: "@Html.Raw(ViewBag.Mensagem)",
+                    icon: "success",
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-success"
+                    },
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                });
+            });
+        </script>
+    }
+    @if (ViewBag.MensagemVoltarLink != null)
+    {
+        <script>
+            $(document).ready(function (){
+                Swal.fire({
+                    title: "Sucesso!",
+                    html:  "@ViewBag.MensagemVoltarTexto",
+                    icon: "success",
+                    showCancelButton: true,
+                    cancelButtonText: "Ok",
+                    confirmButtonText: "<i class='flaticon2-back'></i>voltar",
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    },
+                    customClass: {
+                        confirmButton: "btn btn-primary font-weight-bolder",
+                        cancelButton: "btn btn-light-dark font-weight-bolder"
+                    }
+                }).then(function (result) {
+                if (result.value) {
+                    window.location.href = "@ViewBag.MensagemVoltarLink"
+                    };
+                });
+            });
+        </script>
+    }
+</body>
+<!--end::Body-->
+</html>
+
+
+

@@ -1,0 +1,383 @@
+﻿@model IList<AnuncioSelecionadoModel>
+@{
+    ViewData["Title"] = "Anúncios";
+    ViewData["SubTitle"] = "configuração";
+    ViewData["SubMenu"] = "true";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Header{}
+@section Scripts{
+    <script>
+        "use strict";
+        var KTAnuncioUsuario = function () {
+            var _clipboard = function () {
+                // basic example
+                new ClipboardJS('[data-clipboard=true]').on('success', function (e) {
+                    e.clearSelection();
+                    swal.fire({
+                        title: "Copiado",
+                        text: "O link foi copiado para o clipboard!",
+                        icon: "success",
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn font-weight-bold btn-light-primary"
+                        },
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    });
+                });
+            }
+
+            var _handleIdForm = function (e) {
+                var validation;
+                var form = KTUtil.getById('idForm');
+                validation = FormValidation.formValidation(
+                    form,
+                    {
+                        fields: {
+                            username: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "'UserName' é necessário"
+                                    }
+                                }
+                            },
+                        },
+                        plugins: {
+                            trigger: new FormValidation.plugins.Trigger(),
+                            bootstrap: new FormValidation.plugins.Bootstrap(),
+                            submitButton: new FormValidation.plugins.SubmitButton(),
+                            defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                        }
+                    }
+                );
+                $('.salvar').on('click', function (e) {
+                    e.preventDefault();
+                    validation.validate().then(function (status) {
+                        if (status == 'Valid') {
+                            KTApp.blockPage({
+                                overlayColor: 'blue',
+                                opacity: 0.1,
+                                state: 'primary',
+                                message: 'Aguarde...'
+                            });
+                            form.submit();
+                        } else {
+                            swal.fire({
+                                text: "Desculpe, parece que foram detectados alguns erros, tente novamente...",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "OK",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            });
+                            KTApp.unblockPage();
+                        }
+                    });
+                });
+                $(".cancelar").on('click', function (e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: "Tem certeza?",
+                        text: "Todos os dados digitados serâo perdidos! @ViewBag.anuncioTipoAtivo",
+                        icon: "warning",
+                        showCancelButton: true,
+                        cancelButtonText: "Não",
+                        confirmButtonText: "Sim"
+                    }).then(function (result) {
+                        if (result.value) {
+                            $(window.location).attr('href', '@Url.Action("index","AnunciosUsuario", new {id = ViewBag.anuncioTipoAtivo, rede =  ViewBag.redeSocialAtivo })');
+                        }
+                    });
+                });
+            }
+
+            // menu lateral dos tipos
+            var _initAside = function () {
+                offcanvas = new KTOffcanvas('kt_profile_aside', {
+                    overlay: true,
+                    baseClass: 'offcanvas-mobile',
+                    toggleBy: 'kt_subheader_mobile_toggle'
+                });
+            }
+
+            return {
+                // public functions
+                init: function () {
+                    _clipboard();
+                    _handleIdForm();
+                    _initAside();
+                }
+            };
+        }();
+
+        jQuery(document).ready(function () {
+            KTAnuncioUsuario.init();
+        });
+    </script>
+}
+<!--begin::Profile Overview-->
+<div class="d-flex flex-row idAnuncioUsuario">
+    <!--begin::Aside-->
+    <div class="flex-row-auto offcanvas-mobile w-300px w-xl-350px" id="kt_profile_aside">
+        <!--begin::Profile Card-->
+        <div class="card card-custom card-stretch">
+            <!--begin::Body-->
+            <div class="card-body pt-4">
+                <div class="d-flex align-items-center pb-5">
+                    <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
+                        <div class="symbol-label" style="background-image: url(@Url.Content("~/img/misc/settings.png")"></div>
+                        <i class="symbol-badge bg-success"></i>
+                    </div>
+                    <div>
+                        <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">Tipos</a>
+                        <div class="text-muted">Selecione o tipo de anúncio<br />para configurá-lo:</div>
+                    </div>
+                </div>
+                <!--begin::Nav-->
+                <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
+                    @foreach (AnuncioTipoModel item in ViewBag.anuncioTipo)
+                    {
+                        <div class="navi-item mb-2">
+                            <a href="@Url.Action("index","AnunciosUsuario", new {id = item.id, rede = ViewBag.redeSocialAtivo })" class="navi-link py-4 tipo @(ViewBag.anuncioTipoAtivo == item.id ? "active" : "")">
+                                <span class="navi-icon mr-2">
+                                    <span class="svg-icon svg-icon-@item.nome.ToLower()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            @Html.Raw(item.icone)
+                                        </svg>
+                                    </span>
+                                </span>
+                                <span class="navi-text font-size-lg">@item.nome</span>
+                            </a>
+                        </div>
+                    }
+                </div>
+                <!--end::Nav-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Profile Card-->
+    </div>
+    <!--end::Aside-->
+    <!--begin::Content-->
+    <div class="flex-row-fluid ml-lg-8">
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <!--begin::Header-->
+            <div class="card-header py-3">
+                <div class="card-title align-items-start flex-column">
+                    <h3 class="card-label font-weight-bolder text-dark">@ViewBag.anuncioTipoNome</h3>
+                    <span class="text-muted font-weight-bold font-size-sm mt-1">seleção de anúncios</span>
+                </div>
+                <div class="card-toolbar">
+                    <button type="submit" class="btn btn-light-success mr-2 mt-2 text-right salvar">
+                        <i class="flaticon-edit-1"></i> Salvar
+                    </button>
+                    <button type="reset" class="btn btn-light-dark mr-2 mt-2 cancelar">
+                        <i class="flaticon-cancel"></i> Cancelar
+                    </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-light-info font-weight-bolder mt-2">
+                            <i class="socicon-@ViewBag.nomeRedeSocial.ToLower()"></i> @ViewBag.nomeRedeSocial
+                        </button>
+                        <button type="button" class="btn btn-light-info dropdown-toggle dropdown-toggle-split mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                            <ul class="nav nav-hover flex-column">
+                                @foreach (RedeSocialModel item in ViewBag.redeSocial)
+                                {
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("index","AnunciosUsuario", new {id = @ViewBag.anuncioTipoAtivo, rede = item.id })" class="nav-link">
+                                            <i class="socicon-@item.nome.ToLower() @item.nome.ToLower() mr-2"></i> @item.nome
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Header-->
+            <form class="form" id="idForm" asp-action="Edit">
+                <div class="card-body">
+                    @if (String.IsNullOrEmpty(ViewBag.linkTronado))  //Caso não haja um link tronado para o tipo de anúncio, deve-se antes criar um
+                    {
+                        <!--begin::Alert-->
+                        <div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
+                            <div class="alert-icon">
+                                <span class="svg-icon svg-icon-3x svg-icon-danger">
+                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Code/Info-circle.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                            <rect fill="#000000" x="11" y="10" width="2" height="7" rx="1" />
+                                            <rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
+                            </div>
+                            <div class="alert-text font-weight-bold">
+                                Ainda não há um link criado para o tipo de anúncio <strong>@ViewBag.anuncioTipoNome</strong>
+                                <br />Após configurar os dados abaixo ele será criado.
+                            </div>
+                            <div class="alert-close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="ki ki-close"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <!--end::Alert-->
+                    }
+                    else
+                    {
+                        <!--begin::Clipboard-->
+                        <div class="alert alert-custom alert-light-light fade show mb-10" role="alert">
+                            <a href="#" data-clipboard="true" data-clipboard-target="#linkTronado" class="btn btn-icon btn-light-success pulse pulse-success mr-5">
+                                <i class="flaticon2-copy"></i>
+                                <span class="pulse-ring"></span>
+                            </a>
+                            <div class="alert-text font-weight-bold text-black-50">
+                                Link para @ViewBag.anuncioTipoNome: <strong id="linkTronado">@ViewBag.linkTronado</strong>
+                            </div>
+                        </div>
+                        <!--end::Alert-->
+                    }
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            <label>Usúario usado na rede social</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="flaticon2-writing"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control" name="username" type="text" value="@(ViewBag.usuarioRedeSocial != null ? ViewBag.usuarioRedeSocial : "" )" />
+                            </div>
+                            <span class="form-text text-muted">seu 'UserName' da rede social selecionada</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                double consumido = 0;
+                                if (item.totalExibicao > 0)
+                                {
+                                    consumido = (1 - (double)(item.totalExibicao - item.totalTempoExibido) / item.totalExibicao) * 100;
+                                    if (consumido > 100) consumido = 100;
+                                }
+                                string colorProgressBar;
+                                switch (consumido)
+                                {
+                                    case < 45:
+                                        colorProgressBar = "bg-success";
+                                        break;
+                                    case > 75:
+                                        colorProgressBar = "bg-danger";
+                                        break;
+                                    default:
+                                        colorProgressBar = "bg-warning";
+                                        break;
+                                }
+                                <!--begin::Col-->
+                                <div class="col-xl-6">
+                                    <!--begin::Card-->
+                                    <div class="card card-custom gutter-b card-stretch">
+                                        <!--begin::Body-->
+                                        <div class="card-body pt-4 d-flex flex-column justify-content-between">
+                                            <!--begin::Toolbar-->
+                                            <div class="d-flex justify-content-end">
+                                                <span class="switch switch-outline switch-icon switch-success">
+                                                    <label>
+                                                        <input type="checkbox" @(item.selecionado ? "checked='checked'" : "") name="selecionados" value="@item.id" />
+                                                        <span></span>
+                                                    </label>
+                                                </span>
+                                                <span>&nbsp;</span>
+                                            </div>
+                                            <!--end::Toolbar-->
+                                            <div class="d-flex align-items-center">
+                                                <!--begin::Image-->
+                                                <div class="flex-shrink-0 mr-1 mt-lg-0">
+                                                    <div style="width: 150px; height: 150px;">
+                                                        <img src="@(Local.Configuracao("URL_CDN") + "propaganda/" + item.propaganda + "?id=" + Utils.Helpers.Chave())" class="imgx150">
+                                                    </div>
+                                                </div>
+                                                <!--end::Image-->
+                                                <!--begin::Info-->
+                                                <div class="d-flex flex-column mr-auto mt-3" style="height: 150px;">
+                                                    <!--begin: Title-->
+                                                    <span class="card-title text-hover-primary font-weight-bolder font-size-h6 text-dark mb-1">@item.nome</span>
+                                                    <!--end::Title-->
+                                                    @if (!String.IsNullOrEmpty(item.observacao))
+                                                    {
+                                                        <span class="text-muted font-weight-bold">
+                                                            <span>Observação:</span>
+                                                            <br /><span>@item.observacao</span>
+                                                        </span>
+                                                    }
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <!--begin::Info-->
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <span class="text-dark-75 font-weight-bolder mr-2"><i class="flaticon-calendar-with-a-clock-time-tools text-muted font-weight-bold mr-2"></i>Criado em:</span>
+                                                <a href="#" class="text-muted text-hover-primary">@item.criacao.ToString("dd/MM/yyyy")</a>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-cente my-1">
+                                                <span class="text-dark-75 font-weight-bolder mr-2"><i class="flaticon-time text-muted font-weight-bold mr-2"></i>Tempo exibição:</span>
+                                                <a href="#" class="text-muted text-hover-primary">@item.tempoExibicao seg</a>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="text-dark-75 font-weight-bolder mr-2"><i class="flaticon2-files-and-folders text-muted font-weight-bold mr-2"></i>Total de exibições:</span>
+                                                <span class="text-muted font-weight-bold">@item.totalExibicao.ToString("#,###")</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="text-dark-75 font-weight-bolder mr-2"><i class="flaticon-coins text-muted font-weight-bold mr-2"></i>Valor unitário:</span>
+                                                <span class="text-muted font-weight-bold">@item.valorUnitario?.ToString("R$ ###,###,###,##0.00")/h</span>
+                                            </div>
+                                            <!--end::Info-->
+                                            <!--begin::ProgressBar-->
+                                            <div class="mb-0 mt-3">
+                                                <span class="font-weight-bold mr-4">Consumido</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar @colorProgressBar" role="progressbar" style="width:  @(consumido.ToString("N1").Replace(",", ".") + "%");" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">@(consumido.ToString("N1").Replace(",", ".") + "%")</div>
+                                                </div>
+                                            </div>
+                                            <!--end::ProgressBar-->
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Card-->
+                                </div> <!--end::Col-->
+                            }
+                        }
+                    </div>
+                    <div class="form-group hide">
+                        <input name="anuncioTipoAtivo" value="@ViewBag.anuncioTipoAtivo" />
+                        <input name="redeSocialAtivo" value="@ViewBag.redeSocialAtivo" />
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <button type="submit" class="btn btn-light-success mr-2 mt-2 text-right salvar">
+                        <i class="flaticon-edit-1"></i> Salvar
+                    </button>
+                    <button type="reset" class="btn btn-light-dark mr-2 mt-2 cancelar">
+                        <i class="flaticon-cancel"></i> Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--end::Content-->
+</div>
+<!--end::Profile Overview-->

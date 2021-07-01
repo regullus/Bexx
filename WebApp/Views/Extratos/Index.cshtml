@@ -1,0 +1,304 @@
+﻿@{
+    ViewData["Title"] = "Extratos";
+    ViewData["SubTitle"] = "";
+    ViewData["SubMenu"] = "true";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    IList<WebApp.Model.ExtratoItem> lancamentos = ViewBag.Lancamentos;
+}
+@section Header{
+    <link href="@Url.Content("~/assets/plugins/custom/datatables/datatables.bundle.css")" rel="stylesheet" type="text/css" />
+}
+@section Scripts{
+
+    <script src="@Url.Content("~/assets/plugins/custom/datatables/datatables.bundle.js")"></script>
+
+    <script>
+
+        var KTform1 = function () {
+            var form = KTUtil.getById('idForm');
+
+            $(".changeDias").change(function (e) {
+                e.preventDefault();
+
+                if ($('#idUsuario').val() != 0) {
+                    KTApp.blockPage({
+                        overlayColor: 'blue',
+                        opacity: 0.1,
+                        state: 'primary',
+                        message: 'Aguarde...'
+                    });
+
+                    form.submit();
+                }
+            });
+
+            // menu lateral dos tipos
+            var _initAside = function () {
+                offcanvas = new KTOffcanvas('kt_profile_aside', {
+                    overlay: true,
+                    baseClass: 'offcanvas-mobile',
+                    toggleBy: 'kt_subheader_mobile_toggle'
+                });
+            }
+
+            return {
+                // public functions
+                init: function () {
+                    _initAside();
+                }
+            };
+        }();
+
+        $('#kt_datatable').DataTable({
+            "ordering": true,
+            "info": false,
+            "scrollY": "400px",
+            "scrollCollapse": true,
+            "paging": false,
+            "searching": true,
+        });
+
+        var table = $('#kt_datatable').DataTable();
+        $('#kt_datatable_filter1').on('keyup', function () {
+            table.search(this.value).draw();
+        });
+
+        jQuery(document).ready(function () {
+            KTform1.init();
+
+            var table = $('#kt_datatable').DataTable();
+            $('#kt_datatable tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+
+                    var nome = $('#td' + this.id).text();
+                    $('#lblNomeUsuario').text(nome);
+                    $('#idUsuario').val(this.id);
+                    $('#nomeUsuario').val(nome);
+
+                    KTApp.blockPage({
+                        overlayColor: 'blue',
+                        opacity: 0.1,
+                        state: 'primary',
+                        message: 'Aguarde...'
+                    });
+
+                    $('#idForm').submit();
+                }
+            });
+
+            // Remove o filtro não customizado do grid
+            $('#kt_datatable_filter').hide();
+
+            // Mantem selecionado o usuario
+            if ('@ViewBag.IdUsuario' != '0') {
+               $('#' + '@ViewBag.IdUsuario').addClass('selected');
+            }
+
+        });
+
+    </script>
+}
+
+<div class="d-flex flex-row">
+    <!--begin::Aside-->
+    <div class="flex-row-auto offcanvas-mobile" style="height:100%" id="kt_profile_aside">
+        <!--begin::Profile Card-->
+        <div class="card card-custom card-stretch">
+            <!--begin::Header-->
+            <div class="card-header py-4">
+                <div class="card-title align-items-start flex-column">
+                    <h3 class="card-label font-weight-bolder text-dark">Lista de usuários</h3>
+                    <span class="text-muted font-weight-bold font-size-sm mt-1">selecione para gerar um extrato</span>
+                </div>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body" style="padding: 0px 0px 0px 0px !important;">
+                <!--begin::Card-->
+                <div class="card card-custom">
+                    <div class="card-body ">
+
+                        <div class="row align-items-center">
+                            <div class="col-md-12 my-4 my-md-0">
+                                <div class="input-icon">
+                                    <input type="search" class="form-control " placeholder="Procurar..." aria-controls="kt_datatable" id="kt_datatable_filter1" />
+                                    <span>
+                                        <i class="flaticon2-search-1 text-muted"></i>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <table class="table table-checkable" id="kt_datatable" width="100px">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Login</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.Usuarios != null)
+                                {
+                                    foreach (UsuarioListaCrudModel item in ViewBag.Usuarios)
+                                    {
+                                        <tr id="@item.id" value="@item.nome">
+                                            <td id="@("td" + item.id)" value='@item.nome'>@item.nome</td>
+                                            <td>@item.login</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Profile Card-->
+    </div>
+    <!--end::Aside-->
+    <!--begin::Content-->
+    <div class="flex-row-fluid ml-lg-8" id="dvLancamento">
+        <form class="form" id="idForm" asp-action="Index">
+            <!--begin::Card Extrato-->
+            <div class="card card-custom gutter-b">
+                <!--begin::Header-->
+                <div class="card-header py-4">
+                    <div class="card-title align-items-start flex-column">
+                        <h3 class="card-label font-weight-bolder text-dark" id="lblNomeUsuario">@ViewBag.NomeUsuario</h3>
+                        <span class="text-muted font-weight-bold font-size-sm mt-1" id="lblStatus">extratro</span>
+                    </div>
+                    <div class="card-toolbar">
+                        <a href='@Url.Action("Index", "Home")' class="btn btn-light-primary font-weight-bolder mr-2 mt-2">
+                            <span class="svg-icon svg-icon-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                        <path d="M6.96323356,15.1775211 C6.62849853,15.5122561 6.08578582,15.5122561 5.75105079,15.1775211 C5.41631576,14.842786 5.41631576,14.3000733 5.75105079,13.9653383 L10.8939067,8.82248234 C11.2184029,8.49798619 11.7409054,8.4866328 12.0791905,8.79672747 L17.2220465,13.5110121 C17.5710056,13.8308912 17.5945795,14.3730917 17.2747004,14.7220508 C16.9548212,15.0710098 16.4126207,15.0945838 16.0636617,14.7747046 L11.5257773,10.6149773 L6.96323356,15.1775211 Z" fill="#000000" fill-rule="nonzero" transform="translate(11.500001, 12.000001) scale(-1, 1) rotate(-270.000000) translate(-11.500001, -12.000001) " />
+                                    </g>
+                                </svg>
+                            </span>Voltar
+                        </a>
+                    </div>
+                </div>
+                <!--end::Header-->
+
+                <input hidden type="text" id="idUsuario" name="idUsuario" value="@ViewBag.IdUsuario" />
+                <input hidden type="text" id="nomeUsuario" name="nomeUsuario" value="@ViewBag.NomeUsuario" />
+
+                <div class="card-body">
+                    <div class="row">
+                        <label class="col-form-label col-3 text-lg-right text-left"></label>
+                        <div class="col-9">
+                            <div class="form-group row">
+                                <label class="col-form-label col-7 text-lg-right text-left">Lancamentos dos ultimos:</label>
+                                <div class="col-5">
+                                    @Html.DropDownList("idQtdeDias", null, htmlAttributes: new { @class = "form-control changeDias" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (ViewBag.IdUsuario != 0)
+                    {
+                        <div class="separator separator-dashed mb-10"></div>
+
+                        <div class="accordion accordion-light  accordion-toggle-arrow" id="accordionExample5">
+                            @if (ViewBag.Saldos != null && ViewBag.Saldos.Count > 0)
+                            {
+                                foreach (WebApp.Model.ExtratoItem saldo in ViewBag.Saldos)
+                                {
+                                    <div class="card">
+                                        <div class="card-header" id="@("heading" + saldo.idAnuncio)">
+                                            <div class="card-title collapsed" data-toggle="collapse" data-target="@("#collapse5" + saldo.idAnuncio)">
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                    @saldo.nomeAnuncio
+                                                </div>
+                                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5" style="text-align:right">
+                                                    <span class="text-muted font-weight-bold">Saldo: @saldo.valor</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if (lancamentos != null || lancamentos.Count > 0)
+                                        {
+                                            var lancamentosAnuncio = lancamentos.Where(x => x.idAnuncio == saldo.idAnuncio).OrderBy(x => x.idAnuncio).ThenByDescending(x => x.data).ToList<WebApp.Model.ExtratoItem>();
+                                            if (lancamentosAnuncio != null || lancamentosAnuncio.Count > 0)
+                                            {
+                                                foreach (WebApp.Model.ExtratoItem lancamento in lancamentosAnuncio)
+                                                {
+                                                    <div id="@("collapse5" + saldo.idAnuncio)" class="collapse" data-parent="#accordionExample5">
+                                                        <div class="card-body">
+                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                <!--begin::Card-->
+                                                                <div class="card card-custom gutter-b">
+                                                                    <!--begin::Body-->
+                                                                    <div class="card-body pt-2 pb-2">
+                                                                        <div class="row">
+                                                                            <div class="col-3">
+                                                                                <div class="col-12">
+                                                                                    <span class="text-dark-75 font-weight-bolder mr-2">Date:</span>
+                                                                                </div>
+                                                                                <span class="text-muted font-weight-bold col-12">@lancamento.data.ToString("dd/MM/yyyy")</span>
+                                                                            </div>
+                                                                            @*<div class="col-3">
+                                                                    <div class="col-12">
+                                                                        <span class="text-dark-75 font-weight-bolder mr-2">Anuncio:</span>
+                                                                    </div>
+                                                                    <span class="text-muted font-weight-bold col-12">Coca Cola</span>
+                                                                </div>*@
+                                                                            <div class="col-5">
+                                                                                <div class="col-12">
+                                                                                    <span class="text-dark-75 font-weight-bolder mr-2">Descrição:</span>
+                                                                                </div>
+                                                                                <span class="text-muted font-weight-bold col-12">@lancamento.descricao</span>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <div class="col-12">
+                                                                                    <span class="text-dark-75 font-weight-bolder mr-2">Valor:</span>
+                                                                                </div>
+                                                                                <span class="text-muted font-weight-bold col-12">@lancamento.valor</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end::Body-->
+                                                                </div>
+                                                                <!--end:: Card-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <a href='@Url.Action("Index", "Home")' class="btn btn-light-primary font-weight-bolder mr-2 mt-2">
+                        <span class="svg-icon svg-icon-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24" />
+                                    <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                    <path d="M6.96323356,15.1775211 C6.62849853,15.5122561 6.08578582,15.5122561 5.75105079,15.1775211 C5.41631576,14.842786 5.41631576,14.3000733 5.75105079,13.9653383 L10.8939067,8.82248234 C11.2184029,8.49798619 11.7409054,8.4866328 12.0791905,8.79672747 L17.2220465,13.5110121 C17.5710056,13.8308912 17.5945795,14.3730917 17.2747004,14.7220508 C16.9548212,15.0710098 16.4126207,15.0945838 16.0636617,14.7747046 L11.5257773,10.6149773 L6.96323356,15.1775211 Z" fill="#000000" fill-rule="nonzero" transform="translate(11.500001, 12.000001) scale(-1, 1) rotate(-270.000000) translate(-11.500001, -12.000001) " />
+                                </g>
+                            </svg>
+                        </span>Voltar
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
