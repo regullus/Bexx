@@ -23,7 +23,6 @@ namespace Models
         public string Avatar { get; set; }
         public bool DoisFatoresHabilitado { get; set; }
         public string AutenticadorGoogleChaveSecreta { get; set; }
-        public int idFinanceiroConta { get; set; }
         public int idPais { get; set; }
     }
 

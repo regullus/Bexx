@@ -101,25 +101,6 @@ namespace WebApi.Controllers
 
         #region Api
 
-        private async Task<int> FinanceiroIdContaApi(int idUsuario)
-        {
-            int idConta = 0;
-            try
-            {
-                FinanceiroContaModel ret = await unitOfWork.FinanceiroConta.GetByIdUsuarioAsync(idUsuario);
-                if (ret != null)
-                {
-                    idConta = ret.id;
-                }
-                return idConta;
-            }
-            catch (Exception ex)
-            {
-                Geral.LogErro(cLocal, "FinanceiroIdContaApi", ex.Message, idUsuario);
-                return 0;
-            }
-        }
-
         private async Task<int> addTokenRefresh(TokenRefreshModel refreshToken)
         {
             int ret = 0;
@@ -614,9 +595,6 @@ namespace WebApi.Controllers
                 strIdioma = idioma.sigla;
             }
 
-            //id da Conta finaceira do usuario, não existindo id = 0
-            int idFinanceiroConta = await FinanceiroIdContaApi(user.Id);
-
             UsuarioClaimModel usuarioClain = new UsuarioClaimModel()
             {
                 Id = user.Id,
@@ -631,7 +609,6 @@ namespace WebApi.Controllers
                 Expiracao = dataExpiracao,
                 Avatar = user.avatar,
                 DoisFatoresHabilitado = user.TwoFactorEnabled,
-                idFinanceiroConta = idFinanceiroConta,
                 AutenticadorGoogleChaveSecreta = user.google_authenticator_secretkey,
                 idPais = user.id_pais,
             };

@@ -14,7 +14,6 @@ namespace Interfaces
         IImagemRepository Imagem { get; }
         IMensagemRepository Mensagem { get; }
         ITicketsRepository Tickets { get; }
-        IRedeSocialRepository RedeSocial { get; }
         IBaseRepository Base { get; }
         ITokenRefreshRepository TokenRefresh { get; }
     }
