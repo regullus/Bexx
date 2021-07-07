@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{FC0FB31D-D336-4D16-B140-CF28FAF9E6CE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebPech", "WebPech\WebPech.csproj", "{F08A399C-816E-4C13-8F11-119597C0A0E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,12 @@ Global
 		{FC0FB31D-D336-4D16-B140-CF28FAF9E6CE}.Default|Any CPU.Build.0 = Debug|Any CPU
 		{FC0FB31D-D336-4D16-B140-CF28FAF9E6CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC0FB31D-D336-4D16-B140-CF28FAF9E6CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F08A399C-816E-4C13-8F11-119597C0A0E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F08A399C-816E-4C13-8F11-119597C0A0E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F08A399C-816E-4C13-8F11-119597C0A0E8}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{F08A399C-816E-4C13-8F11-119597C0A0E8}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{F08A399C-816E-4C13-8F11-119597C0A0E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F08A399C-816E-4C13-8F11-119597C0A0E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +78,7 @@ Global
 		{B6D745E2-E0FA-4CCE-98B7-497EBCD62CFC} = {FF2DA018-C35B-4E57-B061-398205D3F478}
 		{521D2477-89E6-4047-BA7E-9D37C2FF3F33} = {18B50324-734F-49AA-9616-4728AA669CA0}
 		{FC0FB31D-D336-4D16-B140-CF28FAF9E6CE} = {BE748F94-F4F0-40A8-9D79-1FA2908C862F}
+		{F08A399C-816E-4C13-8F11-119597C0A0E8} = {48CFFC4D-6A52-47A0-AE8D-1A469AEE8A3A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BEBF208E-4ADB-4B25-9727-5F91DE1ADE0A}
