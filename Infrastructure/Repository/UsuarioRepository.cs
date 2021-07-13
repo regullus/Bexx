@@ -198,7 +198,7 @@ namespace Infrastructure.Repository
             sql.Append("    u.nome,");         
             sql.Append("    u.login");           
             sql.Append(" FROM");
-            sql.Append("    usuario      as u,");
+            sql.Append("    usuario as u,");
             sql.Append("    usuarioRegra as r");
             sql.Append(" WHERE");
             sql.Append("    u.id = r.idUsuario and");
@@ -220,7 +220,7 @@ namespace Infrastructure.Repository
             sql.Append("    u.nome,");
             sql.Append("    u.login");
             sql.Append(" FROM");
-            sql.Append("    usuario      as u,");
+            sql.Append("    usuario as u,");
             sql.Append("    usuarioRegra as r");
             sql.Append(" WHERE");
             sql.Append("    u.id = r.idUsuario and");
@@ -315,7 +315,7 @@ namespace Infrastructure.Repository
             sql.Append("    pais.nome,");
             sql.Append("    pais.nomeIng,");
             sql.Append("    pais.nomeEsp,");
-            sql.Append("    pais.nomenternacional,");
+            sql.Append("    pais.nomeInternacional,");
             sql.Append("    pais.culture");
             sql.Append(" FROM");
             sql.Append("    usuario usu,");
@@ -341,7 +341,6 @@ namespace Infrastructure.Repository
             StringBuilder sql = new StringBuilder();
             sql.Append(" SELECT");
             sql.Append("    id,");
-            sql.Append("    criacao,");
             sql.Append("    nome,");
             sql.Append("    nomeIng,");
             sql.Append("    nomeEsp");
