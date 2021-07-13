@@ -10,7 +10,7 @@ using WebApi.Authentication;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210709174156_initial")]
+    [Migration("20210712225953_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,21 +134,21 @@ namespace WebApi.Migrations
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("claim_type");
+                        .HasColumnName("claimTipo");
 
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("claim_value");
+                        .HasColumnName("claimValor");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int")
-                        .HasColumnName("role_id");
+                        .HasColumnName("regraId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("role_claims");
+                    b.ToTable("regraClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
@@ -161,86 +161,86 @@ namespace WebApi.Migrations
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("claim_type");
+                        .HasColumnName("claimTipo");
 
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("claim_value");
+                        .HasColumnName("claimValor");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int")
-                        .HasColumnName("user_id");
+                        .HasColumnName("idUsuario");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("user_claims");
+                    b.ToTable("usuarioClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("ProviderKey")
                         .HasColumnType("nvarchar(450)")
-                        .HasColumnName("provider_key");
+                        .HasColumnName("providerKey");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)")
-                        .HasColumnName("login_provider");
+                        .HasColumnName("loginProvider");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("provider_display_name");
+                        .HasColumnName("providerDisplayNome");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int")
-                        .HasColumnName("user_id");
+                        .HasColumnName("idUsuario");
 
                     b.HasKey("ProviderKey", "LoginProvider");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("user_logins");
+                    b.ToTable("usuarioLogin");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int")
-                        .HasColumnName("user_id");
+                        .HasColumnName("idUsuario");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int")
-                        .HasColumnName("role_id");
+                        .HasColumnName("idRegra");
 
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("user_role");
+                    b.ToTable("usuarioRegra");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int")
-                        .HasColumnName("user_id");
+                        .HasColumnName("idUsuario");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)")
-                        .HasColumnName("login_provider");
+                        .HasColumnName("loginProvider");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(450)")
-                        .HasColumnName("name");
+                        .HasColumnName("nome");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("value");
+                        .HasColumnName("valor");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("user_token");
+                    b.ToTable("usuarioToken");
                 });
 
             modelBuilder.Entity("WebApi.Authentication.ApplicationRole", b =>
@@ -254,26 +254,26 @@ namespace WebApi.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("concurrency_stamp");
+                        .HasColumnName("concurrencyStamp");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)")
-                        .HasColumnName("name");
+                        .HasColumnName("nome");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)")
-                        .HasColumnName("normalized_name");
+                        .HasColumnName("normalizedNome");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[normalized_name] IS NOT NULL");
+                        .HasFilter("[normalizedNome] IS NOT NULL");
 
-                    b.ToTable("role");
+                    b.ToTable("regra");
                 });
 
             modelBuilder.Entity("WebApi.Authentication.ApplicationUser", b =>
@@ -286,12 +286,12 @@ namespace WebApi.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int")
-                        .HasColumnName("access_failed_count");
+                        .HasColumnName("accessFailedCount");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("concurrency_stamp");
+                        .HasColumnName("concurrencyStamp");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -300,29 +300,29 @@ namespace WebApi.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit")
-                        .HasColumnName("email_confirmed");
+                        .HasColumnName("emailConfirmado");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit")
-                        .HasColumnName("lockout_enabled");
+                        .HasColumnName("lockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset")
-                        .HasColumnName("lockout_end");
+                        .HasColumnName("lockoutEnd");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)")
-                        .HasColumnName("normalized_email");
+                        .HasColumnName("normalizedEmail");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)")
-                        .HasColumnName("normalized_login");
+                        .HasColumnName("normalizedLogin");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("password_hash");
+                        .HasColumnName("passwordHash");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)")
@@ -330,15 +330,15 @@ namespace WebApi.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit")
-                        .HasColumnName("celular_confirmado");
+                        .HasColumnName("celularConfirmado");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("security_stamp");
+                        .HasColumnName("securityStamp");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit")
-                        .HasColumnName("two_factor_enabled");
+                        .HasColumnName("twoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -355,41 +355,34 @@ namespace WebApi.Migrations
                     b.Property<int>("criacao")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("data_expiracao_senha")
+                    b.Property<DateTime?>("dataExpiracaoSenha")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("data_vencimento_plano")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("google_authenticator_secretkey")
+                    b.Property<string>("googleAuthenticatorSecretKey")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("id_empresa")
+                    b.Property<int>("idArea")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_filial")
+                    b.Property<int>("idEmpresa")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_idioma")
-                        .HasMaxLength(10)
+                    b.Property<int>("idGrupo")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_imagem")
+                    b.Property<int>("idIdioma")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_pais")
+                    b.Property<int>("idPais")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_plano")
+                    b.Property<int>("idSexo")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_sexo")
+                    b.Property<int?>("idUsuarioDados")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_user_situacao")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("id_usuario_dados")
+                    b.Property<int>("idUsuarioSituacao")
                         .HasColumnType("int");
 
                     b.Property<string>("nome")
@@ -400,7 +393,7 @@ namespace WebApi.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("termo_uso_em")
+                    b.Property<DateTime?>("termoUsoEm")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -411,9 +404,9 @@ namespace WebApi.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[normalized_login] IS NOT NULL");
+                        .HasFilter("[normalizedLogin] IS NOT NULL");
 
-                    b.ToTable("users");
+                    b.ToTable("usuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

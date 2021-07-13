@@ -10,19 +10,19 @@ namespace Models
 
     public class UsuarioClaimModel
     {
-        public int Id { get; set; }
+        public int id { get; set; }
         public int idAtivo { get; set; }
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public string Senha { get; set; }
-        public string Roles { get; set; }
-        public string Token { get; set; }
-        public string RefreshToken { get; set; }
-        public string Idioma { get; set; }
-        public DateTime Expiracao { get; set; }
-        public string Avatar { get; set; }
-        public bool DoisFatoresHabilitado { get; set; }
-        public string AutenticadorGoogleChaveSecreta { get; set; }
+        public string nome { get; set; }
+        public string email { get; set; }
+        public string senha { get; set; }
+        public string regras { get; set; }
+        public string token { get; set; }
+        public string refreshToken { get; set; }
+        public string idioma { get; set; }
+        public DateTime expiracao { get; set; }
+        public string avatar { get; set; }
+        public bool doisFatoresHabilitado { get; set; }
+        public string autenticadorGoogleChaveSecreta { get; set; }
         public int idPais { get; set; }
     }
 
@@ -35,17 +35,16 @@ namespace Models
         public int idUsuarioDados { get; set; }
         public int idImagem { get; set; }
         public int idEmpresa { get; set; }
-        public int idFilial { get; set; }
-        public int idUserSituacao { get; set; }
-        public int idPlano { get; set; }
+        public int idGrupo { get; set; }
+        public int idUsuarioSituacao { get; set; }
+        public int idArea { get; set; }
         public int idPais { get; set; }
         public int idSexo { get; set; }
-        public DateTime dataVencimentoPlano { get; set; }
         public DateTime dataExpiracaoSenha { get; set; }
         public int idIdioma { get; set; }
         public string avatar { get; set; }
-        public bool DoisFatoresHabilitado { get; set; }
-        public string AutenticadorGoogleChaveSecreta { get; set; }
+        public bool doisFatoresHabilitado { get; set; }
+        public string autenticadorGoogleChaveSecreta { get; set; }
         public string perfil { get; set; }
     }
 
@@ -53,23 +52,16 @@ namespace Models
     {
         public int id { get; set; }
         [Required]
-        public int Atualizacao { get; set; }
+        public int atualizacao { get; set; }
         [Required]
-        public int DataUltimoAcesso { get; set; }
+        public int dataUltimoAcesso { get; set; }
         [Required]
-        public bool ExibeBoasVindas { get; set; }
-        public string SocialTwitch { get; set; }
-        public string SocialFacebook { get; set; }
-        public string SocialTwitter { get; set; }
-        public string SocialYouTube { get; set; }
-        public string SocialInstagram { get; set; }
-        public string cpf { get; set; }
-        public int idInstituicaoFinanceira { get; set; }
-        public string agencia { get; set; }
-        public string agenciaDigito { get; set; }
-        public string conta { get; set; }
-        public string contaDigito { get; set; }
-        public string chavePix { get; set; }
+        public bool exibeBoasVindas { get; set; }
+        public string twitch { get; set; }
+        public string facebook { get; set; }
+        public string twitter { get; set; }
+        public string youtube { get; set; }
+        public string instagram { get; set; }
     }
 
     public class UsuarioModel
@@ -78,20 +70,19 @@ namespace Models
         public int idUsuarioDados { get; set; }
         public int idImagem { get; set; }
         public int idEmpresa { get; set; }
-        public int idFilial { get; set; }
-        public int idUserSituacao { get; set; }
-        public int idPlano { get; set; }
+        public int idGrupo { get; set; }
+        public int idArea { get; set; }
+        public int idUsuarioSituacao { get; set; }
         public int idPais { get; set; }
         public int idSexo { get; set; }
+        public int idIdioma { get; set; }
         public int atualizacao { get; set; }
         public string nome { get; set; }
         public string email { get; set; }
         public string login { get; set; }
         public string senha { get; set; }
         public bool doisFatoresHabilitados { get; set; }
-        public DateTime dataVencimentoPlano { get; set; }
         public DateTime dataExpiracaoSenha { get; set; }
-        public int idIdioma { get; set; }
         public string avatar { get; set; }
         public string celular { get; set; }
         public bool celularConfirmado { get; set; }
@@ -99,35 +90,35 @@ namespace Models
 
     public class NovaSenhaModel
     {
-        public string Password { get; set; }
-        public string ConfirmarPassword { get; set; }
-        public string Token { get; set; }
-        public string Token2 { get; set; }
+        public string password { get; set; }
+        public string confirmarPassword { get; set; }
+        public string token { get; set; }
+        public string token2 { get; set; }
     }
 
     public class DoisFatoresModel
     {
-        public int Id { get; set; }
-        public bool DoisFatoresHabilitado { get; set; }
-        public string AutenticadorGoogleChaveSecreta { get; set; }
+        public int id { get; set; }
+        public bool doisFatoresHabilitado { get; set; }
+        public string autenticadorGoogleChaveSecreta { get; set; }
     }
 
-    public class UserNameModel
+    public class UsuarioNomeModel
     {
         [Required(ErrorMessage = "UserName é necessário")]
-        public string UserName { get; set; }
+        public string usuarioNome { get; set; }
     }
 
-    public class UserNameTokenModel
+    public class UsuarioNomeTokenModel
     {
-        [Required(ErrorMessage = "UserName é necessário")]
-        public string UserNameToken { get; set; }
+        [Required(ErrorMessage = "Usuário é necessário")]
+        public string usuarioNomeToken { get; set; }
     }
 
-    public class UserEmailModel
+    public class UsuarioEmailModel
     {
         [Required(ErrorMessage = "email é necessário")]
-        public string Email { get; set; }
+        public string email { get; set; }
     }
 
     public class UsuarioListaCrudModel

@@ -69,7 +69,7 @@ namespace Infrastructure.Repository
 
         public async Task<int> UpdateAsync(UsuarioDadosModel entity)
         {
-            entity.Atualizacao = Helpers.DataAtualInt; 
+            entity.atualizacao = Helpers.DataAtualInt; 
             var sql = "UPDATE user_data SET atualizacao = @atualizacao, data_ultimo_acesso = @dataUltimoAcesso, exibe_boas_vindas = @exibeBoasVindas, social_twitch = @socialTwitch, social_facebook = @socialFacebook, social_twitter = @socialTwitter, social_youtube = @socialYouTube, social_instagram = @socialInstagram,  WHERE id = @id";
             using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {

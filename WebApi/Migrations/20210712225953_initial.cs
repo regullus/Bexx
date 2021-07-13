@@ -47,166 +47,164 @@ namespace WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "role",
+                name: "regra",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    normalized_name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    concurrency_stamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    nome = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    normalizedNome = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    concurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_role", x => x.id);
+                    table.PrimaryKey("PK_regra", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "users",
+                name: "usuario",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    id_usuario_dados = table.Column<int>(type: "int", nullable: true),
-                    id_imagem = table.Column<int>(type: "int", nullable: false),
-                    id_empresa = table.Column<int>(type: "int", nullable: false),
-                    id_filial = table.Column<int>(type: "int", nullable: false),
-                    id_user_situacao = table.Column<int>(type: "int", nullable: false),
-                    id_plano = table.Column<int>(type: "int", nullable: false),
-                    id_pais = table.Column<int>(type: "int", nullable: false),
-                    id_sexo = table.Column<int>(type: "int", nullable: false),
+                    idUsuarioDados = table.Column<int>(type: "int", nullable: true),
+                    idEmpresa = table.Column<int>(type: "int", nullable: false),
+                    idGrupo = table.Column<int>(type: "int", nullable: false),
+                    idUsuarioSituacao = table.Column<int>(type: "int", nullable: false),
+                    idArea = table.Column<int>(type: "int", nullable: false),
+                    idPais = table.Column<int>(type: "int", nullable: false),
+                    idSexo = table.Column<int>(type: "int", nullable: false),
+                    idIdioma = table.Column<int>(type: "int", nullable: false),
                     criacao = table.Column<int>(type: "int", nullable: false),
                     atualizacao = table.Column<int>(type: "int", nullable: false),
-                    data_vencimento_plano = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    data_expiracao_senha = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    id_idioma = table.Column<int>(type: "int", maxLength: 10, nullable: false),
-                    avatar = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    termo_uso_em = table.Column<DateTime>(type: "datetime2", nullable: true),
                     nome = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
                     senha = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    google_authenticator_secretkey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    dataExpiracaoSenha = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    avatar = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    termoUsoEm = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    googleAuthenticatorSecretKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     login = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    normalized_login = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    normalizedLogin = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    normalized_email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    email_confirmed = table.Column<bool>(type: "bit", nullable: false),
-                    password_hash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    security_stamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    concurrency_stamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    normalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    emailConfirmado = table.Column<bool>(type: "bit", nullable: false),
+                    passwordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    securityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    concurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     celular = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    celular_confirmado = table.Column<bool>(type: "bit", nullable: false),
-                    two_factor_enabled = table.Column<bool>(type: "bit", nullable: false),
-                    lockout_end = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    lockout_enabled = table.Column<bool>(type: "bit", nullable: false),
-                    access_failed_count = table.Column<int>(type: "int", nullable: false)
+                    celularConfirmado = table.Column<bool>(type: "bit", nullable: false),
+                    twoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    lockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    lockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    accessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_users", x => x.id);
+                    table.PrimaryKey("PK_usuario", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "role_claims",
+                name: "regraClaims",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    role_id = table.Column<int>(type: "int", nullable: false),
-                    claim_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    claim_value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    regraId = table.Column<int>(type: "int", nullable: false),
+                    claimTipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    claimValor = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_role_claims", x => x.id);
+                    table.PrimaryKey("PK_regraClaims", x => x.id);
                     table.ForeignKey(
-                        name: "FK_role_claims_role_role_id",
-                        column: x => x.role_id,
-                        principalTable: "role",
+                        name: "FK_regraClaims_regra_regraId",
+                        column: x => x.regraId,
+                        principalTable: "regra",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user_claims",
+                name: "usuarioClaims",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    user_id = table.Column<int>(type: "int", nullable: false),
-                    claim_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    claim_value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    idUsuario = table.Column<int>(type: "int", nullable: false),
+                    claimTipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    claimValor = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_claims", x => x.id);
+                    table.PrimaryKey("PK_usuarioClaims", x => x.id);
                     table.ForeignKey(
-                        name: "FK_user_claims_users_user_id",
-                        column: x => x.user_id,
-                        principalTable: "users",
+                        name: "FK_usuarioClaims_usuario_idUsuario",
+                        column: x => x.idUsuario,
+                        principalTable: "usuario",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user_logins",
+                name: "usuarioLogin",
                 columns: table => new
                 {
-                    login_provider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    provider_key = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    provider_display_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    user_id = table.Column<int>(type: "int", nullable: false)
+                    loginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    providerKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    providerDisplayNome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    idUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_logins", x => new { x.provider_key, x.login_provider });
+                    table.PrimaryKey("PK_usuarioLogin", x => new { x.providerKey, x.loginProvider });
                     table.ForeignKey(
-                        name: "FK_user_logins_users_user_id",
-                        column: x => x.user_id,
-                        principalTable: "users",
+                        name: "FK_usuarioLogin_usuario_idUsuario",
+                        column: x => x.idUsuario,
+                        principalTable: "usuario",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user_role",
+                name: "usuarioRegra",
                 columns: table => new
                 {
-                    user_id = table.Column<int>(type: "int", nullable: false),
-                    role_id = table.Column<int>(type: "int", nullable: false)
+                    idUsuario = table.Column<int>(type: "int", nullable: false),
+                    idRegra = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_role", x => new { x.user_id, x.role_id });
+                    table.PrimaryKey("PK_usuarioRegra", x => new { x.idUsuario, x.idRegra });
                     table.ForeignKey(
-                        name: "FK_user_role_role_role_id",
-                        column: x => x.role_id,
-                        principalTable: "role",
+                        name: "FK_usuarioRegra_regra_idRegra",
+                        column: x => x.idRegra,
+                        principalTable: "regra",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_user_role_users_user_id",
-                        column: x => x.user_id,
-                        principalTable: "users",
+                        name: "FK_usuarioRegra_usuario_idUsuario",
+                        column: x => x.idUsuario,
+                        principalTable: "usuario",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user_token",
+                name: "usuarioToken",
                 columns: table => new
                 {
-                    user_id = table.Column<int>(type: "int", nullable: false),
-                    login_provider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    idUsuario = table.Column<int>(type: "int", nullable: false),
+                    loginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    nome = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    valor = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_token", x => new { x.user_id, x.login_provider, x.name });
+                    table.PrimaryKey("PK_usuarioToken", x => new { x.idUsuario, x.loginProvider, x.nome });
                     table.ForeignKey(
-                        name: "FK_user_token_users_user_id",
-                        column: x => x.user_id,
-                        principalTable: "users",
+                        name: "FK_usuarioToken_usuario_idUsuario",
+                        column: x => x.idUsuario,
+                        principalTable: "usuario",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -239,42 +237,42 @@ namespace WebApi.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
-                table: "role",
-                column: "normalized_name",
+                table: "regra",
+                column: "normalizedNome",
                 unique: true,
-                filter: "[normalized_name] IS NOT NULL");
+                filter: "[normalizedNome] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_role_claims_role_id",
-                table: "role_claims",
-                column: "role_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_user_claims_user_id",
-                table: "user_claims",
-                column: "user_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_user_logins_user_id",
-                table: "user_logins",
-                column: "user_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_user_role_role_id",
-                table: "user_role",
-                column: "role_id");
+                name: "IX_regraClaims_regraId",
+                table: "regraClaims",
+                column: "regraId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                table: "users",
-                column: "normalized_email");
+                table: "usuario",
+                column: "normalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                table: "users",
-                column: "normalized_login",
+                table: "usuario",
+                column: "normalizedLogin",
                 unique: true,
-                filter: "[normalized_login] IS NOT NULL");
+                filter: "[normalizedLogin] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_usuarioClaims_idUsuario",
+                table: "usuarioClaims",
+                column: "idUsuario");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_usuarioLogin_idUsuario",
+                table: "usuarioLogin",
+                column: "idUsuario");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_usuarioRegra_idRegra",
+                table: "usuarioRegra",
+                column: "idRegra");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -286,25 +284,25 @@ namespace WebApi.Migrations
                 name: "PersistedGrants");
 
             migrationBuilder.DropTable(
-                name: "role_claims");
+                name: "regraClaims");
 
             migrationBuilder.DropTable(
-                name: "user_claims");
+                name: "usuarioClaims");
 
             migrationBuilder.DropTable(
-                name: "user_logins");
+                name: "usuarioLogin");
 
             migrationBuilder.DropTable(
-                name: "user_role");
+                name: "usuarioRegra");
 
             migrationBuilder.DropTable(
-                name: "user_token");
+                name: "usuarioToken");
 
             migrationBuilder.DropTable(
-                name: "role");
+                name: "regra");
 
             migrationBuilder.DropTable(
-                name: "users");
+                name: "usuario");
         }
     }
 }

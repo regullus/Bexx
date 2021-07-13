@@ -60,7 +60,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                var user = await userManager.FindByNameAsync(model.userName);
+                var user = await userManager.FindByNameAsync(model.usuario);
 
                 if (user != null)
                 {
@@ -86,10 +86,10 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("loginExiste")]
-        public async Task<IActionResult> LoginExiste([FromBody] UserNameModel model)
+        public async Task<IActionResult> LoginExiste([FromBody] UsuarioNomeModel model)
         {
             string existe = "no";
-            var userExists = await userManager.FindByNameAsync(model.UserName);
+            var userExists = await userManager.FindByNameAsync(model.usuarioNome);
             if (userExists != null)
             {
                 existe = "ok";
@@ -154,7 +154,7 @@ namespace WebApi.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            var userExists = await userManager.FindByNameAsync(model.userName);
+            var userExists = await userManager.FindByNameAsync(model.usuario);
             if (userExists != null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new ResponseId { Id = 0 , Status = "Error", Message = "Usuário já existe!!" });
@@ -164,25 +164,23 @@ namespace WebApi.Controllers
             {
                 Email = model.email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.userName,
-                id_usuario_dados = model.idUsuarioDados,
-                id_imagem = model.idImagem,
-                id_empresa = model.idEmpresa,
-                id_filial = model.idFilial,
-                id_user_situacao = model.idUserSituacao,
-                id_plano = model.idPlano,
-                id_pais = model.idPais,
-                id_sexo = model.idSexo,
+                UserName = model.usuario,
+                idUsuarioDados = model.idUsuarioDados,
+                idEmpresa = model.idEmpresa,
+                idGrupo = model.idGrupo,
+                idArea = model.idArea,
+                idUsuarioSituacao = model.idUsuarioSituacao,
+                idPais = model.idPais,
+                idSexo = model.idSexo,
                 atualizacao = Utils.Helpers.DataAtualInt,
                 criacao = Utils.Helpers.DataAtualInt,
-                data_vencimento_plano = model.dataVencimentoPlano,
-                data_expiracao_senha = model.dataExpiracaoSenha,
-                termo_uso_em = DateTime.Now,
+                dataExpiracaoSenha = model.dataExpiracaoSenha,
+                termoUsoEm = DateTime.Now,
                 nome = model.nome,
                 senha = Helpers.Morpho(model.password, TipoCriptografia.Criptografa),
-                id_idioma = model.idIdioma,
+                idIdioma = model.idIdioma,
                 avatar = model.avatar ?? "000000_Avatar.png",
-                google_authenticator_secretkey = "",
+                googleAuthenticatorSecretKey = "",
             };
 
             try
@@ -194,8 +192,8 @@ namespace WebApi.Controllers
                     var roleresult = await userManager.AddToRoleAsync(currentUser, model.perfil);
                     if (roleresult.Succeeded)
                     {
-                        UserNameModel userEmail = new UserNameModel();
-                        userEmail.UserName = currentUser.UserName;
+                        UsuarioNomeModel userEmail = new UsuarioNomeModel();
+                        userEmail.usuarioNome = currentUser.UserName;
                         string retEnvioEmail = await EmailConfirmacao(userEmail);
 
                         if (retEnvioEmail != "ok")
@@ -243,13 +241,13 @@ namespace WebApi.Controllers
         [HttpPost]
         [Route("confirmarCadastro")]
         /// <summary>a entrada do userneme aqui é criptografado</summary>
-        public async Task<IActionResult> ConfirmarCadastro([FromBody] UserNameTokenModel model)
+        public async Task<IActionResult> ConfirmarCadastro([FromBody] UsuarioNomeTokenModel model)
         {
-            if (String.IsNullOrEmpty(model.UserNameToken))
+            if (String.IsNullOrEmpty(model.usuarioNomeToken))
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "token não informado!" });
             }
-            string dado = Helpers.Morpho(model.UserNameToken, TipoCriptografia.Descriptografa);
+            string dado = Helpers.Morpho(model.usuarioNomeToken, TipoCriptografia.Descriptografa);
             if (String.IsNullOrEmpty(dado))
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "token não é válido!" });
@@ -306,11 +304,11 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("emailConfirmacao")]
-        public async Task<String> EmailConfirmacao([FromBody] UserNameModel model)
+        public async Task<String> EmailConfirmacao([FromBody] UsuarioNomeModel model)
         {
             try
             {
-                var user = await userManager.FindByNameAsync(model.UserName);
+                var user = await userManager.FindByNameAsync(model.usuarioNome);
                 //Envia email confirmacao
                 WelcomeRequest request = new WelcomeRequest()
                 {
@@ -333,17 +331,17 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("esqueceuSenha")]
-        public async Task<IActionResult> EsqueceuSenha([FromBody] UserNameModel model)
+        public async Task<IActionResult> EsqueceuSenha([FromBody] UsuarioNomeModel model)
         {
             //Aqui ira enviar um email para o usuario, com o link para uma tela no WebApp
             //para que ele troque a senha
 
             //Tenta achar usuario por login
-            var userExists = await userManager.FindByNameAsync(model.UserName);
+            var userExists = await userManager.FindByNameAsync(model.usuarioNome);
             if (userExists == null)
             {
                 //Tenta achar usuario por email
-                userExists = await userManager.FindByEmailAsync(model.UserName);
+                userExists = await userManager.FindByEmailAsync(model.usuarioNome);
             }
 
             if (userExists == null)
@@ -374,7 +372,7 @@ namespace WebApi.Controllers
         ///<summary>a entrada do userneme aqui é criptografado</summary>
         public async Task<IActionResult> NovaSenha([FromBody] LoginModel model)
         {
-            if (String.IsNullOrEmpty(model.userName))
+            if (String.IsNullOrEmpty(model.usuario))
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Usuário não foi informado!" });
             }
@@ -384,7 +382,7 @@ namespace WebApi.Controllers
             }
             try
             {
-                var user = await userManager.FindByNameAsync(model.userName);
+                var user = await userManager.FindByNameAsync(model.usuario);
                 if (user == null)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Usuário não encontrado!" });
@@ -588,7 +586,7 @@ namespace WebApi.Controllers
             }
 
             string strIdioma = "pt-BR"; //Default
-            IdiomaModel idioma = await unitOfWork.Fixo.GetIdiomaByIdAsync(user.id_idioma);
+            IdiomaModel idioma = await unitOfWork.Fixo.GetIdiomaByIdAsync(user.idIdioma);
 
             if (!String.IsNullOrEmpty(idioma.sigla))
             {
@@ -597,20 +595,20 @@ namespace WebApi.Controllers
 
             UsuarioClaimModel usuarioClain = new UsuarioClaimModel()
             {
-                Id = user.Id,
-                idAtivo = user.id_user_situacao,
-                Nome = user.nome,
-                Email = user.Email,
-                Senha = user.senha,
-                Roles = roles,
-                Token = retToken,
-                RefreshToken = tokenRefresh.token,
-                Idioma = strIdioma,
-                Expiracao = dataExpiracao,
-                Avatar = user.avatar,
-                DoisFatoresHabilitado = user.TwoFactorEnabled,
-                AutenticadorGoogleChaveSecreta = user.google_authenticator_secretkey,
-                idPais = user.id_pais,
+                id = user.Id,
+                idAtivo = user.idUsuarioSituacao,
+                nome = user.nome,
+                email = user.Email,
+                senha = user.senha,
+                regras = roles,
+                token = retToken,
+                refreshToken = tokenRefresh.token,
+                idioma = strIdioma,
+                expiracao = dataExpiracao,
+                avatar = user.avatar,
+                doisFatoresHabilitado = user.TwoFactorEnabled,
+                autenticadorGoogleChaveSecreta = user.googleAuthenticatorSecretKey,
+                idPais = user.idPais,
             };
 
             return usuarioClain;

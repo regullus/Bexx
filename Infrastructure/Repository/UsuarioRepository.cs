@@ -52,9 +52,9 @@ namespace Infrastructure.Repository
             sql.Append("    id_usuario_dados as idUsuarioDados,");
             sql.Append("    id_imagem as idImagem,");
             sql.Append("    id_empresa as idEmpresa,");
-            sql.Append("    id_filial as idFilial,");
-            sql.Append("    id_user_situacao as idUserSituacao,");
-            sql.Append("    id_plano as idPlano,");
+            sql.Append("    id_filial as idGrupo,");
+            sql.Append("    id_user_situacao as idUsuarioSituacao,");
+            sql.Append("    id_plano as idArea,");
             sql.Append("    id_pais as idPais,");
             sql.Append("    id_sexo as idSexo,");
             sql.Append("    atualizacao,");
@@ -63,7 +63,6 @@ namespace Infrastructure.Repository
             sql.Append("    login,");
             sql.Append("    senha,");
             sql.Append("    two_factor_enabled as doisFatoresHabilitados,");            
-            sql.Append("    data_vencimento_plano as dataVencimentoPlano,");
             sql.Append("    data_expiracao_senha as dataExpiracaoSenha,");
             sql.Append("    id_idioma as idIdioma,");
             sql.Append("    avatar as avatar,");
@@ -87,9 +86,9 @@ namespace Infrastructure.Repository
             sql.Append("    id_usuario_dados as idUsuarioDados,");
             sql.Append("    id_imagem as idImagem,");
             sql.Append("    id_empresa as idEmpresa,");
-            sql.Append("    id_filial as idFilial,");
-            sql.Append("    id_user_situacao as idUserSituacao,");
-            sql.Append("    id_plano as idPlano,");
+            sql.Append("    id_filial as idGrupo,");
+            sql.Append("    id_user_situacao as idUsuarioSituacao,");
+            sql.Append("    id_plano as idArea,");
             sql.Append("    id_pais as idPais,");
             sql.Append("    id_sexo as idSexo,");
             sql.Append("    atualizacao,");
@@ -98,7 +97,6 @@ namespace Infrastructure.Repository
             sql.Append("    login,");
             sql.Append("    senha,");
             sql.Append("    two_factor_enabled as doisFatoresHabilitados,");
-            sql.Append("    data_vencimento_plano as dataVencimentoPlano,");
             sql.Append("    data_expiracao_senha as dataExpiracaoSenha,");
             sql.Append("    id_idioma as idIdioma,");
             sql.Append("    avatar,");
@@ -127,9 +125,9 @@ namespace Infrastructure.Repository
             sql.Append("    id_usuario_dados=@idUsuarioDados,");
             sql.Append("    id_imagem=@idImagem,");
             sql.Append("    id_empresa=@idEmpresa,");
-            sql.Append("    id_filial=@idFilial,");
-            sql.Append("    id_user_situacao=@idUserSituacao,");
-            sql.Append("    id_plano=@idPlano,");
+            sql.Append("    id_filial=@idGrupo,");
+            sql.Append("    id_user_situacao=@idUsuarioSituacao,");
+            sql.Append("    id_plano=@idArea,");
             sql.Append("    id_pais=@idPais,");
             sql.Append("    id_sexo=@idSexo,");
             sql.Append("    atualizacao=@atualizacao,");
@@ -137,7 +135,6 @@ namespace Infrastructure.Repository
             sql.Append("    email=@email,");
             sql.Append("    senha=@senha,");
             sql.Append("    two_factor_enabled=@doisFatoresHabilitados,");
-            sql.Append("    data_vencimento_plano=@dataVencimentoPlano,");
             sql.Append("    data_expiracao_senha=@dataExpiracaoSenha,");
             sql.Append("    id_idioma=@idIdioma,");
             sql.Append("    avatar=@avatar,");
@@ -183,8 +180,8 @@ namespace Infrastructure.Repository
             sql.Append(" UPDATE");
             sql.Append("    users");
             sql.Append(" SET");
-            sql.Append("    two_factor_enabled=@DoisFatoresHabilitado,");
-            sql.Append("    google_authenticator_secretkey=@AutenticadorGoogleChaveSecreta");
+            sql.Append("    two_factor_enabled=@doisFatoresHabilitado,");
+            sql.Append("    google_authenticator_secretkey=@autenticadorGoogleChaveSecreta");
             sql.Append(" WHERE");
             sql.Append("    id = @id");
 
