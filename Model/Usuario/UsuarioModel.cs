@@ -62,6 +62,7 @@ namespace Models
         public string twitter { get; set; }
         public string youtube { get; set; }
         public string instagram { get; set; }
+        public string whatsapp { get; set; }
     }
 
     public class UsuarioModel

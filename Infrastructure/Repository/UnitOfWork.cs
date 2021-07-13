@@ -11,7 +11,6 @@ namespace Infrastructure.Repository
                           IUsuarioDadosRepository usuarioDadosRepository,
                           IEmpresaRepository empresaRepository,
                           IConfiguracaoRepository configuracaoRepository,
-                          IImagemRepository imagemRepository,
                           IMensagemRepository mensagemRepository,
                           ITicketsRepository ticketsRepository,
                           IFixoRepository fixoRepository,
@@ -23,7 +22,6 @@ namespace Infrastructure.Repository
             UsuarioDados = usuarioDadosRepository;
             Empresa = empresaRepository;
             Configuracao = configuracaoRepository;
-            Imagem = imagemRepository;
             Mensagem = mensagemRepository;
             Tickets = ticketsRepository;
             Fixo = fixoRepository;
@@ -34,7 +32,6 @@ namespace Infrastructure.Repository
         public IUsuarioDadosRepository UsuarioDados { get; }
         public IEmpresaRepository Empresa { get; }
         public IConfiguracaoRepository Configuracao { get; }
-        public IImagemRepository Imagem { get; }
         public IMensagemRepository Mensagem { get; }
         public ITicketsRepository Tickets { get; }
         public IFixoRepository Fixo { get; }

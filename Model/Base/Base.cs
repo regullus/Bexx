@@ -3,15 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {    
-    public class InstituicaoFinanceiraModel
-    {
-        public int id { get; set; }
-        public int atualizacao { get; set; }
-        public int idAtivo { get; set; }
-        public string codigo { get; set; }
-        public string descricao { get; set; }      
-    }
-
     public class PaisModel
     {
         public int id { get; set; }

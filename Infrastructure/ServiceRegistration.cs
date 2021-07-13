@@ -17,7 +17,6 @@ namespace Infrastructure
             services.AddTransient<IFixoRepository, FixoRepository>();
             services.AddTransient<IEmpresaRepository, EmpresaRepository>();
             services.AddTransient<IConfiguracaoRepository, ConfiguracaoRepository>();
-            services.AddTransient<IImagemRepository, ImagemRepository>();
             services.AddTransient<IMensagemRepository, MensagemRepository>();
             services.AddTransient<ITicketsRepository, TicketsRepository>();
             services.AddTransient<IBaseRepository, BaseRepository>();

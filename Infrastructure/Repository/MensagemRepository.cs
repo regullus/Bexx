@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Npgsql;
+using System.Data.SqlClient;
 using Dapper;
 using Utils;
 
@@ -39,7 +39,7 @@ namespace Infrastructure.Repository
             sql.Append("    id_usuario_origem,");
             sql.Append("    id_usuario_destino,");
             sql.Append("    id_ativo,");
-            sql.Append("    id_empresa,");
+            sql.Append("    idEmpresa,");
             sql.Append("    id_mensagem_tipo,");
             sql.Append("    texto,");
             sql.Append("    texto_ing,");
@@ -61,9 +61,9 @@ namespace Infrastructure.Repository
             sql.Append("    @validade,");
             sql.Append("    @urgente");
             sql.Append("    )");
-            sql.Append(" RETURNING id;");
+            sql.Append("SELECT SCOPE_IDENTITY()");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 int result = await connection.ExecuteScalarAsync<int>(Helpers.QBuild(sql), entity);
@@ -74,7 +74,7 @@ namespace Infrastructure.Repository
         public async Task<int> DeleteAsync(int id)
         {
             var sql = "DELETE FROM mensagem Where id = @id";
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.ExecuteAsync(sql, new { id = id });
@@ -91,7 +91,7 @@ namespace Infrastructure.Repository
             sql.Append("    id_usuario_origem as idUsuarioOrigem,");
             sql.Append("    id_usuario_destino as idUsuarioDestino,");
             sql.Append("    id_ativo as idAtivo,");
-            sql.Append("    id_empresa as idEmpresa,");
+            sql.Append("    idEmpresa,");
             sql.Append("    id_mensagem_tipo as idMensagemTipo,");
             sql.Append("    texto,");
             sql.Append("    texto_ing as textoIng,");
@@ -102,7 +102,7 @@ namespace Infrastructure.Repository
             sql.Append(" FROM");
             sql.Append("    mensagem ");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QueryAsync<MensagemModel>(Helpers.QBuild(sql));
@@ -119,7 +119,7 @@ namespace Infrastructure.Repository
             sql.Append("    id_usuario_origem as idUsuarioOrigem,");
             sql.Append("    id_usuario_destino as idUsuarioDestino,");
             sql.Append("    id_ativo as idAtivo,");
-            sql.Append("    id_empresa as idEmpresa,");
+            sql.Append("    idEmpresa,");
             sql.Append("    id_mensagem_tipo as idMensagemTipo,");
             sql.Append("    texto,");
             sql.Append("    texto_ing as textoIng,");
@@ -132,7 +132,7 @@ namespace Infrastructure.Repository
             sql.Append(" WHERE");
             sql.Append("    id = @id");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QuerySingleOrDefaultAsync<MensagemModel>(Helpers.QBuild(sql), new { id = id });
@@ -150,7 +150,7 @@ namespace Infrastructure.Repository
             sql.Append("     id_usuario_origem=@idUsuarioOrigem,");
             sql.Append("     id_usuario_destino=@idUsuarioDestino,");
             sql.Append("     id_ativo=@idAtivo,");
-            sql.Append("     id_empresa=@idEmpresa,");
+            sql.Append("     idEmpresa=@idEmpresa,");
             sql.Append("     id_mensagem_tipo=@idMensagemTipo,");
             sql.Append("     texto=@texto,");
             sql.Append("     texto_ing=@textoIng,");
@@ -161,7 +161,7 @@ namespace Infrastructure.Repository
             sql.Append(" WHERE");
             sql.Append("    id = @id");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.ExecuteAsync(Helpers.QBuild(sql), entity);
@@ -179,13 +179,13 @@ namespace Infrastructure.Repository
             sql.Append("    id,");
             sql.Append("    atualizacao,");
             sql.Append("    nome,");
-            sql.Append("    nome_ing as nomeIng,");
-            sql.Append("    nome_esp as nomeEsp");
+            sql.Append("    nomeIng,");
+            sql.Append("    nomeEsp");
             sql.Append(" FROM");
             sql.Append("    mensagem_tipo");
             sql.Append(" ORDER BY id");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QueryAsync<MensagemTipoModel>(Helpers.QBuild(sql));

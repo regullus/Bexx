@@ -37,25 +37,6 @@ namespace WebApi.Controllers
 
         #region Custom
 
-        #region InstituicaoFinanceira
-
-        [HttpPost]
-        [Route("getInstituicaoFinanceiraAsync")]
-        public async Task<IActionResult> GetInstituicaoFinanceiraAsync([FromBody] IdModel model)
-        {
-            try
-            {
-                IReadOnlyList<InstituicaoFinanceiraModel> ret = await unitOfWork.Base.GetInstituicaoFinanceiraAsync(model.id);
-                return Ok(ret);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = ex.Message });
-            }
-        }
-
-        #endregion
-
         #region Pais
 
         [HttpPost]

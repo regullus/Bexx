@@ -12,7 +12,6 @@ namespace Interfaces
 {
     public interface IBaseRepository
     {
-        Task<IReadOnlyList<InstituicaoFinanceiraModel>> GetInstituicaoFinanceiraAsync(int IdAtivo);
         Task<IReadOnlyList<PaisModel>> GetPaisAsync();
     }
 }

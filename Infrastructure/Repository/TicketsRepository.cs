@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Npgsql;
+using System.Data.SqlClient;
 using Dapper;
 using Utils;
 
@@ -54,9 +54,9 @@ namespace Infrastructure.Repository
             sql.Append("    @atualizacao,");
             sql.Append("    @status");
             sql.Append("    )");
-            sql.Append(" RETURNING id;");
+            sql.Append("SELECT SCOPE_IDENTITY()");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 int result = await connection.ExecuteScalarAsync<int>(Helpers.QBuild(sql), entity);
@@ -67,7 +67,7 @@ namespace Infrastructure.Repository
         public async Task<int> DeleteAsync(int id)
         {
             var sql = "DELETE FROM tickets WHERE id = @id";
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.ExecuteAsync(sql, new { id = id });
@@ -91,7 +91,7 @@ namespace Infrastructure.Repository
             sql.Append(" FROM");
             sql.Append("     tickets");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QueryAsync<TicketsModel>(Helpers.QBuild(sql));
@@ -117,7 +117,7 @@ namespace Infrastructure.Repository
             sql.Append(" WHERE");
             sql.Append("    id = @id");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QuerySingleOrDefaultAsync<TicketsModel>(Helpers.QBuild(sql), new { id = id });
@@ -143,7 +143,7 @@ namespace Infrastructure.Repository
             sql.Append(" WHERE");
             sql.Append("     id = @id");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.ExecuteAsync(Helpers.QBuild(sql), entity);

@@ -58,6 +58,7 @@ namespace Utils
         Instagram = 5,
         Twitter = 6,
     }
+    
     public enum Idioma
     {
         Portugues = 1,

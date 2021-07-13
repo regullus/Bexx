@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Npgsql;
+using System.Data.SqlClient;
 using Dapper;
 using Utils;
 
@@ -24,20 +24,42 @@ namespace Infrastructure.Repository
 
         public async Task<int> AddAsync(UsuarioDadosModel entity)
         {
-            //entity.AddedOn = DateTime.Now;
-            var sql = "Insert into user_data (atualizacao, data_ultimo_acesso, exibe_boas_vindas, social_twitch, social_facebook, social_twitter, social_youtube, social_instagram) VALUES (@Atualizacao,@DataUltimoAcesso,@ExibeBoasVindas,@SocialTwitch,@SocialFacebook,@SocialTwitter,@SocialYouTube,@SocialInstagram)";
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            StringBuilder sql = new StringBuilder();
+            sql.Append("INSERT INTO ");
+            sql.Append("    usuarioDados (");
+            sql.Append("    atualizacao,");
+            sql.Append("    dataUltimoAcesso,");
+            sql.Append("    exibeBoasVindas,");
+            sql.Append("    twitch,");
+            sql.Append("    facebook,");
+            sql.Append("    twitter,");
+            sql.Append("    youtube,");
+            sql.Append("    instagram");
+            sql.Append("    )");
+            sql.Append("VALUES (");
+            sql.Append("    @atualizacao,");
+            sql.Append("    @dataUltimoAcesso,");
+            sql.Append("    @exibeBoasVindas,");
+            sql.Append("    @twitch,");
+            sql.Append("    @facebook,");
+            sql.Append("    @twitter,");
+            sql.Append("    @youtube,");
+            sql.Append("    @instagram");
+            sql.Append("    )");
+            sql.Append("SELECT SCOPE_IDENTITY()");
+            
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(sql, entity);
+                var result = await connection.ExecuteAsync(Helpers.QBuild(sql), entity);
                 return result;
             }
         }
 
         public async Task<int> DeleteAsync(int id)
         {
-            var sql = "DELETE FROM user_data WHERE id = @Id";
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            var sql = "DELETE FROM usuarioDados WHERE id = @Id";
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.ExecuteAsync(sql, new { Id = id });
@@ -47,34 +69,74 @@ namespace Infrastructure.Repository
 
         public async Task<IReadOnlyList<UsuarioDadosModel>> GetAllAsync()
         {
-            var sql = "SELECT * FROM user_data";
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            StringBuilder sql = new StringBuilder();
+            sql.Append(" SELECT");
+            sql.Append("    atualizacao,");
+            sql.Append("    dataUltimoAcesso,");
+            sql.Append("    exibeBoasVindas,");
+            sql.Append("    twitch,");
+            sql.Append("    facebook,");
+            sql.Append("    twitter,");
+            sql.Append("    youtube,");
+            sql.Append("    instagram");
+            sql.Append(" FROM");
+            sql.Append("    usuarioDados");
+
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<UsuarioDadosModel>(sql);
+                var result = await connection.QueryAsync<UsuarioDadosModel>(Helpers.QBuild(sql));
                 return result.ToList();
             }
         }
 
         public async Task<UsuarioDadosModel> GetByIdAsync(int id)
         {
-            var sql = "SELECT * FROM user_data WHERE id = @Id";
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+
+            StringBuilder sql = new StringBuilder();
+            sql.Append(" SELECT");
+            sql.Append("    atualizacao,");
+            sql.Append("    dataUltimoAcesso,");
+            sql.Append("    exibeBoasVindas,");
+            sql.Append("    twitch,");
+            sql.Append("    facebook,");
+            sql.Append("    twitter,");
+            sql.Append("    youtube,");
+            sql.Append("    instagram");
+            sql.Append(" FROM");
+            sql.Append("    usuarioDados");
+            sql.Append(" WHERE id = @Id");
+
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<UsuarioDadosModel>(sql, new { Id = id });
+                var result = await connection.QuerySingleOrDefaultAsync<UsuarioDadosModel>(Helpers.QBuild(sql), new { Id = id });
                 return result;
             }
         }
 
         public async Task<int> UpdateAsync(UsuarioDadosModel entity)
         {
-            entity.atualizacao = Helpers.DataAtualInt; 
-            var sql = "UPDATE user_data SET atualizacao = @atualizacao, data_ultimo_acesso = @dataUltimoAcesso, exibe_boas_vindas = @exibeBoasVindas, social_twitch = @socialTwitch, social_facebook = @socialFacebook, social_twitter = @socialTwitter, social_youtube = @socialYouTube, social_instagram = @socialInstagram,  WHERE id = @id";
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            entity.atualizacao = Helpers.DataAtualInt;
+            StringBuilder sql = new StringBuilder();
+            sql.Append(" UPDATE");
+            sql.Append("    usuarioDados");
+            sql.Append(" SET");
+            sql.Append("    atualizacao = @atualizacao,");
+            sql.Append("    dataUltimoAcesso = @dataUltimoAcesso,");
+            sql.Append("    exibeBoasVindas = @exibeBoasVindas,");
+            sql.Append("    twitch = @twitch,");
+            sql.Append("    facebook = @facebook,");
+            sql.Append("    twitter = @twitter,");
+            sql.Append("    youtube = @youtube,");
+            sql.Append("    instagram = @instagram");
+            sql.Append(" WHERE");
+            sql.Append("    id = @id");
+    
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(sql, entity);
+                var result = await connection.ExecuteAsync(Helpers.QBuild(sql), entity);
                 return result;
             }
         }

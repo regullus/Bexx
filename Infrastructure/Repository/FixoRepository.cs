@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Npgsql;
+using System.Data.SqlClient;
 using Dapper;
 using Utils;
 
@@ -36,15 +36,15 @@ namespace Infrastructure.Repository
             sql.Append(" SELECT");
             sql.Append("    id,");
             sql.Append("    nome,");
-            sql.Append("    nome_ing as nomeIng,");
-            sql.Append("    nome_esp as nomeEsp,");
+            sql.Append("    nomeIng,");
+            sql.Append("    nomeEsp,");
             sql.Append("    sigla");
             sql.Append(" FROM");
-            sql.Append("    fixo_idioma");
+            sql.Append("    idioma");
             sql.Append(" WHERE");
             sql.Append("    id=@id");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QuerySingleOrDefaultAsync<IdiomaModel>(Helpers.QBuild(sql), new { id = id });
@@ -58,13 +58,13 @@ namespace Infrastructure.Repository
             sql.Append(" SELECT");
             sql.Append("    id,");
             sql.Append("    nome,");
-            sql.Append("    nome_ing as nomeIng,");
-            sql.Append("    nome_esp as nomeEsp,");
+            sql.Append("    nomeIng,");
+            sql.Append("    nomeEsp,");
             sql.Append("    sigla");
             sql.Append(" FROM");
-            sql.Append("    fixo_idioma");
+            sql.Append("    idioma");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QueryAsync<IdiomaModel>(Helpers.QBuild(sql));
@@ -78,14 +78,14 @@ namespace Infrastructure.Repository
             sql.Append(" SELECT");
             sql.Append("    id,");
             sql.Append("    nome,");
-            sql.Append("    nome_ing as nomeIng,");
-            sql.Append("    nome_esp as nomeEsp");
+            sql.Append("    nomeIng,");
+            sql.Append("    nomeEsp");
             sql.Append(" FROM");
             sql.Append("    fixo_ativo");
             sql.Append(" WHERE");
             sql.Append("    id=@id");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QuerySingleOrDefaultAsync<AtivoModel>(Helpers.QBuild(sql), new { id = id });
@@ -99,12 +99,12 @@ namespace Infrastructure.Repository
             sql.Append(" SELECT");
             sql.Append("    id,");
             sql.Append("    nome,");
-            sql.Append("    nome_ing as nomeIng,");
-            sql.Append("    nome_esp as nomeEsp");
+            sql.Append("    nomeIng,");
+            sql.Append("    nomeEsp");
             sql.Append(" FROM");
             sql.Append("    fixo_ativo");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QueryAsync<AtivoModel>(Helpers.QBuild(sql));

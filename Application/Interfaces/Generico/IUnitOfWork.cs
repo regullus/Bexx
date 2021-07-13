@@ -11,7 +11,6 @@ namespace Interfaces
         IFixoRepository Fixo { get; }
         IEmpresaRepository Empresa { get; }
         IConfiguracaoRepository Configuracao { get; }
-        IImagemRepository Imagem { get; }
         IMensagemRepository Mensagem { get; }
         ITicketsRepository Tickets { get; }
         IBaseRepository Base { get; }

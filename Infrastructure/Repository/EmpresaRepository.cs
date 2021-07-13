@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Npgsql;
+using System.Data.SqlClient;
 using Dapper;
 using Utils;
 
@@ -38,7 +38,7 @@ namespace Infrastructure.Repository
             sql.Append("    atualizacao,");
             sql.Append("    id_cidade,");
             sql.Append("    id_administrador,");
-            sql.Append("    id_idioma,");
+            sql.Append("    idIdioma,");
             sql.Append("    id_ativo,");
             sql.Append("    nome,");
             sql.Append("    nome_fantasia,");
@@ -69,9 +69,9 @@ namespace Infrastructure.Repository
             sql.Append("    @multiLanguage,");
             sql.Append("    @observacao");
             sql.Append("    )");
-            sql.Append(" RETURNING id;");
+            sql.Append("SELECT SCOPE_IDENTITY()");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 int result = await connection.ExecuteScalarAsync<int>(Helpers.QBuild(sql), entity);
@@ -82,7 +82,7 @@ namespace Infrastructure.Repository
         public async Task<int> DeleteAsync(int id)
         {
             var sql = "Delete From empresa Where id = @id";
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.ExecuteAsync(sql, new { id = id });
@@ -98,7 +98,7 @@ namespace Infrastructure.Repository
             sql.Append("    atualizacao,");
             sql.Append("    id_cidade as idCidade,");
             sql.Append("    id_administrador as idAdmistrador,");
-            sql.Append("    id_idioma as idIdioma,");
+            sql.Append("    idIdioma,");
             sql.Append("    id_ativo as idAtivo,");
             sql.Append("    nome,");
             sql.Append("    nome_fantasia as nomeFantasia,");
@@ -114,7 +114,7 @@ namespace Infrastructure.Repository
             sql.Append(" FROM");
             sql.Append("    empresa");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QueryAsync<EmpresaModel>(Helpers.QBuild(sql));
@@ -130,7 +130,7 @@ namespace Infrastructure.Repository
             sql.Append("    atualizacao,");
             sql.Append("    id_cidade as idCidade,");
             sql.Append("    id_administrador as idAdmistrador,");
-            sql.Append("    id_idioma as idIdioma,");
+            sql.Append("    idIdioma,");
             sql.Append("    id_ativo as idAtivo,");
             sql.Append("    nome,");
             sql.Append("    nome_fantasia as nomeFantasia,");
@@ -148,7 +148,7 @@ namespace Infrastructure.Repository
             sql.Append(" WHERE");
             sql.Append("    id = @id");
          
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QuerySingleOrDefaultAsync<EmpresaModel>(Helpers.QBuild(sql), new { id = id });
@@ -166,7 +166,7 @@ namespace Infrastructure.Repository
             sql.Append("     atualizacao=@atualizacao,");
             sql.Append("     id_cidade=@idCidade,");
             sql.Append("     id_administrador=@idAdministrador,");
-            sql.Append("     id_idioma=@idIdioma,");
+            sql.Append("     idIdioma=@idIdioma,");
             sql.Append("     id_ativo=@idAtivo,");
             sql.Append("     nome=@nome,");
             sql.Append("     nome_fantasia=@nomeFantasia,");
@@ -182,7 +182,7 @@ namespace Infrastructure.Repository
             sql.Append(" WHERE");
             sql.Append("    id = @id");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.ExecuteAsync(Helpers.QBuild(sql), entity);

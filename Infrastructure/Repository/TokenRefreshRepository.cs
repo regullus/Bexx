@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Npgsql;
+using System.Data.SqlClient;
 using Dapper;
 using Utils;
 
@@ -50,9 +50,9 @@ namespace Infrastructure.Repository
             sql.Append("    @dataAdicao,");
             sql.Append("    @dataExpiracao");
             sql.Append("    )");
-            sql.Append(" RETURNING id;");
+            sql.Append("SELECT SCOPE_IDENTITY()");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 int result = await connection.ExecuteScalarAsync<int>(Helpers.QBuild(sql), entity);
@@ -63,7 +63,7 @@ namespace Infrastructure.Repository
         public async Task<int> DeleteAsync(int id)
         {
             var sql = "DELETE FROM user_refresh_token WHERE id = @id";
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.ExecuteAsync(sql, new { id = id });
@@ -86,7 +86,7 @@ namespace Infrastructure.Repository
             sql.Append(" FROM");
             sql.Append("    user_refresh_token");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QueryAsync<TokenRefreshModel>(Helpers.QBuild(sql));
@@ -112,7 +112,7 @@ namespace Infrastructure.Repository
             sql.Append("    id = @id and");
             sql.Append("    id_ativo = 1"); //1-ativo
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QuerySingleOrDefaultAsync<TokenRefreshModel>(Helpers.QBuild(sql), new { id = id });
@@ -136,7 +136,7 @@ namespace Infrastructure.Repository
             sql.Append(" WHERE");
             sql.Append("    id = @id");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.ExecuteAsync(Helpers.QBuild(sql), entity);
@@ -167,7 +167,7 @@ namespace Infrastructure.Repository
             sql.Append("    id_ativo = 1"); //1-ativo
             sql.Append(" ORDER BY id DESC");
 
-            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            using (var connection = new  SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 var result = await connection.QueryFirstAsync<TokenRefreshModel>(Helpers.QBuild(sql), new { idUsuario = idUsuario });

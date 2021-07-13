@@ -31,18 +31,6 @@ namespace WebApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                date = DateTime.Now.AddDays(index),
-                temperatureC = rng.Next(-20, 55),
-                summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
     }
 
     [ApiController]
@@ -60,19 +48,5 @@ namespace WebApi.Controllers
         {
             _logger = logger;
         }
-
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                date = DateTime.Now.AddDays(index),
-                temperatureC = rng.Next(-20, 55),
-                summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
     }
-
 }
