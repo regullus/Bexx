@@ -4,6 +4,8 @@ node_modules
 .DS_Store
 .idea
 sassdoc
+.DS_Store
+.DS_Store?
 
 src/assets/theme/*/*.css
 src/assets/layout/css/*/*.css

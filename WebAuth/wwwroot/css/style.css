@@ -1,0 +1,130 @@
+﻿body {
+    background-color: #dfdfdf !important;
+}
+
+.bg-rabs {
+    background-color: #dfdfdf !important;
+}
+
+.tiledBackground {
+    width: 300px;
+    height: 300px;
+    color: pink;
+}
+
+.hide {
+    display: none !important;
+}
+
+.todas {
+    color: #0033AA !important;
+}
+
+.twitch {
+    color: #653da8 !important;
+}
+
+.youtube {
+    color: #fe3432 !important;
+}
+
+.facebook {
+    color: #3c5a9a !important;
+}
+
+.instagram {
+    color: #e86343 !important;
+}
+
+.twitter {
+    color: #41d1da !important;
+}
+
+.svg-icon.svg-icon-ativo svg g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+    fill: #1bc5bd !important;
+}
+
+.svg-icon.svg-icon-naoatvo svg g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+    fill: #f64e60 !important;
+}
+
+.svg-icon.svg-icon-carrossel svg g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+    fill: #0a8800 !important;
+}
+
+.svg-icon.svg-icon-carrossel svg:hover g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+}
+
+.svg-icon.svg-icon-donation svg g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+    fill: #FFA800 !important;
+}
+
+.svg-icon.svg-icon-donation svg:hover g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+}
+
+.svg-icon.svg-icon-chat svg g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+    fill: #8950FC !important;
+}
+
+.svg-icon.svg-icon-chat svg:hover g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+}
+
+.svg-icon.svg-icon-follow svg g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+    fill: #F64E60 !important;
+}
+
+.svg-icon.svg-icon-follow svg:hover g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+}
+
+.svg-icon.svg-icon-normal svg g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+    fill: #F3F6F9 !important;
+}
+
+.svg-icon.svg-icon-normal svg:hover g [fill] {
+    -webkit-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+}
+
+.imgx120 {
+    max-width: 120px;
+    max-height: 120px;
+    object-fit: cover !important;
+    display: block;
+    margin: auto;
+}
+
+.imgx150 {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover !important;
+    display: block;
+    margin: auto;
+}
+
+.backx250 {
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
