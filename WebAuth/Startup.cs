@@ -35,7 +35,7 @@ namespace WebApp
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(config =>
                {
-                   config.Cookie.Name = "TronarUserLoginCookie";
+                   config.Cookie.Name = "BexxUserLoginCookie";
                    config.LoginPath = "/Login";
                    config.LogoutPath = "/Home/Logout";
                    config.AccessDeniedPath = "/Login/AccessDenied";
