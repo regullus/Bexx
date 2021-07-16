@@ -5,6 +5,7 @@
     <UserSecretsId>85e53d10-47de-45f2-b7b9-eb26c09b3311</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'WebApp' " />
   <ItemGroup>
     <Compile Remove="Controllers\Admin\**" />
     <Content Remove="Controllers\Admin\**" />

@@ -1,20 +1,13 @@
-﻿html {
-    background: url(img/backgroung/login.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+﻿.footer {
+    background-color: #662EBE !important;
+}
+.copy {
+    background-color: #92298C !important;
+}
+.social {
+    color: #F69434;
 }
 
-.bg_video {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -1000;
-    background: url(img/backgroung/login.jpg) no-repeat;
-    background-size: cover;
+.orange {
+    background-color: #F69434 !important;
 }

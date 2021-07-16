@@ -31,29 +31,133 @@
 </head>
 <!--end::Head-->
 <!--begin::Body-->
-<body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-static page-loading" style="background-color: transparent!important;">
-    <video autoplay loop poster="@Url.Content("~/img/background/login.jpg")" class="bg_video" muted plays-inline>
-        <source src="@Url.Content("~/videos/login.mp4")" type="video/mp4">
-        <source src="@Url.Content("~/videos/login.webm")" type="video/webm">
-    </video>
-    <!--begin::Main-->
-    <div class="d-flex flex-column flex-root">
-        <!--begin::Login-->
-        <div class="login login-3 login-signin-on d-flex flex-row-fluid" id="kt_login">
-            <div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid">
-                <div class="login-form text-center text-white p-7 position-relative overflow-hidden" style=" border-radius: 30px; background-color: rgba(0,0, 0, 0.5) !important" id="login-form">
-                    <!--begin::Login Header-->
-                    <div class="d-flex flex-center mb-10">
-                        <img src="@Url.Content("~/img/logo/logoBranco.png")" class="max-h-100px" alt="" />
+<body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-static page-loading">
+    	<!--begin::Main-->
+		<!--begin::Header Mobile-->
+		<div id="kt_header_mobile" class="header-mobile header-mobile-fixed">
+			<!--begin::Logo-->
+			<a href="index.html">
+				<img alt="Logo" src="@Url.Content("~/img/logo/logo.png")" class="logo-default max-h-30px" />
+			</a>
+			<!--end::Logo-->
+		</div>
+		<!--end::Header Mobile-->
+		<div class="d-flex flex-column flex-root">
+			<!--begin::Page-->
+			<div class="d-flex flex-row flex-column-fluid page">
+				<!--begin::Wrapper-->
+                <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+                    <!--begin::Header-->
+                    <div id="kt_header" class="header header-fixed">
+                        <!--begin::Container-->
+                        <div class="container d-flex align-items-stretch justify-content-between">
+                            <!--begin::Left-->
+                            <div class="d-none d-lg-flex align-items-center mr-3">
+                                <!--begin::Logo-->
+                                <a href="index.html">
+                                    <img alt="Logo" src="@Url.Content("~/img/logo/logo.png")" class="logo-sticky max-h-35px" />
+                                </a>
+                                <!--end::Logo-->
+                            </div>
+                            <!--end::Left-->
+                        </div>
+                        <!--end::Container-->
                     </div>
-                    <!--end::Login Header-->
-                    @RenderBody()
+                    <!--end::Header-->
+                    <!--begin::Content-->
+                    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                        <!--begin::Entry-->
+                        <div class="d-flex flex-column-fluid">
+                            <!--begin::Container-->
+                            <div class="container">
+                                <!--begin::Main-->
+                                <div class="d-flex flex-column flex-root">
+                                    <!--begin::Login-->
+                                    <div class="login login-3 login-signin-on d-flex flex-row-fluid" id="kt_login">
+                                        <div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid">
+                                            <div class="login-form text-center p-7 position-relative overflow-hidden" style="border-radius: 30px; background-color: rgba(235, 235, 235, 0.2) !important" id="login-form">
+                                                @RenderBody()
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Login-->
+                                </div>
+                                <!--end::Main-->
+                            </div>
+                            <!--end::Container-->
+                        </div>
+                        <!--end::Entry-->
+                    </div>
+                    <!--end::Content-->
+                    <!--begin::Footer-->
+                    <div class="footer m-0">
+                        <!--begin::Container-->
+                        <div class="m-10 p-0">
+                            <div class="row m-0 p-0">
+                                <div class="col-md-4">
+                                    <h2 class="mb-6 mt-6 text-light">Sobre nós</h2>
+                                    <p class="text-muted font-weight-bold mr-2 text-left">
+                                        Somos o melhores mais capacitados especialistas
+                                        em inteligência logística do Brasil. Nosso diferencial
+                                        se baseia em sólidos conhecimentos de Inteligência
+                                        de negócios, gestão de transportadoras, otmização de
+                                        valores, cetralização de gestão e confiabilidades.
+                                    </p>
+                                </div>
+                                <div class="col-md-4 pl-5">
+                                    <h2 class="mb-6 mt-6 text-light">Contato</h2>
+                                    <p class="text-muted font-weight-bold m-0 mr-2 text-left">
+                                        Avenida Maria Silva Garcia, 385 3&deg; Andar
+                                    </p>
+                                    <p class="text-muted font-weight-bold m-0 mr-2 text-left">
+                                        Uberlândia - MG - Brasil
+                                    </p>
+                                    <p class="text-muted font-weight-bold m-0 mr-2 text-left">
+                                        contato@bexx.com.br
+                                    </p>
+                                    <p class="text-muted font-weight-bold m-0 mr-2 text-left">
+                                        + 55 (34) 3228-9500
+                                    </p>
+                                    <h2 class="mb-6 mt-6 text-light">Nossas redes</h2>
+                                    <a href="#"><i class="social socicon-facebook font-weight-bold mr-2 font-size-h3"></i></a>
+                                    <a href="#"><i class="social socicon-instagram font-weight-bold mr-2 font-size-h3"></i></a>
+                                    <a href="#"><i class="social socicon-twitter font-weight-bold mr-2 font-size-h3"></i></a>
+                                </div>
+                                <div class="col-md-4 pl-5 pr-12">
+                                    <h2 class="mb-6 mt-6 text-light">Assine nossa Newsletter</h2>
+                                   
+                                    <div class="form-group">
+                                        <label class="text-muted font-weight-bold mr-2 text-left">Receba o melhor conteúdo no CONFORTO do seu email.</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="email" />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-warning orange" type="button"><i class="fa fas fa-chevron-circle-right font-weight-bold"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2 class="mb-6 mt-6 text-light">Baixe nosso App</h2>
+                                    <a href="#" class="mt-2 mr-2"><img src="@Url.Content("~/img/misc/GooglePlay.png")" style="max-height: 32px;" /></a>
+                                    <a href="#" class="mt-2 mr-2"><img src="@Url.Content("~/img/misc/AppStore.png")" style="max-height: 32px;" /></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Container-->
+                    </div>
+                    <!--end::Footer-->
+                    <!-- Copyright Footer -->
+                    <footer class="text-center copy py-4">
+                        <div class="container">
+                            <span class="text-muted font-weight-bold mr-2 text-center text-light"> Copyrights 2021 © BEXX All Rights Reserved</span>
+                        </div>
+                    </footer>
+                    <!-- End Copyright Footer -->
                 </div>
-            </div>
-        </div>
-        <!--end::Login-->
-    </div>
-    <!--end::Main-->
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Page-->
+		</div>
+		<!--end::Main-->
+	
     <!--begin::Global Config(global config for global JS scripts)-->
     <script>
         var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#6993FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#F3F6F9", "dark": "#212121" }, "light": { "white": "#ffffff", "primary": "#E1E9FF", "secondary": "#ECF0F3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#212121", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#ECF0F3", "gray-300": "#E5EAEE", "gray-400": "#D6D6E0", "gray-500": "#B5B5C3", "gray-600": "#80808F", "gray-700": "#464E5F", "gray-800": "#1B283F", "gray-900": "#212121" } }, "font-family": "Poppins" };
@@ -72,15 +176,13 @@
     @await RenderSectionAsync("Scripts", required: false)
 
     <script src="https://www.google.com/recaptcha/api.js?render=@GooglereCAPTCHA.Value.ReCAPTCHA_Site_Key"></script>
-    <script>
-        grecaptcha.ready(function () {
+    <script>grecaptcha.ready(function () {
             grecaptcha.execute(keyReCaptcha, { action: 'homepage' }).then(function (token) {
                 $('#token').val(token);
                 $('#tokenCadastro').val(token);
                 $('#tokenEsqueci').val(token);
             });
-        });
-    </script>
+        });</script>
 
 </body>
 <!--end::Body-->
