@@ -1,0 +1,57 @@
+  .theme-bg-primary {
+    background-color: #662EBE !important;
+  }
+  .theme-bg-secundary {
+    background-color: #9229BC !important;
+  }
+  .theme-bg-tertiary {
+    background-color: #F69434 !important;
+  }
+  .theme-bg-quaternary {
+    background-color: #F05B30 !important;
+  }
+  .theme-bg-quinary {
+    background-color: #59F5BC !important;
+  }
+  .theme-bg-light {
+    background-color: #EFF1F2 !important;
+  }
+  .theme-bg-transparent {
+    background-color: transparent !important;
+  }
+  .theme-color-primary {
+    color: #662EBE !important;
+  }
+  .theme-color-secundary {
+    color: #9229BC !important;
+  }
+  .theme-color-tertiary {
+    color: #F69434 !important;
+  }
+  .theme-color-quaternary {
+    color: #F05B30 !important;
+  }
+  .theme-color-quinary {
+    color: #59F5BC !important;
+  }
+  .theme-color-light {
+    color: #EFF1F2 !important;
+  }
+  #footer-logo{
+    max-width: 32px;
+  }
+  .footer-profile {
+    max-width: 48px;
+    text-align: left;
+  }
+
+  /* Menu Lateral */
+  /* .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-heading, .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-link {
+    background-color: #662EBE !important;
+}
+.aside-menu .menu-nav > .menu-item.menu-item-active > .menu-heading, .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-link .menu-text {
+  color: #F3F6F9 !important;
+}
+.aside-menu .menu-nav > .menu-item.menu-item-active > .menu-heading .menu-icon.svg-icon svg g [fill], .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-link .menu-icon.svg-icon svg g [fill] {
+  fill: #F3F6F9 !important;
+} */

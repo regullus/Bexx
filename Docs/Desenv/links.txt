@@ -1,6 +1,13 @@
 https://docs.microsoft.com/pt-br/azure/active-directory/develop/tutorial-v2-angular-auth-code
 
 
+Amazon
+ec2-52-67-121-81.sa-east-1.compute.amazonaws.com
+Administrator
+uqIpUXef7nvH&s(Gw%qqC(FUfbs&eCfE
+
+
+
 
 
 

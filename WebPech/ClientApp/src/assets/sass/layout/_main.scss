@@ -1,45 +1,30 @@
-html {
-    height: 100%;
-    font-size: $fontSize;
-}
+//
+// Base
+//
 
+// Body
 body {
-    font-family: $fontFamily;
-    font-size: $fontSize;
-    color: $textColor;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    padding:0;
-    margin:0;
-    min-height: 100%;
-    background: $bodyBg;
+	background: $page-bg;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    a {
-        color: $primaryColor;
-        text-decoration: none;
-    }
+    background-position: center top;
+    background-size: 100% $page-bg-height;
 }
 
-.layout-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 100vh;
-    background: $bodyImage;
-    background-repeat: no-repeat;
+// Desktop Mode
+@include media-breakpoint-up(lg) {
+	// Container
+	.container,
+	.container-fluid {
+		padding: 0 get($page-padding, desktop);
+	}
+}
 
-    .layout-main {
-        @include flex();
-        @include flex-direction-column();
-        @include flex-justify-between();
-        min-height: 100vh;
-        @include transition(margin-left .3s);
-
-        .layout-main-content {
-            flex: 1 1 0;
-            padding: 30px;
-        }
-    }
+// Tablet & Mobile Modes
+@include media-breakpoint-down(md) {
+	// Container
+	.container,
+	.container-fluid {
+		max-width: none;
+		padding: 0 get($page-padding, tablet-and-mobile);
+	}
 }

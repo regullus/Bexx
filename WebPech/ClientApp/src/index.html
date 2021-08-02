@@ -1,54 +1,97 @@
 <!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Bexx</title>
-    <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link id="theme-css" rel="stylesheet" type="text/css" href="assets/theme/bexx/theme-light.css">
-    <link id="layout-css" rel="stylesheet" type="text/css" href="assets/layout/css/bexx/layout-light.css">
-    
+<html lang="en">
+<meta charset="utf-8">
+<title>Bexx | Pechinchador</title>
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/x-icon" href="./assets//media//logos//favicon.ico">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Poppins:300,400,500,600,700" rel="stylesheet">
+<!-- Splash Screen | Appears during application initialization proccess -->
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #splash-screen {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f2f3f8;
+  }
+
+  #splash-screen img {
+    margin-left: calc(100vw - 100%);
+    margin-bottom: 30px;
+  }
+
+  #splash-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .splash-spinner {
+    animation: rotate 2s linear infinite;
+    margin-left: calc(100vw - 100%);
+    width: 50px;
+    height: 50px;
+  }
+
+  .splash-spinner .path {
+    stroke: #5d78ff;
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
+  }
+
+</style>
+<!--begin::Global Theme Styles(used by all pages)-->
+<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
+<!-- <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" /> -->
+<!--end::Global Theme Styles-->
+<link id="theme-css" rel="stylesheet" type="text/css" href="assets/css/bexx.css">
 </head>
-<body onResize="xrefresh();">
-    <app-root>
-        <div class="loading-wrapper">
-            <svg class="loader12" height="57" stroke="#fff" viewBox="0 0 57 57" width="57"
-                 xmlns="http://www.w3.org/2000/svg">
-                <g fill-rule="evenodd" fill="none">
-                    <g stroke-width="2" transform="translate(1 1)">
-                        <circle class="loader12__path-left" cx="5" cy="50" r="5"></circle>
-                        <circle class="loader12__path-top" cx="27" cy="5" r="5"></circle>
-                        <circle class="loader12__path-right" cx="50" cy="50" r="5"></circle>
-                    </g>
-                </g>
-            </svg>
-        </div>
-    </app-root>
 
-    <script>
-        const loader12Timeline = new TimelineMax({ repeat: -1 });
-
-        loader12Timeline.to('.loader12__path-top', 0.75, {
-            attr: {
-                cx: 50,
-                cy: 50
-            }
-        }, "l12_1")
-            .to('.loader12__path-left', 0.75, {
-                attr: {
-                    cx: 27,
-                    cy: 5
-                }
-            }, "l12_1")
-            .to('.loader12__path-right', 0.75, {
-                attr: {
-                    cx: 5,
-                    cy: 50
-                }
-            }, "l12_1");
-
-        function refresh() { location.reload(); }
-    </script>
+<body root id="kt_body">
+  <div id="splash-screen">
+    <img src="./assets/media/logos/logo-dark.png" alt="logo" />
+    <svg class="splash-spinner" viewBox="0 0 50 50">
+      <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+    </svg>
+  </div>
+  <!--begin::Global Theme Bundle(used by all pages)-->
+  <script src="assets/plugins/global/plugins.bundle.js"></script>
+  <script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+  <!-- <script src="assets/js/scripts.bundle.js"></script> -->
+  <!--end::Global Theme Bundle-->
 </body>
+
 </html>

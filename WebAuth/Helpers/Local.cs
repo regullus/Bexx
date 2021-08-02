@@ -238,7 +238,7 @@ namespace WebApp
             {
                 if (HttpContext.Request.Cookies.Count > 0)
                 {
-                    var siteCookies = HttpContext.Request.Cookies.Where(c => c.Key.Contains("TronarUserLoginCookie"));
+                    var siteCookies = HttpContext.Request.Cookies.Where(c => c.Key.Contains("BexxUserLoginCookie"));
                     foreach (var cookie in siteCookies)
                     {
                         Response.Cookies.Delete(cookie.Key);
@@ -358,6 +358,21 @@ namespace WebApp
             LogErro("Geral", "PaisUsuarioApi", strRet);
 
             return null;
+        }
+
+        public string UrlSistema(string id)
+        {
+            string strURL = "";
+            //return RedirectToAction("Index", "Home");
+            switch (id)
+            {
+                case "1":
+                    strURL = "http://localhost:4200/ ";
+                    break;
+                default:
+                    break;
+            }
+            return strURL;
         }
 
         #endregion

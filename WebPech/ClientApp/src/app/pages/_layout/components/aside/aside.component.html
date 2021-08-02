@@ -1,0 +1,511 @@
+<!--begin::Aside Menu-->
+<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
+  <div
+    id="kt_aside_menu"
+    class="aside-menu min-h-lg-800px"
+    [ngClass]="asideMenuCSSClasses"
+    data-menu-vertical="1"
+    [attr.data-menu-scroll]="asideMenuScroll"
+    [attr.data-menu-dropdown]="asideMenuDropdown"
+    data-menu-dropdown-timeout="500"
+  >
+    <!-- begin::Menu Nav -->
+    <ul class="menu-nav" [ngClass]="ulCSSClasses">
+      <!-- begin::Home -->
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a class="menu-link" routerLink="/" routerLinkActive="active">
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Home/Home.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text" translate="Home"></span>
+        </a>
+      </li>
+      <!-- end::Home -->
+
+      <!-- begin::section -->
+      <li class="menu-section">
+        <h4 class="menu-text">Deck</h4>
+        <i class="menu-icon flaticon-more-v2"></i>
+      </li>
+      <!-- end:: section -->
+      <!-- begin::itens -->
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a class="menu-link" routerLink="/material/data-table/table" routerLinkActive="active">
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Files/Import.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Importar</span>
+        </a>
+      </li>
+      <li
+      class="menu-item"
+      aria-haspopup="true"
+      routerLinkActive="menu-item-active"
+    >
+      <a class="menu-link" routerLink="/lista" routerLinkActive="active">
+        <span
+          [inlineSVG]="'./assets/media/svg/icons/Text/Bullet-list.svg'"
+          cacheSVG="true"
+          class="svg-icon menu-icon"
+        ></span>
+        <span class="menu-text">Lista</span>
+      </a>
+    </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a class="menu-link" routerLink="/analisar" routerLinkActive="active">
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Code/Option.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Analisar</span>
+        </a>
+      </li>
+      <!-- end::itens -->
+
+      <!-- begin::section -->
+      <li class="menu-section">
+        <h4 class="menu-text">Exclusividade</h4>
+        <i class="menu-icon flaticon-more-v2"></i>
+      </li>
+      <!-- end:: section -->
+      <!-- begin::itens -->
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a class="menu-link" routerLink="/destinatario" routerLinkActive="active">
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Text/Redo.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Destinatário</span>
+        </a>
+      </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a class="menu-link" routerLink="/cidade" routerLinkActive="active">
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Home/Building.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Cidade</span>
+        </a>
+      </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a class="menu-link" routerLink="/regiao" routerLinkActive="active">
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Home/Earth.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Região</span>
+        </a>
+      </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a class="menu-link" routerLink="/clifalixauf" routerLinkActive="active">
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Map/Compass.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Cli, Faixa, UF</span>
+        </a>
+      </li>      
+      <!-- end::itens -->
+
+      <!-- begin::section -->
+      <li class="menu-section">
+        <h4 class="menu-text">Dados</h4>
+        <i class="menu-icon flaticon-more-v2"></i>
+      </li>
+      <!-- end:: section -->
+      <!-- begin::itens -->
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a class="menu-link" routerLink="/kpis" routerLinkActive="active">
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Chart-line1.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">KPIs</span>
+        </a>
+      </li>
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+      >
+        <a class="menu-link" routerLink="/material/form-controls/radiobutton" routerLinkActive="active">
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Communication/Clipboard-list.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">Log</span>
+        </a>
+      </li>
+      <!-- end::itens -->
+    
+      <!-- Ng-Bootstrap -->
+      <!-- begin::1 Level -->
+      <li
+        class="menu-item menu-item-submenu hidden"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+        style="display:none;"
+      >
+        <a
+          class="menu-link menu-toggle"
+          href="/ngbootstrap"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Bitcoin.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">NgBootstrap</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">NgBootstrap</span>
+              </span>
+            </li>
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/accordion"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Accordion</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/alert"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Alert</span>
+              </a>
+            </li>
+            <!-- end::2 Level --
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/buttons"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Buttons</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/carousel"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Carousel</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/collapse"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Collapse</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/datepicker"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Datepicker</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/dropdown"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Dropdown</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/modal"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Modal</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/pagination"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Pagination</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/popover"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Popover</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/progressbar"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Progressbar</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/rating"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Rating</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/timepicker"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Timepicker</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/tooltip"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Tooltips</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li
+              class="menu-item"
+              routerLinkActive="menu-item-active"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <a
+                class="menu-link"
+                routerLink="/ngbootstrap/typehead"
+                routerLinkActive="active"
+              >
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Typehead</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+          </ul>
+        </div>
+      </li>
+      <!-- end::1 Level -->
+
+  
+
+    </ul>
+    <!-- end::Menu Nav -->
+  </div>
+  <!--end::Menu Container-->
+</div>
+<!--end::Aside Menu-->

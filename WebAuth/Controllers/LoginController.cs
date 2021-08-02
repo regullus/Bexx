@@ -39,25 +39,32 @@ namespace WebApp.Controllers
         }
 
         #endregion
-
+        
         #region Actions
 
         #region Login
 
         [HttpGet]
-        public ActionResult index(string ret)
+        public ActionResult index(string ret, string id)
         {
             try
             {
                 ViewBag.Message = null;
                 gstrErro = null;
-
                 var lembrar = ((ClaimsIdentity)User.Identity).FindFirst("Lembrar");
                 if (lembrar != null)
                 {
                     if (lembrar.Value != null && lembrar.Value.ToLower() == "true")
                     {
-                        return RedirectToAction("Index", "Home");
+                        string strURL = UrlSistema(id);
+                        if (String.IsNullOrEmpty(strURL))
+                        {
+                            ViewBag.Message = "Sistema inválido";
+                        }
+                        else
+                        {
+                            return Redirect(strURL);
+                        }
                     }
                 }
 
@@ -93,7 +100,7 @@ namespace WebApp.Controllers
             catch (Exception ex)
             {
                 string ticket = LogErro("LoginController", "Index", ex.Message);
-                return RedirectToAction("Erro", "Home", new { Titulo = "Erro em Anúncios", Mensagem = "Foi aberto um ticket de n. " + ticket + " para esse incidente." });
+                return RedirectToAction("Erro", "Home", new { Titulo = "Erro", Mensagem = "Foi aberto um ticket de n. " + ticket + " para esse incidente." });
             }
 
             return View();
@@ -146,7 +153,16 @@ namespace WebApp.Controllers
                 {
                     bool ret = await SetClaim(usuarioClaim, _usuario.login, _usuario.lembrar.ToString());
 
-                    return RedirectToAction("Index", "Home");
+                    string strURL = UrlSistema("1");
+
+                    if (String.IsNullOrEmpty(strURL))
+                    {
+                        ViewBag.Message = "Sistema inválido";
+                    }
+                    else
+                    {
+                        return Redirect(strURL);
+                    }
                 }
                 else
                 {
