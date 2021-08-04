@@ -32,6 +32,12 @@ namespace WebApp
             services.Configure<ReCaptchaSettings>(Configuration.GetSection("GoglereCAPTCHA"));
             services.AddTransient<ReCaptchaService>();
 
+            //mcr
+            services.AddCors(corsOptions =>
+            {
+                corsOptions.AddPolicy("fully permissive", configurePolicy => configurePolicy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200").AllowCredentials()); //localhost:4200 is the default port an angular runs in dev mode with ng serve
+            });
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(config =>
                {
@@ -67,7 +73,10 @@ namespace WebApp
                     await next();
                 }
             });
-          
+
+            //mcr
+            app.UseCors("fully permissive");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();

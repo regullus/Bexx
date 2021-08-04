@@ -253,6 +253,7 @@ namespace WebApp
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usuarioClaim.email));
                 identity.AddClaim(new Claim(ClaimTypes.Name, name));
                 identity.AddClaim(new Claim(type: "Id", value: usuarioClaim.id.ToString()));
+                identity.AddClaim(new Claim(type: "userId", value: usuarioClaim.id.ToString()));
                 identity.AddClaim(new Claim(type: "idAtivo", value: usuarioClaim.idAtivo.ToString()));
                 identity.AddClaim(new Claim(type: "Nome", value: usuarioClaim.nome));
                 identity.AddClaim(new Claim(type: "Email", value: usuarioClaim.email));
@@ -266,7 +267,7 @@ namespace WebApp
                 identity.AddClaim(new Claim(type: "DoisFatoresHabilitado", value: usuarioClaim.doisFatoresHabilitado.ToString()));
                 identity.AddClaim(new Claim(type: "AutenticadorGoogleChaveSecreta", value: usuarioClaim.autenticadorGoogleChaveSecreta.ToString()));
                 identity.AddClaim(new Claim(type: "idPais", value: usuarioClaim.idPais.ToString()));
-               
+        
                 string[] roles = usuarioClaim.regras.Split(',');
                 foreach (var role in roles)
                 {
@@ -363,7 +364,6 @@ namespace WebApp
         public string UrlSistema(string id)
         {
             string strURL = "";
-            //return RedirectToAction("Index", "Home");
             switch (id)
             {
                 case "1":

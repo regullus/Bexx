@@ -2,10 +2,10 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {AuthComponent} from './auth.component';
 import {LoginComponent} from './login/login.component';
+import {LoginExternoComponent} from './login/login-externo/login-externo.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
 import {LogoutComponent} from './logout/logout.component';
-
 
 const routes: Routes = [
   {
@@ -19,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        component: LoginComponent,
+        component: LoginExternoComponent,
         data: {returnUrl: window.location.pathname}
       },
       {

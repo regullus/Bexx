@@ -15,12 +15,12 @@ using System.Threading.Tasks;
 using System;
 using Utils;
 using WebApp.Model;
+using Microsoft.AspNetCore.Http;
 
 #endregion
 
 namespace WebApp.Controllers
 {
-    [AllowAnonymous]
     public class LoginController : appController
     {
         #region Variaveis
@@ -45,12 +45,14 @@ namespace WebApp.Controllers
         #region Login
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult index(string ret, string id)
         {
             try
             {
                 ViewBag.Message = null;
                 gstrErro = null;
+
                 var lembrar = ((ClaimsIdentity)User.Identity).FindFirst("Lembrar");
                 if (lembrar != null)
                 {
@@ -90,11 +92,7 @@ namespace WebApp.Controllers
                             break;
                     }
                 }
-                else
-                {
-                    ViewBag.Message = null;
-                }
-
+             
                 ViewBag.Termos = Local.Configuracao("URL_TERMOS_CONDICOES_USO");
             }
             catch (Exception ex)
@@ -107,6 +105,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> Login([Bind] LoginInputModel _usuario)
         {
             try
@@ -161,6 +160,7 @@ namespace WebApp.Controllers
                     }
                     else
                     {
+                        //return RedirectToAction("Index", "Home");
                         return Redirect(strURL);
                     }
                 }
@@ -183,18 +183,21 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        [Route("api/logout")]
         public async Task<IActionResult> Logout()
         {
             try
             {
                 await HttpContext.SignOutAsync();
+                //mcr retornar para portal
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
                 string ticket = LogErro("LoginController", "Logout", ex.Message);
-                return RedirectToAction("Erro", "Home", new { Titulo = "Erro em Anúncios", Mensagem = "Foi aberto um ticket de n. " + ticket + " para esse incidente." });
+                return RedirectToAction("Erro", "Home", new { Titulo = "Erro", Mensagem = "Foi aberto um ticket de n. " + ticket + " para esse incidente." });
             }
-            return RedirectToAction("Index", "Home");
         }
 
         #endregion
@@ -202,6 +205,7 @@ namespace WebApp.Controllers
         #region Cadastro
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Cadastro([Bind] LoginInputModel _usuario)
         {
             #region ReCaptcha
@@ -384,6 +388,7 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [Route("ConfirmarCadastro")]
         public ActionResult ConfirmarCadastro(string user)
         {
@@ -462,6 +467,7 @@ namespace WebApp.Controllers
         #region EsqueceuSenha
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult EsqueceuSenha([Bind] LoginInputModel _usuario)
         {
 
@@ -563,6 +569,7 @@ namespace WebApp.Controllers
 
         [HttpGet]
         [Route("NovaSenha")]
+        [AllowAnonymous]
         public ActionResult NovaSenha(string user)
         {
 
@@ -614,6 +621,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult CriarSenha([Bind] NovaSenhaModel _novaSenha)
         {
             #region ReCaptcha
@@ -828,6 +836,7 @@ namespace WebApp.Controllers
 
         #region API
 
+        [AllowAnonymous]
         public UsuarioClaimModel UsuarioClainApi(string login, string senha)
         {
             UsuarioClaimModel _usuario;
@@ -860,6 +869,7 @@ namespace WebApp.Controllers
             return null;
         }
 
+        [AllowAnonymous]
         public bool LoginExiste(string username)
         {
             StatusModel _retorno;
@@ -897,43 +907,11 @@ namespace WebApp.Controllers
             return false;
         }
 
-        public bool WeatherApi(string token)
-        {
-            string strRet = "";
-            try
-            {
-                //Cria a transação.
-                var request = new RestRequest("/api/WeatherForecast");
-
-                request.AddHeader("Content-Type", "application/json");
-                request.AddHeader("Authorization", "Bearer " + token);
-                request.RequestFormat = DataFormat.Json;
-                var response = _clientAPI.Execute(request);
-
-                //Converte resposta com sucesso.
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    var _retorno = JsonConvert.DeserializeObject(response.Content);
-                    return true;
-                }
-                else
-                {
-                    strRet = TrataErro(response);
-                }
-            }
-            catch (Exception ex)
-            {
-                strRet = ex.Message;
-            }
-            //logErro para strRet
-            LogErro("Login", "LoginExiste", strRet);
-            return false;
-        }
-
         #endregion
 
         #region JsonResult
 
+        [AllowAnonymous]
         public JsonResult UserExiste(string username)
         {
             StatusModel _retorno;
@@ -973,5 +951,121 @@ namespace WebApp.Controllers
 
         #endregion
 
+        #region ApiExterno
+
+        [AllowAnonymous]
+        [Route("api/isAuthenticated")]
+        public async Task<IActionResult> IsAuthenticated()
+        {
+            await Task.FromResult(false); //Fake task
+            try
+            {
+                return Ok(new Response { Status = "Success", Message = User.Identity.IsAuthenticated.ToString() });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "false" });
+            }
+        }
+
+        [Route("api/fail")]
+        public async Task<IActionResult> Fail()
+        {
+            await Task.FromResult(false); //Fake task
+            return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = "Não autorizado!" });
+        }
+
+        [AllowAnonymous]
+        [Route("api/[action]")]
+        public async Task<IActionResult> Denied()
+        {
+            await Task.FromResult(false); //Fake task
+            return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Não autorizado!" });
+        }
+
+        [AllowAnonymous]
+        [Route("api/versao")]
+        public async Task<IActionResult> Versao()
+        {
+            string versao = "v2.4.0";
+            try
+            {
+                await Task.FromResult(false); //Fake task
+                return Ok(new Response { Status = "Success", Message = versao });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = ex.Message });
+            }
+
+
+        }
+
+        [Authorize]
+        [Route("api/nome")]
+        public async Task<IActionResult> Nome()
+        {
+            await Task.FromResult(false); //Fake task
+
+            if (String.IsNullOrEmpty(User.Identity.Nome()))
+            {
+                return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = "Não autorizado!" });
+            }
+            else
+            {
+                return Ok(new Response { Status = "Success", Message = User.Identity.Nome() });
+            }
+        }
+
+        [Authorize]
+        [Route("api/token")]
+        public async Task<IActionResult> Token()
+        {
+            await Task.FromResult(false); //Fake task
+            if (String.IsNullOrEmpty(token))
+            {
+                return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = "Não autorizado!" });
+            }
+            else
+            {
+                return Ok(new Response { Status = "Success", Message = token });
+            }
+        }
+
+        [Authorize]
+        [Route("api/claims")]
+        public async Task<IActionResult> Claims()
+        {
+            await Task.FromResult(false); //Fake task
+
+            try
+            {
+                UsuarioClaimModel claim = new UsuarioClaimModel();
+
+                claim.id = User.Identity.Id();
+                claim.idAtivo = User.Identity.idAtivo();
+                claim.nome = User.Identity.Nome();
+                claim.email = User.Identity.Email();
+                claim.senha = ""; //não retornar a senha
+                claim.regras = User.Identity.Regra();
+                claim.token = User.Identity.Token();
+                claim.refreshToken = User.Identity.RefreshToken();
+                claim.idioma = User.Identity.Idioma();
+                claim.expiracao = Convert.ToDateTime(User.Identity.DataExpiracao());
+                claim.avatar = User.Identity.Avatar();
+                claim.doisFatoresHabilitado = User.Identity.DoisFatoresHabilitado();
+                claim.autenticadorGoogleChaveSecreta = ""; //não exibir
+                claim.idPais = User.Identity.idPais();
+
+                return Ok(claim);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = ex.Message });
+            }
+            
+        }
+
+        #endregion
     }
 }
