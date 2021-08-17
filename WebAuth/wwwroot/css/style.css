@@ -6,6 +6,59 @@
     background-color: #dfdfdf !important;
 }
 
+.bg-01 {
+    background-color: #92298C !important;
+}
+
+.bg-02 {
+    background-color: #662EBE !important;
+    border: 1px solid red;
+}
+
+.bg-03 {
+    background-color: #F09434 !important;
+}
+
+.bg-04 {
+    background-color: #F05B30 !important;
+}
+
+.bg-05 {
+    background-color: #707070 !important;
+}
+
+.bg-06 {
+    background-color: #060F12 !important;
+}
+
+
+.bg-07 {
+    background-color: #8D6CAB !important;
+}
+
+
+.bg-08 {
+    background-color: #FC0D1B !important;
+}
+
+
+.bg-09 {
+    background-color: #9296AD !important;
+}
+
+
+.bg-10 {
+    background-color: #EFF1F2 !important;
+}
+
+.bg-11 {
+    background-color: #FFFFFF !important;
+}
+
+.bg-12 {
+    background-color: #59F5BC !important;
+}
+
 .tiledBackground {
     width: 300px;
     height: 300px;

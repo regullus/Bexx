@@ -2416,7 +2416,7 @@ var KTOffcanvas = function(elementId, options) {
             return (the.state == 'shown' ? true : false);
         },
 
-        toggle: function() {;
+        toggle: function() {
             Plugin.eventTrigger('toggle');
 
             if (the.state == 'shown') {
@@ -4859,7 +4859,8 @@ var KTWizard = function(elementId, options) {
     // Default options
     var defaultOptions = {
         startStep: 1,
-        clickableSteps: false // to make steps clickable this set value true and add data-wizard-clickable="true" in HTML for class="wizard" element
+        clickableSteps: false, // to make steps clickable this set value true and add data-wizard-clickable="true" in HTML for class="wizard" element
+        navigation: true
     };
 
     ////////////////////////////
@@ -4925,31 +4926,40 @@ var KTWizard = function(elementId, options) {
          * Build Form Wizard
          */
         build: function() {
-            // Next button event handler
-            KTUtil.addEvent(the.btnNext, 'click', function(e) {
-                e.preventDefault();
+            if (the.options.navigation) {
+                // Next button event handler
+                KTUtil.addEvent(the.btnNext, 'click', function(e) {
+                    e.preventDefault();
 
-                // Set new step number
-                Plugin.setNewStep(Plugin.getNextStep());
+                    // Set new step number
+                    Plugin.setNewStep(Plugin.getNextStep());
 
-                // Trigger change event
-                if (Plugin.eventTrigger('change') !== false) {
-                    Plugin.goTo(Plugin.getNextStep());
-                }
-            });
+                    // Trigger change event
+                    if (Plugin.eventTrigger('change') !== false) {
+                        Plugin.goTo(Plugin.getNextStep());
+                    }
+                });
 
-            // Prev button event handler
-            KTUtil.addEvent(the.btnPrev, 'click', function(e) {
-                e.preventDefault();
+                // Prev button event handler
+                KTUtil.addEvent(the.btnPrev, 'click', function(e) {
+                    e.preventDefault();
 
-                // Set new step number
-                Plugin.setNewStep(Plugin.getPrevStep());
+                    // Set new step number
+                    Plugin.setNewStep(Plugin.getPrevStep());
 
-                // Trigger change event
-                if (Plugin.eventTrigger('change') !== false) {
-                    Plugin.goTo(Plugin.getPrevStep());
-                }
-            });
+                    // Trigger change event
+                    if (Plugin.eventTrigger('change') !== false) {
+                        Plugin.goTo(Plugin.getPrevStep());
+                    }
+                });
+
+                // Submit button event handler
+                KTUtil.addEvent(the.btnSubmit, 'click', function(e) {
+                    e.preventDefault();
+
+                    Plugin.eventTrigger('submit');
+                });
+            }
 
             if (the.options.clickableSteps === true) {
                 KTUtil.on(element, '[data-wizard-type="step"]', 'click', function() {
@@ -4965,13 +4975,6 @@ var KTWizard = function(elementId, options) {
                     }
                 });
             }
-
-            // Submit button event handler
-            KTUtil.addEvent(the.btnSubmit, 'click', function(e) {
-                e.preventDefault();
-
-                Plugin.eventTrigger('submit');
-            });
         },
 
         /**
@@ -5324,7 +5327,7 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 			 ** PRIVATE METHODS
 			 ********************/
 			isInit: false,
-			cellOffset: 110,
+			cellOffset: 108,
 			iconOffset: 15,
 			stateId: 'meta',
 			ajaxParams: {},
@@ -5564,9 +5567,11 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 						dropdownMenu.css('z-index', '2000');
 					}
 				}).on('hide.bs.dropdown', '.' + pfx + 'datatable .' + pfx + 'datatable-body', function(e) {
-					$(e.target).append(dropdownMenu.detach());
-					dropdownMenu.hide();
-					dropdownMenu.css('display', '');
+					if (typeof dropdownMenu !== 'undefined') {
+						$(e.target).append(dropdownMenu.detach());
+						dropdownMenu.hide();
+						dropdownMenu.css('display', '');
+					}
 				});
 
 				// remove dropdown if window resize
@@ -9132,14 +9137,29 @@ KTUtil.ready(function() {
         KTLayoutHeader.init('kt_header', 'kt_header_mobile');
     }
 
+    // Init Header Menu
+    if (typeof KTLayoutHeaderMenu !== 'undefined') {
+        KTLayoutHeaderMenu.init('kt_header_menu', 'kt_header_menu_wrapper');
+    }
+
     // Init Header Topbar For Mobile Mode
     if (typeof KTLayoutHeaderTopbar !== 'undefined') {
         KTLayoutHeaderTopbar.init('kt_header_mobile_topbar_toggle');
     }
 
+    // Init Brand Panel For Logo
+    if (typeof KTLayoutBrand !== 'undefined') {
+        KTLayoutBrand.init('kt_brand');
+    }
+
     // Init Aside
     if (typeof KTLayoutAside !== 'undefined') {
         KTLayoutAside.init('kt_aside');
+    }
+
+    // Init Aside Menu Toggle
+    if (typeof KTLayoutAsideToggle !== 'undefined') {
+        KTLayoutAsideToggle.init('kt_aside_toggle');
     }
 
     // Init Aside Menu
@@ -9161,6 +9181,7 @@ KTUtil.ready(function() {
     if (typeof KTLayoutFooter !== 'undefined') {
         KTLayoutFooter.init('kt_footer');
     }
+
 
     //////////////////////////////////////////////
     // Layout Extended Partials(optional to use)//
@@ -9207,7 +9228,7 @@ KTUtil.ready(function() {
     }
 
     // Init Quick Offcanvas Panel
-    if (typeof KTLayoutQuickPanel !== 'undefined') {
+    if (typeof KTLayoutQuickPanel!== 'undefined') {
         KTLayoutQuickPanel.init('kt_quick_panel');
     }
 
@@ -9216,12 +9237,17 @@ KTUtil.ready(function() {
         KTLayoutQuickUser.init('kt_quick_user');
     }
 
-    // Init Search Inline Dropdown For Desktop Mode
-    if (typeof KTLayoutSearchInline !== 'undefined') {
-        KTLayoutSearchInline().init('kt_quick_search_inline');
+    // Init Quick Search Panel
+    if (typeof KTLayoutQuickSearch !== 'undefined') {
+        KTLayoutQuickSearch.init('kt_quick_search');
     }
 
-    // Init Search Dropdown For Tablet & Mobile Mode
+    // Init Quick Cart Panel
+    if (typeof KTLayoutQuickCartPanel !== 'undefined') {
+        KTLayoutQuickCartPanel.init('kt_quick_cart');
+    }
+
+    // Init Dropdown Search
     if (typeof KTLayoutSearch !== 'undefined') {
         KTLayoutSearch().init('kt_quick_search_dropdown');
     }
@@ -9236,11 +9262,29 @@ var KTLayoutAsideMenu = function() {
 
 	// Initialize
 	var _init = function() {
-        
+		var menuDesktopMode = (KTUtil.attr(_element, 'data-menu-dropdown') === '1' ? 'dropdown' : 'accordion');
+        var scroll;
+
+		if (KTUtil.isBreakpointDown('lg') && KTUtil.attr(_element, 'data-menu-scroll') === '1') {
+			scroll = {
+				rememberPosition: true, // remember position on page reload
+				height: function() { // calculate available scrollable area height
+					var height = parseInt(KTUtil.getViewPort().height);
+
+					height = height - (parseInt(KTUtil.css(_element, 'marginBottom')) + parseInt(KTUtil.css(_element, 'marginTop')));
+
+					return height;
+				}
+			};
+		}
+
 		_menuObject = new KTMenu(_element, {
+			// Vertical scroll
+			scroll: scroll,
+
 			// Submenu setup
 			submenu: {
-				desktop: 'accordion',
+				desktop: menuDesktopMode,
 				tablet: 'accordion', // menu set to accordion in tablet mode
 				mobile: 'accordion' // menu set to accordion in mobile mode
 			},
@@ -9251,10 +9295,12 @@ var KTLayoutAsideMenu = function() {
 			}
 		});
 
-		// Close aside offcanvas panel before page reload On tablet and mobile
-		_menuObject.on('linkClick', function(menu) {
-			KTLayoutAside.getOffcanvas().hide(); // Hide offcanvas after general link click
-		});
+		 // Close aside offcanvas panel before page reload On tablet and mobile
+        _menuObject.on('linkClick', function(menu) {
+            if (KTUtil.isBreakpointDown('lg')) { // Tablet and mobile mode
+                KTLayoutAside.getOffcanvas().hide(); // Hide offcanvas after general link click
+            }
+        });
 	}
 
     // Public methods
@@ -9303,7 +9349,6 @@ var KTLayoutAside = function() {
     // Private properties
     var _body;
     var _element;
-    var _asideMenuWrapperElement;
     var _offcanvasObject;
 
     // Private functions
@@ -9316,30 +9361,17 @@ var KTLayoutAside = function() {
 			baseClass: offcanvasClass,
 			overlay: true,
 			closeBy: 'kt_aside_close_btn',
-			toggleBy: ['kt_aside_desktop_toggle', 'kt_aside_tablet_and_mobile_toggle']
+			toggleBy: {
+				target: 'kt_aside_mobile_toggle',
+				state: 'mobile-toggle-active'
+			}
 		});
 	}
-
-    var _initScroll = function() {
-        KTUtil.scrollInit(_asideMenuWrapperElement, {
-            disableForMobile: true,
-            resetHeightOnDestroy: true,
-            handleWindowResize: true,
-            height: function() {
-                var height = parseInt(KTUtil.getViewPort().height);
-
-                height = height - (parseInt(KTUtil.css(_asideMenuWrapperElement , 'marginBottom')) + parseInt(KTUtil.css(_asideMenuWrapperElement, 'marginTop')));
-
-                return height;
-            }
-        });
-    }
 
     // Public methods
 	return {
 		init: function(id) {
             _element = KTUtil.getById(id);
-            _asideMenuWrapperElement =  KTUtil.getById('kt_aside_menu_wrapper');
             _body = KTUtil.getBody();
 
             if (!_element) {
@@ -9348,7 +9380,6 @@ var KTLayoutAside = function() {
 
             // Initialize
             _init();
-            _initScroll();
         },
 
         getElement: function() {
@@ -9450,6 +9481,96 @@ if (typeof module !== 'undefined') {
 
 "use strict";
 
+var KTLayoutHeaderMenu = function() {
+    // Private properties
+	var _menuElement;
+    var _menuObject;
+    var _offcanvasElement;
+    var _offcanvasObject;
+
+    // Private functions
+	var _init = function() {
+		_offcanvasObject = new KTOffcanvas(_offcanvasElement, {
+			overlay: true,
+			baseClass: 'header-menu-wrapper',
+			closeBy: 'kt_header_menu_mobile_close_btn',
+			toggleBy: {
+				target: 'kt_header_mobile_toggle',
+				state: 'burger-icon-active'
+			}
+		});
+
+		_menuObject = new KTMenu(_menuElement, {
+			submenu: {
+				desktop: 'dropdown',
+				tablet: 'accordion',
+				mobile: 'accordion'
+			},
+			accordion: {
+				slideSpeed: 200, // accordion toggle slide speed in milliseconds
+				expandAll: false // allow having multiple expanded accordions in the menu
+			}
+		});
+
+		// Close aside offcanvas panel before page reload On tablet and mobile
+        _menuObject.on('linkClick', function(menu) {
+            if (KTUtil.isBreakpointDown('lg')) { // Tablet and mobile mode
+                _offcanvasObject.hide(); // Hide offcanvas after general link click
+            }
+        });
+	}
+
+    // Public methods
+	return {
+        init: function(menuId, offcanvasId) {
+            _menuElement = KTUtil.getById(menuId);
+            _offcanvasElement = KTUtil.getById(offcanvasId);
+
+            if (!_menuElement) {
+                return;
+            }
+
+            // Initialize menu
+            _init();
+		},
+
+		getMenuElement: function() {
+			return _menuElement;
+		},
+
+        getOffcanvasElement: function() {
+			return _offcanvasElement;
+		},
+
+        getMenu: function() {
+			return _menuObject;
+		},
+
+		pauseDropdownHover: function(time) {
+			if (_menuObject) {
+				_menuObject.pauseDropdownHover(time);
+			}
+		},
+
+        getOffcanvas: function() {
+			return _offcanvasObject;
+		},
+
+		closeMobileOffcanvas: function() {
+			if (_menuObject && KTUtil.isMobileDevice()) {
+				_offcanvasObject.hide();
+			}
+		}
+	};
+}();
+
+// Webpack support
+if (typeof module !== 'undefined') {
+	module.exports = KTLayoutHeaderMenu;
+}
+
+"use strict";
+
 var KTLayoutHeaderTopbar = function() {
     // Private properties
 	var _toggleElement;
@@ -9490,14 +9611,24 @@ if (typeof module !== 'undefined') {
 "use strict";
 
 var KTLayoutHeader = function() {
-    // Private properties
+    // Private Properties
     var _element;
     var _elementForMobile;
     var _object;
 
-	// Private functions
+	// Private Functions
+	var _init = function() {
+		var options = {
+            offset: {
+                desktop: 300,
+                tabletAndMobile: false
+            }
+		};
 
-    // Get height
+		_object = new KTHeader(_element, options);
+	}
+
+    // Get Height
     var _getHeight = function() {
         var height = 0;
 
@@ -9508,7 +9639,7 @@ var KTLayoutHeader = function() {
         return height;
     }
 
-    // Get height
+    // Get Height
     var _getHeightForMobile = function() {
         var height;
 
@@ -9517,7 +9648,7 @@ var KTLayoutHeader = function() {
         return height;
     }
 
-    // Public methods
+    // Public Methods
 	return {
 		init: function(id, idForMobile) {
             _element = KTUtil.getById(id);
@@ -9526,6 +9657,9 @@ var KTLayoutHeader = function() {
             if (!_element) {
                 return;
             }
+
+            // Initialize
+            _init();
 		},
 
         isFixed: function() {

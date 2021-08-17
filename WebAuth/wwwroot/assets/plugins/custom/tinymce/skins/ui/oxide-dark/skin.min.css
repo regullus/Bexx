@@ -334,7 +334,7 @@ button::-moz-focus-inner {
   padding: 4px 16px;
   text-align: center;
   text-decoration: none;
-  text-transform: capitalize;
+  text-transform: none;
   white-space: nowrap;
 }
 
@@ -394,7 +394,7 @@ button::-moz-focus-inner {
   outline: 0;
   padding: 4px 16px;
   text-decoration: none;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .tox .tox-button--secondary[disabled] {
@@ -3549,6 +3549,13 @@ body.tox-dialog__disable-scroll {
 .tox .tox-statusbar__resize-handle svg {
   display: block;
   fill: #fff;
+}
+
+.tox .tox-statusbar__resize-handle:focus svg {
+  background-color: #4a5562;
+  border-radius: 1px;
+  -webkit-box-shadow: 0 0 0 2px #4a5562;
+  box-shadow: 0 0 0 2px #4a5562;
 }
 
 .tox:not([dir=rtl]) .tox-statusbar__path > * {

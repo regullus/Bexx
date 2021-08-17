@@ -5005,7 +5005,7 @@ Build date: 2019-12-19 16:51:02
   font-size: 11px;
 }
 
-/*! nouislider - 14.6.3 - 11/19/2020 */
+/*! nouislider - 14.7.0 - 4/6/2021 */
 /* Functional styling;
  * These styles are required for noUiSlider to function.
  * You don't need to change these rules to apply your design.
@@ -12832,25 +12832,15 @@ button.toast-close-button {
   padding: 6px 0 5px;
 }
 
-.apexcharts-tooltip-box, .apexcharts-custom-tooltip {
+.apexcharts-tooltip-candlestick {
   padding: 4px 8px;
 }
 
-.apexcharts-tooltip-boxPlot {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-  -ms-flex-direction: column-reverse;
-  flex-direction: column-reverse;
-}
-
-.apexcharts-tooltip-box > div {
+.apexcharts-tooltip-candlestick > div {
   margin: 4px 0;
 }
 
-.apexcharts-tooltip-box span.value {
+.apexcharts-tooltip-candlestick span.value {
   font-weight: bold;
 }
 
@@ -13393,15 +13383,15 @@ button.toast-close-button {
 }
 
 .swal2-popup.swal2-toast {
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
   width: auto;
-  padding: 0.625em;
+  padding: 1.25em;
   overflow-y: hidden;
   background: #fff;
   -webkit-box-shadow: 0 0 0.625em #d9d9d9;
@@ -13423,7 +13413,23 @@ button.toast-close-button {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  margin: 0 0.6em;
+  margin: 0 0.625em;
+  font-size: 1em;
+}
+
+.swal2-popup.swal2-toast .swal2-loading {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.swal2-popup.swal2-toast .swal2-input {
+  height: 2em;
+  margin: 0.3125em auto;
+  font-size: 1em;
+}
+
+.swal2-popup.swal2-toast .swal2-validation-message {
   font-size: 1em;
 }
 
@@ -13444,15 +13450,25 @@ button.toast-close-button {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
+  margin: 0 0.625em;
   padding: 0;
   font-size: 1em;
+  text-align: initial;
+}
+
+.swal2-popup.swal2-toast .swal2-html-container {
+  padding: 0.625em 0 0;
+}
+
+.swal2-popup.swal2-toast .swal2-html-container:empty {
+  padding: 0;
 }
 
 .swal2-popup.swal2-toast .swal2-icon {
   width: 2em;
   min-width: 2em;
   height: 2em;
-  margin: 0;
+  margin: 0 0.5em 0 0;
 }
 
 .swal2-popup.swal2-toast .swal2-icon .swal2-icon-content {
@@ -13490,11 +13506,18 @@ button.toast-close-button {
 }
 
 .swal2-popup.swal2-toast .swal2-actions {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   -ms-flex-preferred-size: auto !important;
   flex-basis: auto !important;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
   width: auto;
+  height: 2.2em;
   height: auto;
   margin: 0 0.3125em;
+  margin-top: 0.3125em;
   padding: 0;
 }
 
@@ -13857,7 +13880,7 @@ button.toast-close-button {
   justify-content: center;
   width: 100%;
   margin: 1.25em auto 0;
-  padding: 0 1.6em;
+  padding: 0;
 }
 
 .swal2-actions:not(.swal2-loading) .swal2-styled[disabled] {
@@ -13911,7 +13934,7 @@ button.toast-close-button {
   background: initial;
   background-color: #2778c4;
   color: #fff;
-  font-size: 1.0625em;
+  font-size: 1em;
 }
 
 .swal2-styled.swal2-deny {
@@ -13920,7 +13943,7 @@ button.toast-close-button {
   background: initial;
   background-color: #d14529;
   color: #fff;
-  font-size: 1.0625em;
+  font-size: 1em;
 }
 
 .swal2-styled.swal2-cancel {
@@ -13929,7 +13952,7 @@ button.toast-close-button {
   background: initial;
   background-color: #757575;
   color: #fff;
-  font-size: 1.0625em;
+  font-size: 1em;
 }
 
 .swal2-styled:focus {
@@ -14173,6 +14196,8 @@ button.toast-close-button {
 
 .swal2-radio input,
 .swal2-checkbox input {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   margin: 0 0.4em;
 }
 
@@ -14187,7 +14212,6 @@ button.toast-close-button {
 }
 
 .swal2-validation-message {
-  display: none;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -15117,42 +15141,6 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
   right: 0;
   bottom: 0;
   left: auto;
-}
-
-body.swal2-toast-column .swal2-toast {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-}
-
-body.swal2-toast-column .swal2-toast .swal2-actions {
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  -ms-flex-item-align: stretch;
-  align-self: stretch;
-  height: 2.2em;
-  margin-top: 0.3125em;
-}
-
-body.swal2-toast-column .swal2-toast .swal2-loading {
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-body.swal2-toast-column .swal2-toast .swal2-input {
-  height: 2em;
-  margin: 0.3125em auto;
-  font-size: 1em;
-}
-
-body.swal2-toast-column .swal2-toast .swal2-validation-message {
-  font-size: 1em;
 }
 
 .la,
@@ -26419,7 +26407,7 @@ readers do not read off random characters that represent icons */
 }
 
 /*!
- * Font Awesome Free 5.15.2 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 .fa, .fab, .fad, .fal, .far, .fas {

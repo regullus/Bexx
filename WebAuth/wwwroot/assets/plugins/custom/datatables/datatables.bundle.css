@@ -822,10 +822,6 @@ div.dtr-bs-modal table.table tr:first-child td {
   border-top: none;
 }
 
-table.dataTable.dtr-inline.collapsed.table-sm > tbody > tr > td:first-child:before, table.dataTable.dtr-inline.collapsed.table-sm > tbody > tr > th:first-child:before {
-  top: 5px;
-}
-
 table.dataTable tr.dtrg-group td {
   background-color: #e0e0e0;
 }
@@ -834,7 +830,7 @@ table.dataTable tr.dtrg-group.dtrg-level-0 td {
   font-weight: bold;
 }
 
-table.dataTable tr.dtrg-group.dtrg-level-1 td, table.dataTable tr.dtrg-group.dtrg-level-2 td {
+table.dataTable tr.dtrg-group.dtrg-level-1 td, table.dataTable tr.dtrg-group.dtrg-level-2 td, table.dataTable tr.dtrg-group.dtrg-level-3 td, table.dataTable tr.dtrg-group.dtrg-level-4 td, table.dataTable tr.dtrg-group.dtrg-level-5 td {
   background-color: #f0f0f0;
   padding-top: 0.25em;
   padding-bottom: 0.25em;
@@ -844,6 +840,22 @@ table.dataTable tr.dtrg-group.dtrg-level-1 td, table.dataTable tr.dtrg-group.dtr
 
 table.dataTable tr.dtrg-group.dtrg-level-2 td {
   background-color: #f3f3f3;
+  padding-left: 2.5em;
+}
+
+table.dataTable tr.dtrg-group.dtrg-level-3 td {
+  background-color: #f3f3f3;
+  padding-left: 3em;
+}
+
+table.dataTable tr.dtrg-group.dtrg-level-4 td {
+  background-color: #f3f3f3;
+  padding-left: 3.5em;
+}
+
+table.dataTable tr.dtrg-group.dtrg-level-5 td {
+  background-color: #f3f3f3;
+  padding-left: 4em;
 }
 
 table.dt-rowReorder-float {
@@ -856,7 +868,7 @@ table.dt-rowReorder-float {
 }
 
 tr.dt-rowReorder-moving {
-  outline: 2px solid #888888;
+  outline: 2px solid #888;
   outline-offset: -2px;
 }
 
@@ -896,7 +908,7 @@ div.dts div.dts_label {
 }
 
 div.dts div.dataTables_scrollBody {
-  background: repeating-linear-gradient(45deg, #edeeff, #edeeff 10px, #fff 10px, #fff 20px);
+  background: repeating-linear-gradient(45deg, #edeeff, #edeeff 10px, white 10px, white 20px);
 }
 
 div.dts div.dataTables_scrollBody table {
@@ -916,63 +928,63 @@ table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
 }
 
 table.dataTable.stripe tbody > tr.odd.selected, table.dataTable.stripe tbody > tr.odd > .selected, table.dataTable.display tbody > tr.odd.selected, table.dataTable.display tbody > tr.odd > .selected {
-  background-color: #0172d2;
+  background-color: #0272d3;
 }
 
 table.dataTable.hover tbody > tr.selected:hover, table.dataTable.hover tbody > tr > .selected:hover, table.dataTable.display tbody > tr.selected:hover, table.dataTable.display tbody > tr > .selected:hover {
-  background-color: #0170d0;
+  background-color: #0271d0;
 }
 
 table.dataTable.order-column tbody > tr.selected > .sorting_1, table.dataTable.order-column tbody > tr.selected > .sorting_2, table.dataTable.order-column tbody > tr.selected > .sorting_3, table.dataTable.order-column tbody > tr > .selected, table.dataTable.display tbody > tr.selected > .sorting_1, table.dataTable.display tbody > tr.selected > .sorting_2, table.dataTable.display tbody > tr.selected > .sorting_3, table.dataTable.display tbody > tr > .selected {
-  background-color: #0172d3;
+  background-color: #0273d4;
 }
 
 table.dataTable.display tbody > tr.odd.selected > .sorting_1, table.dataTable.order-column.stripe tbody > tr.odd.selected > .sorting_1 {
-  background-color: #016ecc;
+  background-color: #026fcc;
 }
 
 table.dataTable.display tbody > tr.odd.selected > .sorting_2, table.dataTable.order-column.stripe tbody > tr.odd.selected > .sorting_2 {
-  background-color: #016fcd;
+  background-color: #0270ce;
 }
 
 table.dataTable.display tbody > tr.odd.selected > .sorting_3, table.dataTable.order-column.stripe tbody > tr.odd.selected > .sorting_3 {
-  background-color: #0170cf;
+  background-color: #0270d0;
 }
 
 table.dataTable.display tbody > tr.even.selected > .sorting_1, table.dataTable.order-column.stripe tbody > tr.even.selected > .sorting_1 {
-  background-color: #0172d3;
+  background-color: #0273d4;
 }
 
 table.dataTable.display tbody > tr.even.selected > .sorting_2, table.dataTable.order-column.stripe tbody > tr.even.selected > .sorting_2 {
-  background-color: #0173d5;
+  background-color: #0274d5;
 }
 
 table.dataTable.display tbody > tr.even.selected > .sorting_3, table.dataTable.order-column.stripe tbody > tr.even.selected > .sorting_3 {
-  background-color: #0174d7;
+  background-color: #0275d7;
 }
 
 table.dataTable.display tbody > tr.odd > .selected, table.dataTable.order-column.stripe tbody > tr.odd > .selected {
-  background-color: #016ecc;
+  background-color: #026fcc;
 }
 
 table.dataTable.display tbody > tr.even > .selected, table.dataTable.order-column.stripe tbody > tr.even > .selected {
-  background-color: #0172d3;
+  background-color: #0273d4;
 }
 
 table.dataTable.display tbody > tr.selected:hover > .sorting_1, table.dataTable.order-column.hover tbody > tr.selected:hover > .sorting_1 {
-  background-color: #016bc6;
+  background-color: #026bc6;
 }
 
 table.dataTable.display tbody > tr.selected:hover > .sorting_2, table.dataTable.order-column.hover tbody > tr.selected:hover > .sorting_2 {
-  background-color: #016cc7;
+  background-color: #026cc8;
 }
 
 table.dataTable.display tbody > tr.selected:hover > .sorting_3, table.dataTable.order-column.hover tbody > tr.selected:hover > .sorting_3 {
-  background-color: #016dca;
+  background-color: #026eca;
 }
 
 table.dataTable.display tbody > tr:hover > .selected, table.dataTable.display tbody > tr > .selected:hover, table.dataTable.order-column.hover tbody > tr:hover > .selected, table.dataTable.order-column.hover tbody > tr > .selected:hover {
-  background-color: #016bc6;
+  background-color: #026bc6;
 }
 
 table.dataTable tbody td.select-checkbox, table.dataTable tbody th.select-checkbox {
@@ -992,18 +1004,27 @@ table.dataTable tbody td.select-checkbox:before, table.dataTable tbody td.select
 
 table.dataTable tbody td.select-checkbox:before, table.dataTable tbody th.select-checkbox:before {
   content: " ";
-  margin-top: -6px;
+  margin-top: -2px;
   margin-left: -6px;
   border: 1px solid black;
   border-radius: 3px;
 }
 
 table.dataTable tr.selected td.select-checkbox:after, table.dataTable tr.selected th.select-checkbox:after {
-  content: "✔";
-  margin-top: -11px;
-  margin-left: -4px;
+  content: "✓";
+  font-size: 20px;
+  margin-top: -19px;
+  margin-left: -6px;
   text-align: center;
-  text-shadow: 1px 1px #B0BED9, -1px -1px #B0BED9, 1px -1px #B0BED9, -1px 1px #B0BED9;
+  text-shadow: 1px 1px #b0bed9, -1px -1px #b0bed9, 1px -1px #b0bed9, -1px 1px #b0bed9;
+}
+
+table.dataTable.compact tbody td.select-checkbox:before, table.dataTable.compact tbody th.select-checkbox:before {
+  margin-top: -12px;
+}
+
+table.dataTable.compact tr.selected td.select-checkbox:after, table.dataTable.compact tr.selected th.select-checkbox:after {
+  margin-top: -16px;
 }
 
 div.dataTables_wrapper span.select-info, div.dataTables_wrapper span.select-item {
