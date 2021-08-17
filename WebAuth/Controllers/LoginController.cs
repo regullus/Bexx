@@ -58,15 +58,16 @@ namespace WebApp.Controllers
                 {
                     if (lembrar.Value != null && lembrar.Value.ToLower() == "true")
                     {
-                        string strURL = UrlSistema(id);
-                        if (String.IsNullOrEmpty(strURL))
-                        {
-                            ViewBag.Message = "Sistema inválido";
-                        }
-                        else
-                        {
-                            return Redirect(strURL);
-                        }
+                        //string strURL = UrlSistema(id);
+                        //if (String.IsNullOrEmpty(strURL))
+                        //{
+                        //    ViewBag.Message = "Sistema inválido";
+                        //}
+                        //else
+                        //{
+                        //    return Redirect(strURL);
+                        //}
+                        return RedirectToAction("Index", "Home");
                     }
                 }
 
@@ -152,17 +153,17 @@ namespace WebApp.Controllers
                 {
                     bool ret = await SetClaim(usuarioClaim, _usuario.login, _usuario.lembrar.ToString());
 
-                    string strURL = UrlSistema("1");
+                    //string strURL = UrlSistema("1");
 
-                    if (String.IsNullOrEmpty(strURL))
-                    {
-                        ViewBag.Message = "Sistema inválido";
-                    }
-                    else
-                    {
-                        //return RedirectToAction("Index", "Home");
-                        return Redirect(strURL);
-                    }
+                    //if (String.IsNullOrEmpty(strURL))
+                    //{
+                    //ViewBag.Message = "Sistema inválido";
+                    //}
+                    //else
+                    //{
+                    //return Redirect(strURL);
+                    //}
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -955,9 +956,8 @@ namespace WebApp.Controllers
 
         [AllowAnonymous]
         [Route("api/isAuthenticated")]
-        public async Task<IActionResult> IsAuthenticated()
+        public IActionResult IsAuthenticated()
         {
-            await Task.FromResult(false); //Fake task
             try
             {
                 return Ok(new Response { Status = "Success", Message = User.Identity.IsAuthenticated.ToString() });
@@ -969,44 +969,39 @@ namespace WebApp.Controllers
         }
 
         [Route("api/fail")]
-        public async Task<IActionResult> Fail()
+        public IActionResult Fail()
         {
-            await Task.FromResult(false); //Fake task
             return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = "Não autorizado!" });
         }
 
         [AllowAnonymous]
         [Route("api/[action]")]
-        public async Task<IActionResult> Denied()
+        public IActionResult Denied()
         {
-            await Task.FromResult(false); //Fake task
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Não autorizado!" });
         }
 
         [AllowAnonymous]
         [Route("api/versao")]
-        public async Task<IActionResult> Versao()
+        //public async Task<IActionResult> Versao()
+        public IActionResult Versao()
         {
             string versao = "v2.4.0";
             try
             {
-                await Task.FromResult(false); //Fake task
+                // await Task.FromResult(false); //Fake task
                 return Ok(new Response { Status = "Success", Message = versao });
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = ex.Message });
             }
-
-
         }
 
         [Authorize]
         [Route("api/nome")]
-        public async Task<IActionResult> Nome()
+        public IActionResult Nome()
         {
-            await Task.FromResult(false); //Fake task
-
             if (String.IsNullOrEmpty(User.Identity.Nome()))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = "Não autorizado!" });
@@ -1019,9 +1014,8 @@ namespace WebApp.Controllers
 
         [Authorize]
         [Route("api/token")]
-        public async Task<IActionResult> Token()
+        public IActionResult Token()
         {
-            await Task.FromResult(false); //Fake task
             if (String.IsNullOrEmpty(token))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = "Não autorizado!" });
@@ -1034,10 +1028,8 @@ namespace WebApp.Controllers
 
         [Authorize]
         [Route("api/claims")]
-        public async Task<IActionResult> Claims()
+        public IActionResult Claims()
         {
-            await Task.FromResult(false); //Fake task
-
             try
             {
                 UsuarioClaimModel claim = new UsuarioClaimModel();
@@ -1063,9 +1055,10 @@ namespace WebApp.Controllers
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = ex.Message });
             }
-            
+
         }
 
         #endregion
+
     }
 }

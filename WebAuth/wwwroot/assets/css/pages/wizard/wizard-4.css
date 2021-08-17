@@ -69,8 +69,8 @@
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  background-color: rgba(246, 78, 96, 0.08);
-  color: #F64E60;
+  background-color: rgba(105, 147, 255, 0.08);
+  color: #6993FF;
   margin-right: 1rem;
   border-radius: 0.5rem;
 }
@@ -92,10 +92,10 @@
 }
 .wizard.wizard-4 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=current] .wizard-wrapper .wizard-number {
   color: #ffffff;
-  background-color: #F64E60;
+  background-color: #6993FF;
 }
 .wizard.wizard-4 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=current] .wizard-wrapper .wizard-label .wizard-title {
-  color: #F64E60;
+  color: #6993FF;
 }
 .wizard.wizard-4 .wizard-nav .wizard-steps[data-total-steps="2"] .wizard-step {
   -webkit-box-flex: 0;
