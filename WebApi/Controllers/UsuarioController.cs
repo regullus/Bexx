@@ -386,7 +386,7 @@ namespace WebApi.Controllers
                 return Ok(ret);
             }
             catch (Exception ex)
-            {
+            { 
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = ex.Message });
             }
         }
